@@ -1,0 +1,17 @@
+name: Setup HashLink Action
+description: Set up your GitHub Actions workflow with a specific version of the HashLink VM.
+author: Cédric Belin
+
+branding:
+  color: orange
+  icon: download
+
+inputs:
+  version:
+    description: The version of the HashLink VM.
+    default: latest
+    required: false
+
+runs:
+  using: node16
+  main: bin/setup_hashlink.js
