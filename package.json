@@ -16,12 +16,13 @@
 	"bin": {
 		"setup_hashlink": "bin/setup_hashlink.js"
 	},
-  "dependencies": {
-    "@actions/core": "^1.6.0"
-  },
-  "devDependencies": {
-    "@vercel/ncc": "^0.31.1"
-  },
+	"dependencies": {
+		"@actions/core": "^1.6.0",
+		"@actions/tool-cache": "^1.7.1"
+	},
+	"devDependencies": {
+		"@vercel/ncc": "^0.31.1"
+	},
 	"engines": {
 		"node": ">=16.0.0"
 	}
