@@ -1,8 +1,9 @@
 /lib/
+/node_modules/
 /res/
 /var/
 
 /*.code-workspace
 /*.iml
 /**/.DS_Store
-/index.php
+/npm-debug.log
