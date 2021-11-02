@@ -1,0 +1,8 @@
+/lib/
+/res/
+/var/
+
+/*.code-workspace
+/*.iml
+/**/.DS_Store
+/index.php
