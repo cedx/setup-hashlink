@@ -1,4 +1,4 @@
-// import instrument.coverage.Coverage;
+import instrument.coverage.Coverage;
 import tink.testrunner.Runner;
 import tink.unit.TestBatch;
 
@@ -9,7 +9,7 @@ function main() {
 	]);
 
 	Runner.run(tests).handle(outcome -> {
-		// Coverage.endCoverage();
+		Coverage.endCoverage();
 		Runner.exit(outcome);
 	});
 }
