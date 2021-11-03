@@ -32,7 +32,8 @@ class Release implements Model {
 	/** The associated Git tag. **/
 	@:computed var tag: String = {
 		final semver = Version.parse(version).sure();
-		'${semver.major}.${semver.minor}';
+		final tag = '${semver.major}.${semver.minor}';
+		semver.patch > 0 ? '$tag.${semver.patch}' : tag;
 	}
 
 	/** The release URL. **/

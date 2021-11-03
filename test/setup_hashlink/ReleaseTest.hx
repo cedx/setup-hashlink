@@ -1,25 +1,35 @@
 package setup_hashlink;
 
+import setup_hashlink.Release.ReleaseAsset as Asset;
 using AssertionTools;
 
 /** Tests the features of the `Author` class. **/
 @:asserts class ReleaseTest {
 
+	/** A release that exists. **/
+	public static final existingRelease = new Release({version: "1.0.0", assets: [
+		new Asset({platform: Linux, file: "hl-1.0.zip"}),
+		new Asset({platform: MacOS, file: "hl-1.0.zip"}),
+		new Asset({platform: Windows, file: "hl-1.0.zip"})
+	]});
+
+	/** A release that doesn't exist. **/
+	public static final nonexistentRelease = new Release({version: "666.6.6"});
+
 	/** Creates a new test. **/
 	public function new() {}
 
 	/** Tests the `exists` property. **/
-	@:variant("1.0.0", true)
-	@:variant("666.6.6", false)
-	public function testExists(input: String, output: Bool)
-		return assert(new Release({version: input}).exists == output);
+	@:variant(setup_hashlink.ReleaseTest.existingRelease, true)
+	@:variant(setup_hashlink.ReleaseTest.nonexistentRelease, false)
+	public function testExists(input: Release, output: Bool)
+		return assert(input.exists == output);
 
 	/** Tests the `isSource` property. **/
-	/*
-	@:variant("1.0.0", "1.0")
-	@:variant("666.6.6", "666.6")
-	public function testIsSource(input: String, output: Bool)
-		return assert(new Release({version: input}).tag == output);*/
+	@:variant(setup_hashlink.ReleaseTest.existingRelease, false)
+	@:variant(setup_hashlink.ReleaseTest.nonexistentRelease, true)
+	public function testIsSource(input: Release, output: Bool)
+		return assert(input.isSource == output);
 
 	/** Tests the `latest` property. **/
 	public function testLatest() {
@@ -28,10 +38,16 @@ using AssertionTools;
 	}
 
 	/** Tests the `tag` property. **/
-	@:variant("1.0.0", "1.0")
-	@:variant("666.6.6", "666.6.6")
-	public function testTag(input: String, output: String)
-		return assert(new Release({version: input}).tag == output);
+	@:variant(setup_hashlink.ReleaseTest.existingRelease, "1.0")
+	@:variant(setup_hashlink.ReleaseTest.nonexistentRelease, "666.6.6")
+	public function testTag(input: Release, output: String)
+		return assert(input.tag == output);
+
+	/** Tests the `url` property. **/
+	@:variant(setup_hashlink.ReleaseTest.existingRelease, "https://github.com/HaxeFoundation/hashlink/releases/download/1.0/hl-1.0.zip")
+	@:variant(setup_hashlink.ReleaseTest.nonexistentRelease, "https://github.com/HaxeFoundation/hashlink/archive/refs/tags/666.6.6.zip")
+	public function testUrl(input: Release, output: String)
+		return assert(input.url == output);
 
 	/** Tests the `get()` method. **/
 	@:variant("1.0.0", "1.0.0")
@@ -39,5 +55,13 @@ using AssertionTools;
 	public function testGet(input: String, output: Null<String>) return switch Release.get(input) {
 		case None: assert(output == null);
 		case Some(release): assert(output == release.version);
+	}
+
+	/** Tests the `getAsset()` method. **/
+	@:variant(setup_hashlink.ReleaseTest.existingRelease, "hl-1.0.zip")
+	@:variant(setup_hashlink.ReleaseTest.nonexistentRelease, null)
+	public function testGetAsset(input: Release, output: Null<String>) return switch input.getAsset(Windows) {
+		case None: assert(output == null);
+		case Some(asset): assert(output == asset.file);
 	}
 }
