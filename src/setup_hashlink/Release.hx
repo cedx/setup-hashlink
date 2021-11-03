@@ -3,7 +3,6 @@ package setup_hashlink;
 import coconut.data.List;
 import coconut.data.Model;
 import haxe.Resource;
-import haxe.ds.Option;
 import tink.Json;
 import tink.Url;
 import tink.semver.Version;
@@ -13,13 +12,13 @@ import tink.semver.Version;
 class Release implements Model {
 
 	/** The latest release. **/
-	public static var latest(get, never): Option<Release>;
+	public static var latest(get, never): Release;
 
 	/** The base URL of the releases. **/
 	static final baseUrl: Url = "https://github.com/HaxeFoundation/hashlink/";
 
 	/** The list of all releases. **/
-	static final data: List<Release> = Json.parse(Resource.getString("releases.json"));
+	static final data: List<Release> = (Json.parse(Resource.getString("releases.json")): Array<Release>);
 
 	/** The associated assets. **/
 	@:constant var assets: List<ReleaseAsset> = @byDefault [];
@@ -46,7 +45,7 @@ class Release implements Model {
 	@:constant var version: String;
 
 	/** Gets the latest release. **/
-	static inline function get_latest() return data.first();
+	static inline function get_latest() return data.first().sure();
 
 	/** Gets the release corresponding to the specified `version`. **/
 	public static inline function get(version: String) return data.first(release -> release.version == version);
