@@ -1,7 +1,14 @@
 {
 	"classPath": "src/",
 	"contributors": ["cedx"],
-	"dependencies": {"hxnodejs": "", "tink_core": ""},
+	"dependencies": {
+		"coconut.data": "",
+		"hxnodejs": "",
+		"tink_core": "",
+		"tink_json": "",
+		"tink_semver": "",
+		"tink_url": ""
+	},
 	"description": "Set up your GitHub Actions workflow with a specific version of the HashLink VM.",
 	"license": "MIT",
 	"name": "setup_hashlink",
