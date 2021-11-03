@@ -1,0 +1,20 @@
+name: main
+on: [pull_request, push]
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - name: Fetch sources
+        uses: actions/checkout@v2
+      - name: Set up Lix
+        uses: lix-pm/setup-lix@master
+      - name: Install dependencies
+        run: lix download
+      - name: Run tests
+        run: haxe test.hxml
+      - name: Collect code coverage
+        if: success()
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          path-to-lcov: var/lcov.info
