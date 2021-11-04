@@ -62,12 +62,13 @@ class Setup {
 			"libvorbis-dev"
 		];
 
-		final commands = dependencies.map(pkg -> 'sudo apt --quiet install $pkg').concat([
+		final commands = [
+			'sudo apt install ${dependencies.join(" ")}',
 			"make",
 			"make all",
 			"sudo make install",
 			"sudo ldconfig"
-		]);
+		];
 
 		Sys.setCwd(directory);
 		commands.iter(command -> Sys.command(command));
