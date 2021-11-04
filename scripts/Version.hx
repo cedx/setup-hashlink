@@ -6,6 +6,6 @@ import sys.io.File.*;
 function main() {
 	final version = Json.parse(getContent("haxelib.json")).version;
 	replaceInFile("package.json", ~/"version": "\d+(\.\d+){2}"/, '"version": "$version"');
-	replaceInFile("README.md", ~/action\/v\d+(\.\d+){2}/, 'projet/v$version');
-	replaceInFile("docs/README.md", ~/action\/v\d+(\.\d+){2}/, 'projet/v$version');
+	replaceInFile("README.md", ~/action\/v\d+(\.\d+){2}/, 'action/v$version');
+	replaceInFile("docs/README.md", ~/action\/v\d+(\.\d+){2}/, 'action/v$version');
 }

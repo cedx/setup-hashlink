@@ -1,15 +1,14 @@
 import Sys.*;
-import sys.FileSystem.*;
 import sys.io.File.*;
 
 /** Runs the script. **/
 function main() {
+	Sys.putEnv("NODE_OPTIONS", "--openssl-legacy-provider");
 	for (script in ["Clean", "Version"]) command('lix $script');
 	command("haxe build.hxml");
 
 	final file = "bin/setup_hashlink.js";
-	if (exists('$file.map')) deleteFile('$file.map');
-	command('npx ncc build $file --minify --out=bin');
-	saveContent(file, '#!/usr/bin/env node\n${getContent(file)}');
+	command('npx ncc build $file --minify --out=var');
+	saveContent(file, '#!/usr/bin/env node\n${getContent("var/index.js")}');
 	if (systemName() != "Windows") command('chmod +x $file');
 }
