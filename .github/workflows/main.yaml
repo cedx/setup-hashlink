@@ -9,7 +9,9 @@ jobs:
       - name: Set up Lix
         uses: lix-pm/setup-lix@master
       - name: Install dependencies
-        run: lix download
+        run: |
+          lix download
+          npm install
       - name: Run tests
         run: haxe test.hxml
       - name: Collect code coverage
