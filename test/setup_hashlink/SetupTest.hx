@@ -22,7 +22,6 @@ using haxe.io.Path;
 	@:timeout(180000)
 	public function testDownload() {
 		new Setup(Release.latest).download().next(path -> {
-			trace(path);
 			final isWindows = Sys.systemName() == Platform.Windows;
 			asserts.assert(FileSystem.exists(Path.join([path, isWindows ? "hl.exe" : "bin/hl"])));
 			asserts.assert(FileSystem.exists(Path.join([path, isWindows ? "libhl.dll" : "lib/libhl.so"])));
@@ -35,7 +34,7 @@ using haxe.io.Path;
 	@:timeout(180000)
 	public function testInstall() {
 		new Setup(Release.latest).install()
-			.next(path -> asserts.assert(Sys.getEnv("PATH").contains(path)))
+			.next(path -> { trace(path); asserts.assert(Sys.getEnv("PATH").contains(path)); })
 			.handle(asserts.handle);
 
 		return asserts;
