@@ -62,7 +62,7 @@ class Setup {
 			"libvorbis-dev"
 		];
 
-		final commands = dependencies.map(pkg -> 'sudo apt install --quiet $pkg').concat([
+		final commands = dependencies.map(pkg -> 'sudo apt --quiet install $pkg').concat([
 			"make",
 			"make all",
 			"sudo make install",
