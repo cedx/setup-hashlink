@@ -36,7 +36,7 @@ class Release implements Model {
 		semver.patch > 0 ? '$tag.${semver.patch}' : tag;
 	}
 
-	/** The release URL. **/
+	/** The download URL. **/
 	@:computed var url: Url = baseUrl.resolve(switch getAsset(Sys.systemName()) {
 		case None: 'archive/refs/tags/$tag.zip';
 		case Some(asset): 'releases/download/$tag/${asset.file}';

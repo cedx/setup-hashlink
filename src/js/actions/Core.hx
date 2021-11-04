@@ -21,5 +21,8 @@ extern class Core {
 typedef InputOptions = {
 
 	/** Value indicating whether the input is required. **/
-	var required: Bool;
+	var ?required: Bool;
+
+	/** Value indicating whether leading/trailing whitespace will be trimmed for the input. **/
+	var ?trimWhitespace: Bool;
 }

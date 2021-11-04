@@ -3,7 +3,7 @@ package setup_hashlink;
 import setup_hashlink.Release.ReleaseAsset as Asset;
 using AssertionTools;
 
-/** Tests the features of the `Author` class. **/
+/** Tests the features of the `Release` class. **/
 @:asserts class ReleaseTest {
 
 	/** A release that exists. **/
