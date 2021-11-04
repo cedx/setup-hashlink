@@ -12,7 +12,7 @@ function main() {
 			case None: Core.setFailed('No release corresponding to version $version.');
 			case Some(release): new Setup(release).install().handle(outcome -> switch outcome {
 				case Failure(error): Core.setFailed(error.message);
-				case Success(_): Core.info("HashLink VM successfully installed.");
+				case Success(_): Core.info('HashLink ${release.version} successfully installed.');
 			});
 		}
 	}
