@@ -32,8 +32,8 @@ using haxe.io.Path;
 
 			final isSource = setup.release.isSource;
 			final isWindows = platform == Platform.Windows;
-			asserts.assert(FileSystem.exists(isSource ? "hl.vcxproj" : Path.join([path, isWindows ? "hl.exe" : "bin/hl"])));
-			asserts.assert(FileSystem.exists(isSource ? "libhl.vcxproj" : Path.join([path, isWindows ? dynamicLibrary : 'lib/$dynamicLibrary'])));
+			asserts.assert(FileSystem.exists(Path.join([path, if (isSource) "hl.vcxproj" else isWindows ? "hl.exe" : "bin/hl"])));
+			asserts.assert(FileSystem.exists(Path.join([path, if (isSource) "libhl.vcxproj" else isWindows ? dynamicLibrary : 'lib/$dynamicLibrary'])));
 		}).handle(asserts.handle);
 
 		return asserts;
