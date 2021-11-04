@@ -5,8 +5,8 @@ import js.actions.ToolCache;
 import sys.FileSystem;
 
 using Lambda;
+using StringTools;
 using haxe.io.Path;
-using setup_hashlink.PathTools;
 
 /** Manages the download and installation of the HashLink VM. **/
 class Setup {
@@ -26,7 +26,7 @@ class Setup {
 		return ToolCache.downloadTool(release.url).toPromise()
 			.next(file -> ToolCache.extractZip(file))
 			.next(path -> { cache = path; findSubfolder(path); })
-			.next(name -> Path.join([cache, name]).normalizeSeparator());
+			.next(name -> normalizeSeparator(Path.join([cache, name])));
 	}
 
 	/**
@@ -37,7 +37,7 @@ class Setup {
 		final cache = ToolCache.find("hashlink", release.version);
 		final promise = cache.length > 0 ? Promise.resolve(cache) : download().next(path -> ToolCache.cacheDir(path, "hashlink", release.version));
 		return promise.next(path -> release.isSource ? compile(path) : Success(path)).next(path ->  {
-			final resolvedPath = path.normalizeSeparator();
+			final resolvedPath = normalizeSeparator(path);
 			Core.addPath(Sys.systemName() == Platform.Windows ? resolvedPath : Path.join([resolvedPath, "bin"]));
 			resolvedPath;
 		});
@@ -47,7 +47,7 @@ class Setup {
 		Compiles the sources of the HashLink VM located in the specified `directory`.
 	  Returns the path to the output directory.
 	**/
-	function compile(directory: String) {
+	static function compile(directory: String) {
 		final platform = Sys.systemName();
 		if (platform != Platform.Linux)
 			return Failure(new Error(MethodNotAllowed, 'Compilation is not supported on $platform platform.'));
@@ -75,7 +75,7 @@ class Setup {
 	}
 
 	/** Determines the name of the single subfolder in the specified `directory`. **/
-	function findSubfolder(directory: String) {
+	static function findSubfolder(directory: String) {
 		final folders = FileSystem.readDirectory(directory).filter(name -> FileSystem.isDirectory(Path.join([directory, name])));
 		return switch folders.length {
 			case 0: return Failure(new Error(NotFound, 'No subfolder found in: $directory.'));
@@ -83,4 +83,8 @@ class Setup {
 			default: return Failure(new Error(Conflict, 'Multiple subfolders found in: $directory.'));
 		}
 	}
+
+	/** Normalizes the segment separators of the given `path` using the platform-specific separator. **/
+	static function normalizeSeparator(path: String)
+		return Sys.systemName() == Platform.Windows ? path.replace("/", "\\") : path;
 }
