@@ -10,6 +10,9 @@ extern class Core {
 	/** Prepends the given input `path` to the jobs `PATH`. **/
 	static function addPath(path: String): Void;
 
+	/** Logs the specified `message`. **/
+	static function info(message: String): Void;
+
 	/** Gets the value of an input. **/
 	static function getInput(name: String, ?options: InputOptions): String;
 

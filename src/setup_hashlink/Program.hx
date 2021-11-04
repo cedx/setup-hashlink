@@ -10,7 +10,10 @@ function main() {
 		case Failure(_): Core.setFailed('Invalid version constraint: $version');
 		case Success(semver): switch Release.get(semver) {
 			case None: Core.setFailed('No release corresponding to version $version.');
-			case Some(release): new Setup(release).install();
+			case Some(release): new Setup(release).install().handle(outcome -> switch outcome {
+				case Failure(error): Core.setFailed(error.message);
+				case Success(_): Core.info("HashLink VM successfully installed.");
+			});
 		}
 	}
 }
