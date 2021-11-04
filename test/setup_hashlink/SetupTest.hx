@@ -43,7 +43,7 @@ using haxe.io.Path;
 	@:timeout(180000)
 	public function testInstall() {
 		new Setup(Release.latest).install()
-			.next(path -> { trace(path); asserts.assert(Sys.getEnv("PATH").contains(path)); })
+			.next(path -> asserts.assert(Sys.getEnv("PATH").contains(path)))
 			.handle(asserts.handle);
 
 		return asserts;

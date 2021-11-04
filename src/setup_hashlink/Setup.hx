@@ -47,7 +47,7 @@ class Setup {
 		Compiles the sources of the HashLink VM located in the specified `directory`.
 	  Returns the path to the output directory.
 	**/
-	static function compile(directory: String) {
+	function compile(directory: String) {
 		final platform = Sys.systemName();
 		if (platform != Platform.Linux)
 			return Failure(new Error(MethodNotAllowed, 'Compilation is not supported on $platform platform.'));
@@ -75,7 +75,7 @@ class Setup {
 	}
 
 	/** Determines the name of the single subfolder in the specified `directory`. **/
-	static function findSubfolder(directory: String) {
+	function findSubfolder(directory: String) {
 		final folders = FileSystem.readDirectory(directory).filter(name -> FileSystem.isDirectory(Path.join([directory, name])));
 		return switch folders.length {
 			case 0: return Failure(new Error(NotFound, 'No subfolder found in: $directory.'));
@@ -85,6 +85,6 @@ class Setup {
 	}
 
 	/** Normalizes the segment separators of the given `path` using the platform-specific separator. **/
-	static function normalizeSeparator(path: String)
+	function normalizeSeparator(path: String)
 		return Sys.systemName() == Platform.Windows ? path.replace("/", "\\") : path;
 }
