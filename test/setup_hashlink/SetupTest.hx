@@ -22,7 +22,7 @@ using haxe.io.Path;
 	@:timeout(180000)
 	public function testDownload() {
 		new Setup(Release.latest).download().next(path -> {
-			final isWindows = Sys.systemName() == "Windows";
+			final isWindows = Sys.systemName() == Platform.Windows;
 			asserts.assert(FileSystem.exists(Path.join([path, isWindows ? "hl.exe" : "bin/hl"])));
 			asserts.assert(FileSystem.exists(Path.join([path, isWindows ? "libhl.dll" : "lib/libhl.so"])));
 		}).handle(asserts.handle);
