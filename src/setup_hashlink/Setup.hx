@@ -41,6 +41,7 @@ class Setup {
 			"sudo ldconfig"
 		]);
 
+		Sys.setCwd(directory);
 		commands.iter(command -> Sys.command(command));
 		return Success("/usr/local");
 	}
