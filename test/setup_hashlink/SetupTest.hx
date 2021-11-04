@@ -21,10 +21,19 @@ using haxe.io.Path;
 	/** Tests the `download()` method. **/
 	@:timeout(180000)
 	public function testDownload() {
-		new Setup(Release.latest).download().next(path -> {
-			final isWindows = Sys.systemName() == Platform.Windows;
-			asserts.assert(FileSystem.exists(Path.join([path, isWindows ? "hl.exe" : "bin/hl"])));
-			asserts.assert(FileSystem.exists(Path.join([path, isWindows ? "libhl.dll" : "lib/libhl.so"])));
+		final setup = new Setup(Release.latest);
+		setup.download().next(path -> {
+			final platform = Sys.systemName();
+			final dynamicLibrary = "libhl" + switch platform {
+				case Platform.MacOS: ".dylib";
+				case Platform.Windows: ".dll";
+				default: ".so";
+			}
+
+			final isSource = setup.release.isSource;
+			final isWindows = platform == Platform.Windows;
+			asserts.assert(FileSystem.exists(isSource ? "hl.vcxproj" : Path.join([path, isWindows ? "hl.exe" : "bin/hl"])));
+			asserts.assert(FileSystem.exists(isSource ? "libhl.vcxproj" : Path.join([path, isWindows ? dynamicLibrary : 'lib/$dynamicLibrary'])));
 		}).handle(asserts.handle);
 
 		return asserts;

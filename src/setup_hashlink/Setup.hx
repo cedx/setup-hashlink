@@ -12,7 +12,7 @@ using setup_hashlink.PathTools;
 class Setup {
 
 	/** The release to download and install. **/
-	final release: Release;
+	public final release: Release;
 
 	/** Creates a new setup. **/
 	public function new(release: Release) this.release = release;
@@ -37,8 +37,8 @@ class Setup {
 		final cache = ToolCache.find("hashlink", release.version);
 		final promise = cache.length > 0 ? Promise.resolve(cache) : download().next(path -> ToolCache.cacheDir(path, "hashlink", release.version));
 		return promise.next(path -> release.isSource ? compile(path) : Success(path)).next(path ->  {
-			final resolvedPath = Sys.systemName() == Platform.Windows ? path.normalizeSeparator() : Path.join([path, "bin"]);
-			Core.addPath(resolvedPath);
+			final resolvedPath = path.normalizeSeparator();
+			Core.addPath(Sys.systemName() == Platform.Windows ? resolvedPath : Path.join([resolvedPath, "bin"]));
 			resolvedPath;
 		});
 	}
