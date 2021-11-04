@@ -19,7 +19,7 @@ class Setup {
 
 	/**
 		Downloads and extracts the ZIP archive of the HashLink VM.
-	  Returns the path to the extracted directory.
+		Returns the path to the extracted directory.
 	**/
 	public function download() {
 		var cache: String;
@@ -31,7 +31,7 @@ class Setup {
 
 	/**
 		Installs the HashLink VM, after downloading it if required.
-	  Returns the path to the install directory.
+		Returns the path to the install directory.
 	**/
 	public function install(): Promise<String> {
 		final cache = ToolCache.find("hashlink", release.version);
@@ -45,7 +45,7 @@ class Setup {
 
 	/**
 		Compiles the sources of the HashLink VM located in the specified `directory`.
-	  Returns the path to the output directory.
+		Returns the path to the output directory.
 	**/
 	function compile(directory: String) {
 		final platform = Sys.systemName();

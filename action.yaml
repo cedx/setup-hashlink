@@ -3,12 +3,12 @@ description: Set up your GitHub Actions workflow with a specific version of the 
 author: Cédric Belin
 
 branding:
-  color: orange
+  color: purple
   icon: download
 
 inputs:
   version:
-    description: The version of the HashLink VM.
+    description: The version number of the HashLink VM.
     default: latest
     required: false
 

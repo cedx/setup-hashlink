@@ -13,8 +13,6 @@ jobs:
         uses: lix-pm/setup-lix@master
       - name: Set up HashLink
         uses: cedx/setup-hashlink@v1
-        with:
-          version: latest
       - name: Install dependencies
         run: lix download
       - name: Run tests
