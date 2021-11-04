@@ -7,5 +7,5 @@ using StringTools;
 
 	/** Normalizes the segment separators of the given `path` using the platform-specific separator. **/
 	public static function normalizeSeparator(path: String)
-		return path.replace("/", Sys.systemName() == "Windows" ? "\\" : "/");
+		return Sys.systemName() == "Windows" ? path.replace("/", "\\") : path;
 }
