@@ -36,7 +36,7 @@ class Setup {
 	public function install(): Promise<String> {
 		final cache = ToolCache.find("hashlink", release.version);
 		final promise = cache.length > 0 ? Promise.resolve(cache) : download().next(path -> ToolCache.cacheDir(path, "hashlink", release.version));
-		return promise.next(path -> /* TODO release.isSource ? compile(path) : Success(path) */ path).next(path ->  {
+		return promise.next(path -> release.isSource ? compile(path) : Success(path)).next(path ->  {
 			final resolvedPath = Sys.systemName() == Platform.Windows ? path.normalizeSeparator() : Path.join([path, "bin"]);
 			Core.addPath(resolvedPath);
 			resolvedPath;
