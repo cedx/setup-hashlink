@@ -4,7 +4,6 @@ import js.actions.Core;
 import js.actions.ToolCache;
 import sys.FileSystem;
 
-using Lambda;
 using StringTools;
 using haxe.io.Path;
 
@@ -49,52 +48,12 @@ class Setup {
 	**/
 	function compile(directory: String) {
 		final platform: Platform = Sys.systemName();
-		return [Platform.Linux, Platform.MacOS].contains(platform)
-			? Success(platform == Linux ? compileOnLinux(directory) : compileOnMacOS(directory))
-			: Failure(new Error(MethodNotAllowed, 'Compilation is not supported on $platform platform.'));
-	}
-
-	/**
-		Compiles for the Linux platform the sources of the HashLink VM located in the specified `directory`.
-		Returns the path to the output directory.
-	**/
-	function compileOnLinux(directory: String) {
-		final dependencies = [
-			"libmbedtls-dev",
-			"libopenal-dev",
-			"libpng-dev",
-			"libsdl2-dev",
-			"libturbojpeg0-dev",
-			"libuv1-dev",
-			"libvorbis-dev"
-		];
-
-		final commands = [
-			'sudo apt-get install ${dependencies.join(" ")}',
-			"make",
-			"sudo make install",
-			"sudo ldconfig"
-		];
+		if (![Platform.Linux, Platform.MacOs].contains(platform))
+			return Failure(new Error(MethodNotAllowed, 'Compilation is not supported on $platform platform.'));
 
 		Sys.setCwd(directory);
-		commands.iter(command -> Sys.command(command));
-		return "/usr/local";
-	}
-
-	/**
-		Compiles for the macOS platform the sources of the HashLink VM located in the specified `directory`.
-		Returns the path to the output directory.
-	**/
-	function compileOnMacOS(directory: String) {
-		final commands = [
-			"brew bundle",
-			"make",
-			"sudo make install"
-		];
-
-		Sys.setCwd(directory);
-		commands.iter(command -> Sys.command(command));
-		return "/usr/local";
+		for (command in (platform == Linux ? getLinuxCommands() : getMacOsCommands())) Sys.command(command);
+		return Success("/usr/local");
 	}
 
 	/** Determines the name of the single subfolder in the specified `directory`. **/
@@ -106,6 +65,33 @@ class Setup {
 			default: return Failure(new Error(Conflict, 'Multiple subfolders found in: $directory.'));
 		}
 	}
+
+	/** Returns the list of commands used to compile the HashLink sources on the Linux platform. **/
+	function getLinuxCommands() {
+		final dependencies = [
+			"libmbedtls-dev",
+			"libopenal-dev",
+			"libpng-dev",
+			"libsdl2-dev",
+			"libturbojpeg0-dev",
+			"libuv1-dev",
+			"libvorbis-dev"
+		];
+
+		return [
+			'sudo apt-get install ${dependencies.join(" ")}',
+			"make",
+			"sudo make install",
+			"sudo ldconfig"
+		];
+	}
+
+	/** Returns the list of commands used to compile the HashLink sources on the macOS platform. **/
+	function getMacOsCommands() return [
+		"brew bundle",
+		"make",
+		"sudo make install"
+	];
 
 	/** Normalizes the segment separators of the given `path` using the platform-specific separator. **/
 	function normalizeSeparator(path: String)

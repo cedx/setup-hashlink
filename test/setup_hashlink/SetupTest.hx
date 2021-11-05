@@ -28,7 +28,7 @@ using haxe.io.Path;
 
 		final executable = "hl" + if (isSource) ".vcxproj" else platform == Windows ? ".exe" : "";
 		final dynamicLibrary = "libhl" + if (isSource) ".vcxproj" else switch platform {
-			case MacOS: ".dylib";
+			case MacOs: ".dylib";
 			case Windows: ".dll";
 			default: ".so";
 		}
