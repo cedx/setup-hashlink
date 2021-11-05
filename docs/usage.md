@@ -2,7 +2,7 @@
 
 ## Inputs
 By default, this action will install the latest release of the [HashLink VM](https://hashlink.haxe.org) corresponding to the current host platform.  
-You can customize the downloaded release with the following inputs:
+You can customize the downloaded release with the following input:
 
 ### **version**: string
 The version constraint of the HashLink VM (optional, defaults to `latest`).  
