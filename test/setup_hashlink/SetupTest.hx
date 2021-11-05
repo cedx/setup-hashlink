@@ -27,15 +27,16 @@ using haxe.io.Path;
 		final isSource = setup.release.isSource;
 
 		final executable = "hl" + if (isSource) ".vcxproj" else platform == Windows ? ".exe" : "";
-		final dynamicLib = "libhl" + if (isSource) ".vcxproj" else switch platform {
+		final dynamicLibrary = "libhl" + if (isSource) ".vcxproj" else switch platform {
 			case MacOS: ".dylib";
 			case Windows: ".dll";
 			default: ".so";
 		}
 
-		setup.download()
-			.next(path -> [executable, dynamicLib].map(file -> Path.join([path, file])).iter(file -> asserts.assert(FileSystem.exists(file))))
-			.handle(asserts.handle);
+		setup.download().next(path -> {
+			asserts.assert(FileSystem.exists(Path.join([path, executable])));
+			asserts.assert(FileSystem.exists(Path.join([path, dynamicLibrary])));
+		}).handle(asserts.handle);
 
 		return asserts;
 	}
