@@ -3,7 +3,7 @@
 ## GitHub Actions
 - [Quickstart](https://docs.github.com/en/actions/quickstart)
 - [Learn GitHub Actions](https://docs.github.com/en/actions/learn-github-actions)
-- [GitHub Marketplace](https://github.com/marketplace/actions/setup-hashlink-action)
+- [GitHub Marketplace](https://github.com/marketplace/actions/setup-hashlink-vm)
 
 ## Development
 - [API reference](https://cedx.github.io/setup-hashlink/api)

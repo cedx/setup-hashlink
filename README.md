@@ -11,7 +11,7 @@ Set up your [GitHub Actions](https://docs.github.com/en/actions) workflow with a
 
 ## Development
 - [Git repository](https://github.com/cedx/setup-hashlink)
-- [GitHub marketplace](https://github.com/marketplace/actions/setup-hashlink-action)
+- [GitHub marketplace](https://github.com/marketplace/actions/setup-hashlink-vm)
 - [Submit an issue](https://github.com/cedx/setup-hashlink/issues)
 
 ## License
