@@ -48,10 +48,17 @@ class Setup {
 		Returns the path to the output directory.
 	**/
 	function compile(directory: String) {
-		final platform = Sys.systemName();
-		if (platform != Platform.Linux)
-			return Failure(new Error(MethodNotAllowed, 'Compilation is not supported on $platform platform.'));
+		final platform: Platform = Sys.systemName();
+		return [Platform.Linux, Platform.MacOS].contains(platform)
+			? Success(platform == Linux ? compileOnLinux(directory) : compileOnMacOS(directory))
+			: Failure(new Error(MethodNotAllowed, 'Compilation is not supported on $platform platform.'));
+	}
 
+	/**
+		Compiles for the Linux platform the sources of the HashLink VM located in the specified `directory`.
+		Returns the path to the output directory.
+	**/
+	function compileOnLinux(directory: String) {
 		final dependencies = [
 			"libmbedtls-dev",
 			"libopenal-dev",
@@ -71,7 +78,23 @@ class Setup {
 
 		Sys.setCwd(directory);
 		commands.iter(command -> Sys.command(command));
-		return Success("/usr/local");
+		return "/usr/local";
+	}
+
+	/**
+		Compiles for the macOS platform the sources of the HashLink VM located in the specified `directory`.
+		Returns the path to the output directory.
+	**/
+	function compileOnMacOS(directory: String) {
+		final commands = [
+			"sudo brew bundle",
+			"make",
+			"sudo make install"
+		];
+
+		Sys.setCwd(directory);
+		commands.iter(command -> Sys.command(command));
+		return "/usr/local";
 	}
 
 	/** Determines the name of the single subfolder in the specified `directory`. **/
