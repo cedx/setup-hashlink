@@ -1,4 +1,4 @@
-name: Setup HashLink Action
+name: Setup HashLink VM
 description: Set up your GitHub Actions workflow with a specific version of the HashLink VM.
 author: Cédric Belin
 

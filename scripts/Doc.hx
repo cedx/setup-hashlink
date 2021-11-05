@@ -18,7 +18,7 @@ function main() {
 		"--define", "website", "https://cedx.github.io/setup-hashlink",
 		"--input-path", "var",
 		"--output-path", "docs/api",
-		"--title", "Setup HashLink Action",
+		"--title", "Setup HashLink VM",
 		"--toplevel-package", "setup_hashlink"
 	]);
 
