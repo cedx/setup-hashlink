@@ -3,8 +3,6 @@
 
 Set up your [GitHub Actions](https://docs.github.com/en/actions) workflow with a specific version of the [HashLink VM](https://hashlink.haxe.org).
 
-!> This action only supports the **Ubuntu** and **Windows** platforms.  
-
 ## Getting started
 If you haven't used GitHub Actions before, be sure to check out the [related documentation](https://help.github.com/en/actions), as it explains how to create and configure a workflow.
 

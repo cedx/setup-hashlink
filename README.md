@@ -3,8 +3,6 @@
 
 Set up your [GitHub Actions](https://docs.github.com/en/actions) workflow with a specific version of the [HashLink VM](https://hashlink.haxe.org).
 
-> This action only supports the **Ubuntu** and **Windows** platforms.  
-
 ## Documentation
 - [User guide](https://cedx.github.io/setup-hashlink)
 - [API reference](https://cedx.github.io/setup-hashlink/api)
