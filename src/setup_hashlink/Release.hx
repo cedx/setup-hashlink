@@ -5,6 +5,7 @@ import coconut.data.Model;
 import haxe.Resource;
 import tink.Json;
 import tink.Url;
+import tink.semver.Constraint;
 import tink.semver.Version;
 
 /** Represents a GitHub release. **/
@@ -31,7 +32,7 @@ class Release implements Model {
 
 	/** The associated Git tag. **/
 	@:computed var tag: String = {
-		final semver = Version.parse(version).sure();
+		final semver: Version = version;
 		final tag = '${semver.major}.${semver.minor}';
 		semver.patch > 0 ? '$tag.${semver.patch}' : tag;
 	}
@@ -48,8 +49,11 @@ class Release implements Model {
 	/** Gets the latest release. **/
 	static inline function get_latest() return data.first().sure();
 
+	/** Finds a release that matches the specified version `constraint`. **/
+	public static inline function find(constraint: Constraint) return data.first(release -> constraint.matches(release.version));
+
 	/** Gets the release corresponding to the specified `version`. **/
-	public static inline function get(version: String) return data.first(release -> release.version == version);
+	public static inline function get(version: Version) return data.first(release -> release.version == version);
 
 	/** Gets the asset corresponding to the specified `platform`. **/
 	public inline function getAsset(platform: Platform) return assets.first(asset -> asset.platform == platform);
