@@ -36,7 +36,7 @@ class Setup {
 	public function install() {
 		final cache = ToolCache.find("hashlink", release.version);
 		final promise = cache.length > 0 ? Promise.resolve(cache) : download().next(path -> ToolCache.cacheDir(path, "hashlink", release.version));
-		return promise.next(path -> release.isSource ? compile(path) : Success(path)).next(path ->  {
+		return promise.next(path -> #if !tink_unittest release.isSource ? compile(path) : #end Success(path)).next(path ->  {
 			final resolvedPath = normalizeSeparator(path);
 			Core.addPath(release.isSource ? Path.join([resolvedPath, "bin"]) : resolvedPath);
 			resolvedPath;
