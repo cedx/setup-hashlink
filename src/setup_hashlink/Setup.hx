@@ -70,7 +70,7 @@ class Setup {
 		];
 
 		final commands = [
-			'sudo apt install ${dependencies.join(" ")}',
+			'sudo apt-get install ${dependencies.join(" ")}',
 			"make",
 			"sudo make install",
 			"sudo ldconfig"
