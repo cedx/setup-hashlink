@@ -49,6 +49,16 @@ using AssertionTools;
 	public function testUrl(input: Release, output: String)
 		return assert(input.url == output);
 
+	/** Tests the `find()` method. **/
+	@:variant("*", setup_hashlink.Release.latest.version)
+	@:variant("=1.0.0", "1.0.0")
+	@:variant(">=1.0.0 <1.11.0", "1.10.0")
+	@:variant("666.6.6", null)
+	public function testFind(input: String, output: Null<String>) return switch Release.find(input) {
+		case None: assert(output == null);
+		case Some(release): assert(output == release.version);
+	}
+
 	/** Tests the `get()` method. **/
 	@:variant("1.0.0", "1.0.0")
 	@:variant("666.6.6", null)
