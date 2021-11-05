@@ -1,15 +1,15 @@
 package setup_hashlink;
 
 import js.actions.Core;
-import tink.semver.Version;
+import tink.semver.Constraint;
 
 /** Application entry point. **/
 function main() {
 	final version = Core.getInput("version");
-	switch Version.parse(version.length == 0 || version == "latest" ? Release.latest.version : version) {
-		case Failure(_): Core.setFailed('Invalid version number: $version');
-		case Success(semver): switch Release.get(semver) {
-			case None: Core.setFailed('No release corresponding to version $version.');
+	switch Constraint.parse(version.length == 0 || version == "latest" ? "*" : version) {
+		case Failure(_): Core.setFailed("Invalid version constraint.");
+		case Success(constraint): switch Release.find(constraint) {
+			case None: Core.setFailed("No release matching the version constraint.");
 			case Some(release): new Setup(release).install().handle(outcome -> switch outcome {
 				case Failure(error): Core.setFailed(error.message);
 				case Success(_): Core.info('HashLink ${release.version} successfully installed.');
