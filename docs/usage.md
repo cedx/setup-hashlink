@@ -5,13 +5,17 @@ By default, this action will install the latest release of the [HashLink VM](htt
 You can customize the downloaded release with the following inputs:
 
 ### **version**: string
-The version number of the HashLink VM (optional, defaults to `"latest"`).  
+The version constraint of the HashLink VM (optional, defaults to `latest`).  
 Allowed values are:
-- `latest`: the latest release of the virtual machine.
-- a specific version number: `1.0.0`, `1.11.0`, etc.
+- `latest` or `*`: the latest release of the virtual machine.
+- a loose version number: `1.0.0`, `1.11.0`, etc. It's equivalent to the caret `^` operator: `^1.0.0`, `^1.11.0`, etc.
+- a strict version number: `=1.0.0`, `=1.11.0`, etc.
+- a version specification: `1.10.x`, `>=1.0.0 <1.11.0`, `=1.0.0 || ^1.10.0`, etc.
+
+!> The version constraint follows the syntax and semantics of the [tink_semver](https://github.com/haxetink/tink_semver) package.
 
 ## Setup
-?> A complete workflow can be found in this [workflow.yaml](https://github.com/cedx/setup-hashlink/blob/main/example/workflow.yaml) file.
+?> A sample workflow can be found in this [workflow.yaml](https://github.com/cedx/setup-hashlink/blob/main/example/workflow.yaml) file.
 
 ### Basic
 Setup a specific version of the HashLink VM:
@@ -25,7 +29,7 @@ jobs:
 			- uses: lix-pm/setup-lix@master
 			- uses: cedx/setup-hashlink@v1
 				with:
-					version: 1.11.0
+					version: =1.11.0
 			- run: hl --version
 			- run: lix download
 			- run: haxe test.hxml
@@ -42,7 +46,7 @@ jobs:
 		strategy:
 			matrix:
 				platform: [ubuntu-latest, windows-latest]
-				version: [1.0.0, latest]
+				version: [1.x, latest]
 		steps:
 			- uses: actions/checkout@v2
 			- uses: lix-pm/setup-lix@master

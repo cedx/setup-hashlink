@@ -51,6 +51,7 @@ using AssertionTools;
 
 	/** Tests the `find()` method. **/
 	@:variant("*", setup_hashlink.Release.latest.version)
+	@:variant("1.x", setup_hashlink.Release.latest.version)
 	@:variant("=1.0.0", "1.0.0")
 	@:variant(">=1.0.0 <1.11.0", "1.10.0")
 	@:variant("666.6.6", null)
