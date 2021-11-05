@@ -51,8 +51,10 @@ class Setup {
 		if (![Platform.Linux, Platform.MacOs].contains(platform))
 			return Failure(new Error(MethodNotAllowed, 'Compilation is not supported on $platform platform.'));
 
+		final workingDirectory = Sys.getCwd();
 		Sys.setCwd(directory);
 		for (command in (platform == Linux ? getLinuxCommands() : getMacOsCommands())) Sys.command(command);
+		Sys.setCwd(workingDirectory);
 		return Success("/usr/local");
 	}
 
