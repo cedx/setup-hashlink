@@ -2,6 +2,7 @@ package setup_hashlink;
 
 import sys.FileSystem;
 
+using Lambda;
 using StringTools;
 using haxe.io.Path;
 
@@ -21,21 +22,20 @@ using haxe.io.Path;
 	/** Tests the `download()` method. **/
 	@:timeout(300000)
 	public function testDownload() {
-		final platform = Sys.systemName();
+		final platform: Platform = Sys.systemName();
 		final setup = new Setup(Release.latest);
 		final isSource = setup.release.isSource;
 
-		final executable = "hl" + if (isSource) ".vcxproj" else platform == Platform.Windows ? ".exe" : "";
-		final dynamicLibrary = "libhl" + if (isSource) ".vcxproj" else switch platform {
-			case Platform.MacOS: ".dylib";
-			case Platform.Windows: ".dll";
+		final executable = "hl" + if (isSource) ".vcxproj" else platform == Windows ? ".exe" : "";
+		final dynamicLib = "libhl" + if (isSource) ".vcxproj" else switch platform {
+			case MacOS: ".dylib";
+			case Windows: ".dll";
 			default: ".so";
 		}
 
-		setup.download().next(path -> {
-			asserts.assert(FileSystem.exists(Path.join([path, executable])));
-			asserts.assert(FileSystem.exists(Path.join([path, dynamicLibrary])));
-		}).handle(asserts.handle);
+		setup.download()
+			.next(path -> [executable, dynamicLib].map(file -> Path.join([path, file])).iter(file -> asserts.assert(FileSystem.exists(file))))
+			.handle(asserts.handle);
 
 		return asserts;
 	}
