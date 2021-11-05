@@ -19,7 +19,7 @@ using haxe.io.Path;
 	}
 
 	/** Tests the `download()` method. **/
-	@:timeout(180000)
+	@:timeout(300000)
 	public function testDownload() {
 		final platform = Sys.systemName();
 		final setup = new Setup(Release.latest);
@@ -41,7 +41,7 @@ using haxe.io.Path;
 	}
 
 	/** Tests the `install()` method. **/
-	@:timeout(180000)
+	@:timeout(600000)
 	public function testInstall() {
 		new Setup(Release.latest).install()
 			.next(path -> asserts.assert(Sys.getEnv("PATH").contains(path)))
