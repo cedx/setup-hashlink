@@ -87,7 +87,7 @@ class Setup {
 	**/
 	function compileOnMacOS(directory: String) {
 		final commands = [
-			"sudo brew bundle",
+			"brew bundle",
 			"make",
 			"sudo make install"
 		];
