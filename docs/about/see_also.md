@@ -3,10 +3,10 @@
 ## GitHub Actions
 - [Quickstart](https://docs.github.com/en/actions/quickstart)
 - [Learn GitHub Actions](https://docs.github.com/en/actions/learn-github-actions)
+- [GitHub Marketplace](https://github.com/marketplace/actions/setup-hashlink-action)
 
 ## Development
 - [API reference](https://cedx.github.io/setup-hashlink/api)
-- [GitHub marketplace](https://github.com/marketplace/actions/setup-hashlink-action)
 - [Submit an issue](https://github.com/cedx/setup-hashlink/issues)
 
 ## Testing
