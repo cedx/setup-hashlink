@@ -7,7 +7,7 @@ enum abstract Platform(String) from String to String {
 	var Linux = "Linux";
 
 	/** Specifies a macOS platform. **/
-	var MacOS = "Mac";
+	var MacOs = "Mac";
 
 	/** Specifies a Windows platform. **/
 	var Windows = "Windows";
