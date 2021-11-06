@@ -1,0 +1,51 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build",
+			"group": {"kind": "build", "isDefault": true},
+			"problemMatcher": ["$haxe", "$haxe-absolute", "$haxe-error", "$haxe-trace"],
+			"type": "shell", "command": "haxe", "args": ["build.hxml"]
+		},
+		{
+			"label": "Clean",
+			"group": "build",
+			"type": "shell", "command": "lix", "args": ["Clean"]
+		},
+		{
+			"label": "Dist",
+			"group": "build",
+			"type": "shell", "command": "lix", "args": ["Dist"]
+		},
+		{
+			"label": "Doc",
+			"group": "build",
+			"type": "shell", "command": "lix", "args": ["Doc"]
+		},
+		{
+			"label": "Install",
+			"group": "build",
+			"type": "shell", "command": "lix", "args": ["Install"]
+		},
+		{
+			"label": "Lint",
+			"group": "build",
+			"type": "shell", "command": "lix", "args": ["Lint"]
+		},
+		{
+			"label": "Publish",
+			"group": "build",
+			"type": "shell", "command": "lix", "args": ["Publish"]
+		},
+		{
+			"label": "Test",
+			"group": {"kind": "test", "isDefault": true},
+			"type": "shell", "command": "haxe", "args": ["test.hxml"]
+		},
+		{
+			"label": "Version",
+			"group": "build",
+			"type": "shell", "command": "lix", "args": ["Version"]
+		}
+	]
+}
