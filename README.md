@@ -1,5 +1,5 @@
 # Setup HashLink VM
-![Release](https://flat.badgen.net/badge/action/v1.2.1/blue) ![License](https://flat.badgen.net/badge/license/MIT/blue) ![Coverage](https://flat.badgen.net/coveralls/c/bitbucket/cedx/setup-hashlink)
+![Release](https://flat.badgen.net/badge/action/v1.2.1/blue) ![License](https://flat.badgen.net/badge/license/MIT/blue) ![Coverage](https://flat.badgen.net/coveralls/c/bitbucket/cedx/setup-hashlink) ![Build](https://badgen.net/github/checks/cedx/setup-hashlink)
 
 Set up your [GitHub Actions](https://docs.github.com/en/actions) workflow with a specific version of the [HashLink VM](https://hashlink.haxe.org).
 
