@@ -1,6 +1,7 @@
 # Changelog
 
 ## Version [1.2.1](https://bitbucket.org/cedx/setup-hashlink/branches/compare/v1.2.1..v1.2.0)
+- Fixed: the working directory is not restored after a compilation.
 - Updated the documentation.
 - Updated the project URL.
 
