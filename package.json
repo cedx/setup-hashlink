@@ -1,13 +1,13 @@
 {
-	"bugs": "https://github.com/cedx/setup-hashlink/issues",
+	"bugs": "https://bitbucket.org/cedx/setup-hashlink/issues",
 	"description": "Set up your GitHub Actions workflow with a specific version of the HashLink VM.",
-	"homepage": "https://github.com/cedx/setup-hashlink",
+	"homepage": "https://bitbucket.org/cedx/setup-hashlink",
 	"license": "MIT",
 	"name": "@cedx/setup-hashlink",
 	"private": true,
 	"repository": "cedx/setup-hashlink",
 	"type": "commonjs",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"author": {
 		"email": "cedric@belin.io",
 		"name": "Cédric Belin",

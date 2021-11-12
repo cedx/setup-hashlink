@@ -12,8 +12,8 @@
 	"description": "Set up your GitHub Actions workflow with a specific version of the HashLink VM.",
 	"license": "MIT",
 	"name": "setup_hashlink",
-	"releasenote": "Added support for macOS platform.",
+	"releasenote": "Updated the documentation, updated the project URL.",
 	"tags": ["action", "ci", "github", "hashlink", "test", "vm", "workflow"],
-	"url": "https://cedx.github.io/setup-hashlink",
-	"version": "1.2.0"
+	"url": "https://bitbucket.org/cedx/setup-hashlink",
+	"version": "1.2.1"
 }
