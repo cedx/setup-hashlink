@@ -85,7 +85,8 @@ class Setup {
 			'sudo apt-get install --assume-yes --no-install-recommends ${dependencies.join(" ")}',
 			"make",
 			"sudo make install",
-			"sudo ldconfig"
+			"sudo ldconfig",
+			"export LD_LIBRARY_PATH=/usr/local/lib"
 		];
 	}
 
