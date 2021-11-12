@@ -1,5 +1,5 @@
 name: main
-on: [pull_request, push]
+on: push
 jobs:
   test:
     runs-on: ${{matrix.platform}}
@@ -7,34 +7,5 @@ jobs:
       matrix:
         platform: [macos-latest, ubuntu-latest, windows-latest]
     steps:
-      - name: Fetch sources
-        uses: actions/checkout@v2
-      - name: Set up Lix
-        uses: lix-pm/setup-lix@master
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 16
-      - name: Install dependencies
-        run: |
-          lix download
-          npm install
-      - name: Run tests
-        run: haxe test.hxml
-      - name: Collect code coverage
-        if: success()
-        uses: coverallsapp/github-action@master
-        with:
-          flag-name: ${{matrix.platform}}
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          path-to-lcov: var/lcov.info
-          parallel: true
-  coverage:
-    runs-on: windows-latest
-    needs: test
-    steps:
-      - name: Finish code coverage
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          parallel-finished: true
+      - uses: cedx/setup-hashlink@v1
+      - run: hl --version
