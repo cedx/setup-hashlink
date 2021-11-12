@@ -81,7 +81,8 @@ class Setup {
 		];
 
 		return [
-			'sudo apt-get install ${dependencies.join(" ")}',
+			"sudo apt-get update",
+			'sudo apt-get install --assume-yes --no-install-recommends ${dependencies.join(" ")}',
 			"make",
 			"sudo make install",
 			"sudo ldconfig"
