@@ -5,7 +5,7 @@
 			"label": "Build",
 			"group": {"kind": "build", "isDefault": true},
 			"problemMatcher": ["$haxe", "$haxe-absolute", "$haxe-error", "$haxe-trace"],
-			"type": "shell", "command": "haxe", "args": ["build.hxml"]
+			"type": "hxml", "file": "build.hxml"
 		},
 		{
 			"label": "Clean",
@@ -40,7 +40,8 @@
 		{
 			"label": "Test",
 			"group": {"kind": "test", "isDefault": true},
-			"type": "shell", "command": "haxe", "args": ["test.hxml"]
+			"problemMatcher": ["$haxe", "$haxe-absolute", "$haxe-error", "$haxe-trace"],
+			"type": "hxml", "file": "test.hxml"
 		},
 		{
 			"label": "Version",
