@@ -10,5 +10,6 @@ function main() {
 	final file = "bin/setup_hashlink.js";
 	command('npx ncc build $file --minify --out=var');
 	saveContent(file, '#!/usr/bin/env node\n${getContent("var/index.js")}');
+	command('git update-index --chmod=+x $file');
 	if (systemName() != "Windows") command('chmod +x $file');
 }
