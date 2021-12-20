@@ -1,7 +1,7 @@
 {
 	"bugs": "https://bitbucket.org/cedx/setup-hashlink/issues",
 	"description": "Set up your GitHub Actions workflow with a specific version of the HashLink VM.",
-	"homepage": "https://bitbucket.org/cedx/setup-hashlink",
+	"homepage": "https://github.com/marketplace/actions/setup-hashlink-vm",
 	"license": "MIT",
 	"name": "@cedx/setup-hashlink",
 	"private": true,
