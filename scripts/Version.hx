@@ -1,4 +1,4 @@
-import Tools.replaceInFile;
+import Tools;
 import haxe.Json;
 import sys.io.File.*;
 
