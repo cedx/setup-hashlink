@@ -1,7 +1,6 @@
 import haxe.Exception;
 import tink.core.Error.ErrorCode;
 import tink.unit.AssertionBuffer;
-
 using tink.CoreApi;
 
 /** Provides helper methods for creating assertions. **/

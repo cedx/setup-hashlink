@@ -1,7 +1,6 @@
 package setup_hashlink;
 
 import sys.FileSystem;
-
 using Lambda;
 using StringTools;
 using haxe.io.Path;

@@ -3,7 +3,6 @@ package setup_hashlink;
 import js.actions.Core;
 import js.actions.ToolCache;
 import sys.FileSystem;
-
 using StringTools;
 using haxe.io.Path;
 
