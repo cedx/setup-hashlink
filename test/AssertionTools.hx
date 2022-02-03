@@ -22,8 +22,8 @@ abstract class AssertionTools {
 		});
 
 	/** Expects the specified function to not throw an exception. **/
-	public static function doesNotThrow(asserts: AssertionBuffer, func: () -> Void, ?exceptionClass: Class<Exception>)
-		try { func(); asserts.assert(true, "It should not throw an exception."); }
+	public static function doesNotThrow(asserts: AssertionBuffer, callback: Callback<Noise>, ?exceptionClass: Class<Exception>)
+		try { callback.invoke(Noise); asserts.assert(true, "It should not throw an exception."); }
 		catch (e) asserts.assert(!Std.isOfType(e, exceptionClass != null ? exceptionClass : Exception));
 
 	/** Expects the specified promise to be rejected. **/
@@ -42,7 +42,7 @@ abstract class AssertionTools {
 		});
 
 	/** Expects the specified function to throw an exception. **/
-	public static function throws(asserts: AssertionBuffer, func: () -> Void, ?exceptionClass: Class<Exception>)
-		try { func(); asserts.fail("Exception not thrown."); }
+	public static function throws(asserts: AssertionBuffer, callback: Callback<Noise>, ?exceptionClass: Class<Exception>)
+		try { callback.invoke(Noise); asserts.fail("Exception not thrown."); }
 		catch (e) asserts.assert(Std.isOfType(e, exceptionClass != null ? exceptionClass : Exception));
 }
