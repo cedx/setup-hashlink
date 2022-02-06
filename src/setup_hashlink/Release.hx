@@ -22,7 +22,7 @@ class Release implements Model {
 	static final data: List<Release> = (Json.parse(Resource.getString("releases.json")): Array<Release>);
 
 	/** The associated assets. **/
-	@:constant var assets: List<ReleaseAsset> = @byDefault [];
+	@:constant var assets: List<ReleaseAsset> = new List();
 
 	/** Value indicating whether this release exists. **/
 	@:computed var exists: Bool = data.exists(release -> release.version == version);
