@@ -47,16 +47,16 @@ class Release implements Model {
 	@:constant var version: String;
 
 	/** Gets the latest release. **/
-	static inline function get_latest() return data.first().sure();
+	static function get_latest() return data.first().sure();
 
 	/** Finds a release that matches the specified version `constraint`. **/
-	public static inline function find(constraint: Constraint) return data.first(release -> constraint.matches(release.version));
+	public static function find(constraint: Constraint) return data.first(release -> constraint.matches(release.version));
 
 	/** Gets the release corresponding to the specified `version`. **/
-	public static inline function get(version: Version) return data.first(release -> release.version == version);
+	public static function get(version: Version) return data.first(release -> release.version == version);
 
 	/** Gets the asset corresponding to the specified `platform`. **/
-	public inline function getAsset(platform: Platform) return assets.first(asset -> asset.platform == platform);
+	public function getAsset(platform: Platform) return assets.first(asset -> asset.platform == platform);
 }
 
 /** Represents an asset of a GitHub release. **/
