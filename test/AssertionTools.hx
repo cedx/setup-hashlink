@@ -7,7 +7,7 @@ using tink.CoreApi;
 abstract class AssertionTools {
 
 	/** Expects the specified promise to not reject. **/
-	public static function doesNotReject(asserts: AssertionBuffer, promise: Promise<Any>, ?errorCode: ErrorCode): Promise<Noise>
+	public static function doesNotReject(asserts: AssertionBuffer, ?errorCode: ErrorCode, promise: Promise<Any>): Promise<Noise>
 		return promise.map(outcome -> switch outcome {
 			case Success(_):
 				asserts.assert(true, "It should not reject.");
@@ -22,12 +22,12 @@ abstract class AssertionTools {
 		});
 
 	/** Expects the specified function to not throw an exception. **/
-	public static function doesNotThrow(asserts: AssertionBuffer, callback: Callback<Noise>, ?exceptionClass: Class<Exception>)
+	public static function doesNotThrow(asserts: AssertionBuffer, ?exceptionClass: Class<Exception>, callback: Callback<Noise>)
 		try { callback.invoke(Noise); asserts.assert(true, "It should not throw an exception."); }
 		catch (e) asserts.assert(!Std.isOfType(e, exceptionClass != null ? exceptionClass : Exception));
 
 	/** Expects the specified promise to be rejected. **/
-	public static function rejects(asserts: AssertionBuffer, promise: Promise<Any>, ?errorCode: ErrorCode): Promise<Noise>
+	public static function rejects(asserts: AssertionBuffer, ?errorCode: ErrorCode, promise: Promise<Any>): Promise<Noise>
 		return promise.map(outcome -> switch outcome {
 			case Success(_):
 				asserts.assert(false, "It should reject.");
@@ -42,7 +42,7 @@ abstract class AssertionTools {
 		});
 
 	/** Expects the specified function to throw an exception. **/
-	public static function throws(asserts: AssertionBuffer, callback: Callback<Noise>, ?exceptionClass: Class<Exception>)
+	public static function throws(asserts: AssertionBuffer, ?exceptionClass: Class<Exception>, callback: Callback<Noise>)
 		try { callback.invoke(Noise); asserts.fail("Exception not thrown."); }
 		catch (e) asserts.assert(Std.isOfType(e, exceptionClass != null ? exceptionClass : Exception));
 }
