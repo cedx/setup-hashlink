@@ -12,13 +12,13 @@ abstract class AssertionTools {
 			case Success(_):
 				asserts.assert(true, "It should not reject.");
 				Success(Noise);
-			case Failure(e):
-				asserts.assert(errorCode != null ? e.code != errorCode : false, errorCode != null
+			case Failure(error):
+				asserts.assert(errorCode != null ? error.code != errorCode : false, errorCode != null
 					? 'It should not reject with a $errorCode error.'
 					: "It should not reject.");
-				errorCode != null && e.code != errorCode
+				errorCode != null && error.code != errorCode
 					? Success(Noise)
-					: Failure(new Error(ExpectationFailed, 'Promise rejected with a ${e.code} error.'));
+					: Failure(new Error(ExpectationFailed, 'Promise rejected with a ${error.code} error.'));
 		});
 
 	/** Expects the specified function to not throw an exception. **/
@@ -32,11 +32,11 @@ abstract class AssertionTools {
 			case Success(_):
 				asserts.assert(false, "It should reject.");
 				Failure(new Error(ExpectationFailed, "Promise not rejected."));
-			case Failure(e):
-				asserts.assert(errorCode != null ? e.code == errorCode : true, errorCode != null
+			case Failure(error):
+				asserts.assert(errorCode != null ? error.code == errorCode : true, errorCode != null
 					? 'It should reject with a $errorCode error.'
 					: "It should reject.");
-				errorCode == null || e.code == errorCode
+				errorCode == null || error.code == errorCode
 					? Success(Noise)
 					: Failure(new Error(ExpectationFailed, 'Promise not rejected with a $errorCode error.'));
 		});
