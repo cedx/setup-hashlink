@@ -50,29 +50,29 @@ using AssertionTools;
 		return assert(input.url == output);
 
 	/** Tests the `find()` method. **/
-	@:variant("*", setup_hashlink.Release.latest.version)
-	@:variant("1.x", setup_hashlink.Release.latest.version)
-	@:variant("=1.0.0", "1.0.0")
-	@:variant(">=1.0.0 <1.11.0", "1.10.0")
-	@:variant("666.6.6", null)
-	public function testFind(input: String, output: Null<String>) return switch Release.find(input) {
-		case None: assert(output == null);
-		case Some(release): assert(output == release.version);
+	@:variant("*", Some(setup_hashlink.Release.latest.version))
+	@:variant("1.x", Some(setup_hashlink.Release.latest.version))
+	@:variant("=1.0.0", Some("1.0.0"))
+	@:variant(">=1.0.0 <1.11.0", Some("1.10.0"))
+	@:variant("666.6.6", None)
+	public function testFind(input: String, output: Option<String>) return switch Release.find(input) {
+		case None: assert(output == None);
+		case Some(release): assert(output.equals(release.version));
 	}
 
 	/** Tests the `get()` method. **/
-	@:variant("1.0.0", "1.0.0")
-	@:variant("666.6.6", null)
-	public function testGet(input: String, output: Null<String>) return switch Release.get(input) {
-		case None: assert(output == null);
-		case Some(release): assert(output == release.version);
+	@:variant("1.0.0", Some("1.0.0"))
+	@:variant("666.6.6", None)
+	public function testGet(input: String, output: Option<String>) return switch Release.get(input) {
+		case None: assert(output == None);
+		case Some(release): assert(output.equals(release.version));
 	}
 
 	/** Tests the `getAsset()` method. **/
-	@:variant(setup_hashlink.ReleaseTest.existingRelease, "hl-1.0.zip")
-	@:variant(setup_hashlink.ReleaseTest.nonexistentRelease, null)
-	public function testGetAsset(input: Release, output: Null<String>) return switch input.getAsset(Windows) {
-		case None: assert(output == null);
-		case Some(asset): assert(output == asset.file);
+	@:variant(setup_hashlink.ReleaseTest.existingRelease, Some("hl-1.0.zip"))
+	@:variant(setup_hashlink.ReleaseTest.nonexistentRelease, None)
+	public function testGetAsset(input: Release, output: Option<String>) return switch input.getAsset(Windows) {
+		case None: assert(output == None);
+		case Some(asset): assert(output.equals(asset.file));
 	}
 }
