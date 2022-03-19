@@ -18,7 +18,7 @@
 	},
 	"dependencies": {
 		"@actions/core": "^1.6.0",
-		"@actions/tool-cache": "^1.7.1"
+		"@actions/tool-cache": "^1.7.2"
 	},
 	"devDependencies": {
 		"@vercel/ncc": "^0.33.3"
