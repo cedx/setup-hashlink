@@ -1,19 +1,12 @@
 {
 	"classPath": "src/",
 	"contributors": ["cedx"],
-	"dependencies": {
-		"coconut.data": "",
-		"hxnodejs": "",
-		"tink_core": "",
-		"tink_json": "",
-		"tink_semver": "",
-		"tink_url": ""
-	},
+	"dependencies": {"coconut.data": "", "hxnodejs": "", "tink_json": "", "tink_semver": "", "tink_url": ""},
 	"description": "Set up your GitHub Actions workflow with a specific version of the HashLink VM.",
 	"license": "MIT",
 	"name": "setup_hashlink",
 	"releasenote": "Exported the `LD_LIBRARY_PATH` environment variable to avoid `hdll` loading errors, updated the package repositories before installing the new dependencies.",
 	"tags": ["action", "ci", "github", "hashlink", "test", "vm", "workflow"],
-	"url": "https://github.com/marketplace/actions/setup-hashlink-vm",
+	"url": "https://github.com/cedx/setup-hashlink",
 	"version": "1.2.2"
 }
