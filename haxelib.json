@@ -8,5 +8,5 @@
 	"releasenote": "Exported the `LD_LIBRARY_PATH` environment variable to avoid `hdll` loading errors, updated the package repositories before installing the new dependencies.",
 	"tags": ["action", "ci", "github", "hashlink", "test", "vm", "workflow"],
 	"url": "https://github.com/cedx/setup-hashlink",
-	"version": "1.2.2"
+	"version": "1.2.3"
 }
