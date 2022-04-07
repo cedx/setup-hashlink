@@ -1,6 +1,7 @@
 # Changelog
 
 ## Version [1.2.3](https://github.com/cedx/setup-hashlink/compare/v1.2.2...v1.2.3)
+- Updated the package dependencies.
 - Updated the project URL.
 
 ## Version [1.2.2](https://github.com/cedx/setup-hashlink/compare/v1.2.1...v1.2.2)

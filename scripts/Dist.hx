@@ -2,7 +2,6 @@ import sys.io.File;
 
 /** Runs the script. **/
 function main() {
-	Sys.putEnv("NODE_OPTIONS", "--openssl-legacy-provider");
 	for (script in ["Clean", "Version"]) Sys.command('lix $script');
 	Sys.command("haxe --dce full build.hxml");
 
