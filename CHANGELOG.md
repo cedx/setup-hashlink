@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [1.3.0](https://github.com/cedx/setup-hashlink/compare/v1.2.3...v1.3.0)
+- Using the `@actions/exec` package to run shell commands.
+
 ## Version [1.2.3](https://github.com/cedx/setup-hashlink/compare/v1.2.2...v1.2.3)
 - Updated the package dependencies.
 - Updated the project URL.
