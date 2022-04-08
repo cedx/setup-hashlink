@@ -2,7 +2,6 @@
 	"defaultSeverity": "ERROR",
 	"exclude": {
 		"path": "RELATIVE_TO_PROJECT",
-		"Dynamic": ["src/js/actions/Exec"],
 		"HiddenField": ["src/setup_hashlink/Release"]
 	},
 	"checks": [

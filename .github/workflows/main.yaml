@@ -32,5 +32,5 @@ jobs:
       matrix:
         platform: [macos-latest, ubuntu-latest, windows-latest]
     steps:
-      - uses: cedx/setup-hashlink@main
+      - uses: cedx/setup-hashlink@v1
       - run: hl --version
