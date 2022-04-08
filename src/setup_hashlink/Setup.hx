@@ -1,9 +1,9 @@
 package setup_hashlink;
 
 import js.actions.Core;
-import js.actions.Exec;
 import js.actions.ToolCache;
 import sys.FileSystem;
+using Lambda;
 using StringTools;
 using haxe.io.Path;
 
@@ -53,7 +53,7 @@ class Setup {
 		final workingDirectory = Sys.getCwd();
 		Sys.setCwd(directory);
 		final promise = platform == Linux ? compileLinux() : compileMacOs();
-		return promise.next(_ -> { Sys.setCwd(workingDirectory); "/usr/local"; });
+		return promise.next(path -> { Sys.setCwd(workingDirectory); path; });
 	}
 
 	/** Compiles the HashLink sources on the macOS platform. **/
@@ -76,19 +76,16 @@ class Setup {
 			"sudo ldconfig"
 		];
 
-		return Promise.inSequence(commands.map(command -> (Exec.exec(command): Promise<Int>)))
-			.next(_ -> { Core.exportVariable("LD_LIBRARY_PATH", "/usr/local/bin"); Noise; });
+		commands.iter(command -> Sys.command(command));
+		Core.exportVariable("LD_LIBRARY_PATH", "/usr/local/bin");
+		return Promise.resolve("/usr/local");
 	}
 
 	/** Compiles the HashLink sources on the macOS platform. **/
 	function compileMacOs() {
-		final commands = [
-			"brew bundle",
-			"make",
-			"sudo make install"
-		];
-
-		return Promise.inSequence(commands.map(command -> (Exec.exec(command): Promise<Int>))).noise();
+		final commands = ["brew bundle", "make", "sudo make install"];
+		commands.iter(command -> Sys.command(command));
+		return Promise.resolve("/usr/local");
 	}
 
 	/** Determines the name of the single subfolder in the specified `directory`. **/

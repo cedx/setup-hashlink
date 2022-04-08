@@ -5629,6 +5629,13 @@ class IntIterator {
 	}
 }
 IntIterator.__name__ = true;
+class Lambda {
+	static iter(it,f) {
+		let x = $getIterator(it);
+		while(x.hasNext()) f(x.next());
+	}
+}
+Lambda.__name__ = true;
 Math.__name__ = true;
 class Reflect {
 	static field(o,field) {
@@ -6244,8 +6251,8 @@ class js_Boot {
 }
 js_Boot.__name__ = true;
 var js_actions_Core = __nccwpck_require__(186);
-var js_actions_Exec = __nccwpck_require__(514);
 var js_actions_ToolCache = __nccwpck_require__(784);
+var js_node_ChildProcess = __nccwpck_require__(81);
 var js_node_Fs = __nccwpck_require__(147);
 function setup_$hashlink_Program_main() {
 	let version = js_actions_Core.getInput("version");
@@ -7462,35 +7469,23 @@ class setup_$hashlink_Setup {
 		}
 		let workingDirectory = haxe_io_Path.addTrailingSlash(process.cwd());
 		process.chdir(directory);
-		return tink_core_Promise.next(platform == "Linux" ? this.compileLinux() : this.compileMacOs(),function(_) {
+		return tink_core_Promise.next(platform == "Linux" ? this.compileLinux() : this.compileMacOs(),function(path) {
 			process.chdir(workingDirectory);
-			return new tink_core__$Future_SyncFuture(new tink_core__$Lazy_LazyConst(tink_core_Outcome.Success("/usr/local")));
+			return new tink_core__$Future_SyncFuture(new tink_core__$Lazy_LazyConst(tink_core_Outcome.Success(path)));
 		});
 	}
 	compileLinux() {
-		let commands = ["sudo apt-get update","sudo apt-get install --assume-yes --no-install-recommends " + ["libmbedtls-dev","libopenal-dev","libpng-dev","libsdl2-dev","libturbojpeg0-dev","libuv1-dev","libvorbis-dev"].join(" "),"make","sudo make install","sudo ldconfig"];
-		let result = new Array(commands.length);
-		let _g = 0;
-		let _g1 = commands.length;
-		while(_g < _g1) {
-			let i = _g++;
-			result[i] = tink_core_Future.ofJsPromise(js_actions_Exec.exec(commands[i]));
-		}
-		return tink_core_Promise.next(tink_core_Promise.inSequence(result),function(_) {
-			js_actions_Core.exportVariable("LD_LIBRARY_PATH","/usr/local/bin");
-			return new tink_core__$Future_SyncFuture(new tink_core__$Lazy_LazyConst(tink_core_Outcome.Success(null)));
+		Lambda.iter(["sudo apt-get update","sudo apt-get install --assume-yes --no-install-recommends " + ["libmbedtls-dev","libopenal-dev","libpng-dev","libsdl2-dev","libturbojpeg0-dev","libuv1-dev","libvorbis-dev"].join(" "),"make","sudo make install","sudo ldconfig"],function(command) {
+			js_node_ChildProcess.spawnSync(command,{ shell : true, stdio : "inherit"});
 		});
+		js_actions_Core.exportVariable("LD_LIBRARY_PATH","/usr/local/bin");
+		return new tink_core__$Future_SyncFuture(new tink_core__$Lazy_LazyConst(tink_core_Outcome.Success("/usr/local")));
 	}
 	compileMacOs() {
-		let commands = ["brew bundle","make","sudo make install"];
-		let result = new Array(commands.length);
-		let _g = 0;
-		let _g1 = commands.length;
-		while(_g < _g1) {
-			let i = _g++;
-			result[i] = tink_core_Future.ofJsPromise(js_actions_Exec.exec(commands[i]));
-		}
-		return tink_core_Promise.noise(tink_core_Promise.inSequence(result));
+		Lambda.iter(["brew bundle","make","sudo make install"],function(command) {
+			js_node_ChildProcess.spawnSync(command,{ shell : true, stdio : "inherit"});
+		});
+		return new tink_core__$Future_SyncFuture(new tink_core__$Lazy_LazyConst(tink_core_Outcome.Success("/usr/local")));
 	}
 	findSubfolder(directory) {
 		let _this = js_node_Fs.readdirSync(directory);
@@ -7505,11 +7500,11 @@ class setup_$hashlink_Setup {
 		}
 		switch(_g.length) {
 		case 0:
-			return tink_core_Outcome.Failure(new tink_core_TypedError(404,"No subfolder found in: " + directory + ".",{ fileName : "src/setup_hashlink/Setup.hx", lineNumber : 98, className : "setup_hashlink.Setup", methodName : "findSubfolder"}));
+			return tink_core_Outcome.Failure(new tink_core_TypedError(404,"No subfolder found in: " + directory + ".",{ fileName : "src/setup_hashlink/Setup.hx", lineNumber : 95, className : "setup_hashlink.Setup", methodName : "findSubfolder"}));
 		case 1:
 			return tink_core_Outcome.Success(_g[0]);
 		default:
-			return tink_core_Outcome.Failure(new tink_core_TypedError(409,"Multiple subfolders found in: " + directory + ".",{ fileName : "src/setup_hashlink/Setup.hx", lineNumber : 100, className : "setup_hashlink.Setup", methodName : "findSubfolder"}));
+			return tink_core_Outcome.Failure(new tink_core_TypedError(409,"Multiple subfolders found in: " + directory + ".",{ fileName : "src/setup_hashlink/Setup.hx", lineNumber : 97, className : "setup_hashlink.Setup", methodName : "findSubfolder"}));
 		}
 	}
 	normalizeSeparator(path) {
@@ -7558,24 +7553,6 @@ class tink_core_CallbackLinkRef {
 	}
 }
 tink_core_CallbackLinkRef.__name__ = true;
-class tink_core_CallbackLink {
-	static fromMany(callbacks) {
-		return new tink_core_SimpleLink(function() {
-			if(callbacks != null) {
-				let _g = 0;
-				while(_g < callbacks.length) {
-					let cb = callbacks[_g];
-					++_g;
-					if(cb != null) {
-						cb.cancel();
-					}
-				}
-			} else {
-				callbacks = null;
-			}
-		});
-	}
-}
 class tink_core_SimpleLink {
 	constructor(f) {
 		this.f = f;
@@ -7947,105 +7924,6 @@ class tink_core_Future {
 			});
 		});
 	}
-	static processMany(a,concurrency,fn,lift) {
-		if(a.length == 0) {
-			return new tink_core__$Future_SyncFuture(new tink_core__$Lazy_LazyConst(lift(tink_core_Outcome.Success([]))));
-		} else {
-			return new tink_core__$Future_SuspendableFuture(function($yield) {
-				let links = [];
-				let _g = [];
-				let _g1 = 0;
-				while(_g1 < a.length) {
-					++_g1;
-					_g.push(null);
-				}
-				let ret = _g;
-				let index = 0;
-				let pending = 0;
-				let done = false;
-				let concurrency1;
-				if(concurrency == null) {
-					concurrency1 = a.length;
-				} else {
-					let v = concurrency;
-					concurrency1 = v < 1 ? 1 : v > a.length ? a.length : v;
-				}
-				let fireWhenReady = function() {
-					if(index == ret.length) {
-						if(pending == 0) {
-							let v = lift(tink_core_Outcome.Success(ret));
-							done = true;
-							$yield(v);
-							return true;
-						} else {
-							return false;
-						}
-					} else {
-						return false;
-					}
-				};
-				let step = null;
-				step = function() {
-					if(!done && !fireWhenReady()) {
-						while(index < ret.length) {
-							index += 1;
-							let index1 = index - 1;
-							let p = a[index1];
-							let check = function(o) {
-								let _g = fn(o);
-								switch(_g._hx_index) {
-								case 0:
-									ret[index1] = _g.data;
-									fireWhenReady();
-									break;
-								case 1:
-									let _g1 = _g.failure;
-									let _g2 = 0;
-									while(_g2 < links.length) {
-										let l = links[_g2];
-										++_g2;
-										if(l != null) {
-											l.cancel();
-										}
-									}
-									let v = lift(tink_core_Outcome.Failure(_g1));
-									done = true;
-									$yield(v);
-									break;
-								}
-							};
-							let _g = p.getStatus();
-							if(_g._hx_index == 3) {
-								let _hx_tmp;
-								_hx_tmp = tink_core_Lazy.get(_g.result);
-								check(_hx_tmp);
-								if(!done) {
-									continue;
-								}
-							} else {
-								pending += 1;
-								links.push(p.handle(function(o) {
-									pending -= 1;
-									check(o);
-									if(!done) {
-										step();
-									}
-								}));
-							}
-							break;
-						}
-					}
-				};
-				let _g2 = 0;
-				let _g3 = concurrency1;
-				while(_g2 < _g3) {
-					++_g2;
-					step();
-				}
-				return tink_core_CallbackLink.fromMany(links);
-			});
-		}
-	}
 	static irreversible(init) {
 		return new tink_core__$Future_SuspendableFuture(function($yield) {
 			init($yield);
@@ -8166,15 +8044,6 @@ class tink_core_OutcomeTools {
 }
 tink_core_OutcomeTools.__name__ = true;
 class tink_core_Promise {
-	static noise(this1) {
-		if(this1.getStatus()._hx_index == 4) {
-			return tink_core_Promise.NEVER;
-		} else {
-			return tink_core_Promise.next(this1,function(v) {
-				return new tink_core__$Future_SyncFuture(new tink_core__$Lazy_LazyConst(tink_core_Outcome.Success(null)));
-			});
-		}
-	}
 	static next(this1,f,gather) {
 		return tink_core_Future.flatMap(this1,function(o) {
 			switch(o._hx_index) {
@@ -8184,16 +8053,6 @@ class tink_core_Promise {
 				return new tink_core__$Future_SyncFuture(new tink_core__$Lazy_LazyConst(tink_core_Outcome.Failure(o.failure)));
 			}
 		});
-	}
-	static many(a,concurrency) {
-		return tink_core_Future.processMany(a,concurrency,function(o) {
-			return o;
-		},function(o) {
-			return o;
-		});
-	}
-	static inSequence(a) {
-		return tink_core_Promise.many(a,1);
 	}
 }
 class tink_core_Signal {
@@ -9725,6 +9584,7 @@ class tink_state_internal_Revision {
 		return tink_state_internal_Revision.counter += 1.0;
 	}
 }
+function $getIterator(o) { if( o instanceof Array ) return new haxe_iterators_ArrayIterator(o); else return o.iterator(); }
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $global.$haxeUID++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = m.bind(o); o.hx__closures__[m.__id__] = f; } return f; }
 $global.$haxeUID |= 0;
 if(typeof(performance) != "undefined" ? typeof(performance.now) == "function" : false) {
@@ -9748,7 +9608,6 @@ setup_$hashlink_Release.data = tink_pure_List.fromArray(new tink_json_Parser0().
 tink_core_Callback.depth = 0;
 tink_core_SimpleDisposable._hx_skip_constructor = false;
 tink_core_Future.NEVER = new tink_core__$Future_NeverFuture();
-tink_core_Promise.NEVER = tink_core_Future.NEVER;
 tink_json_JsonString.BACKSLASH = "\\";
 tink_parse_Char.byInt = new haxe_ds_IntMap();
 tink_parse_Char.WHITE = tink_parse_Char.oneOf([9,10,11,12,13,32]);
