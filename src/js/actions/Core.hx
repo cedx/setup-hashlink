@@ -7,8 +7,11 @@ import js.lib.Error;
 @:jsRequire("@actions/core")
 extern class Core {
 
-	/** Prepends the given input `path` to the jobs `PATH`. **/
+	/** Prepends the given input `path` to the system `PATH`. **/
 	static function addPath(path: String): Void;
+
+	/** Sets an environment variable. **/
+	static function exportVariable(name: String, value: String): Void;
 
 	/** Logs the specified `message`. **/
 	static function info(message: String): Void;

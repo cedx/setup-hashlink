@@ -7451,30 +7451,46 @@ class setup_$hashlink_Setup {
 				return new tink_core__$Future_SyncFuture(new tink_core__$Lazy_LazyConst(tink_core_Outcome.Success(path)));
 			}
 		}),function(path) {
-			let resolvedPath = _gthis.normalizeSeparator(path);
-			js_actions_Core.addPath(tink_state_Observable.get_value(_gthis.release.__coco_isSource) ? haxe_io_Path.join([resolvedPath,"bin"]) : resolvedPath);
-			return new tink_core__$Future_SyncFuture(new tink_core__$Lazy_LazyConst(tink_core_Outcome.Success(resolvedPath)));
+			js_actions_Core.addPath(_gthis.normalizeSeparator(tink_state_Observable.get_value(_gthis.release.__coco_isSource) ? haxe_io_Path.join([path,"bin"]) : path));
+			return new tink_core__$Future_SyncFuture(new tink_core__$Lazy_LazyConst(tink_core_Outcome.Success(_gthis.normalizeSeparator(path))));
 		});
 	}
 	compile(directory) {
 		let platform = Sys.systemName();
 		if(!["Linux","Mac"].includes(platform)) {
-			return new tink_core__$Future_SyncFuture(new tink_core__$Lazy_LazyConst(tink_core_Outcome.Failure(new tink_core_TypedError(405,"Compilation is not supported on " + platform + " platform.",{ fileName : "src/setup_hashlink/Setup.hx", lineNumber : 52, className : "setup_hashlink.Setup", methodName : "compile"}))));
+			return new tink_core__$Future_SyncFuture(new tink_core__$Lazy_LazyConst(tink_core_Outcome.Failure(new tink_core_TypedError(405,"Compilation is not supported on " + platform + " platform.",{ fileName : "src/setup_hashlink/Setup.hx", lineNumber : 51, className : "setup_hashlink.Setup", methodName : "compile"}))));
 		}
 		let workingDirectory = haxe_io_Path.addTrailingSlash(process.cwd());
 		process.chdir(directory);
-		let _this = platform == "Linux" ? this.getLinuxCommands() : this.getMacOsCommands();
-		let result = new Array(_this.length);
-		let _g = 0;
-		let _g1 = _this.length;
-		while(_g < _g1) {
-			let i = _g++;
-			result[i] = tink_core_Future.ofJsPromise(js_actions_Exec.exec(_this[i]));
-		}
-		return tink_core_Promise.next(tink_core_Promise.inSequence(result),function(_) {
+		return tink_core_Promise.next(platform == "Linux" ? this.compileLinux() : this.compileMacOs(),function(_) {
 			process.chdir(workingDirectory);
 			return new tink_core__$Future_SyncFuture(new tink_core__$Lazy_LazyConst(tink_core_Outcome.Success("/usr/local")));
 		});
+	}
+	compileLinux() {
+		let commands = ["sudo apt-get update","sudo apt-get install --assume-yes --no-install-recommends " + ["libmbedtls-dev","libopenal-dev","libpng-dev","libsdl2-dev","libturbojpeg0-dev","libuv1-dev","libvorbis-dev"].join(" "),"make","sudo make install","sudo ldconfig"];
+		let result = new Array(commands.length);
+		let _g = 0;
+		let _g1 = commands.length;
+		while(_g < _g1) {
+			let i = _g++;
+			result[i] = tink_core_Future.ofJsPromise(js_actions_Exec.exec(commands[i]));
+		}
+		return tink_core_Promise.next(tink_core_Promise.inSequence(result),function(_) {
+			js_actions_Core.exportVariable("LD_LIBRARY_PATH","/usr/local/bin");
+			return new tink_core__$Future_SyncFuture(new tink_core__$Lazy_LazyConst(tink_core_Outcome.Success(null)));
+		});
+	}
+	compileMacOs() {
+		let commands = ["brew bundle","make","sudo make install"];
+		let result = new Array(commands.length);
+		let _g = 0;
+		let _g1 = commands.length;
+		while(_g < _g1) {
+			let i = _g++;
+			result[i] = tink_core_Future.ofJsPromise(js_actions_Exec.exec(commands[i]));
+		}
+		return tink_core_Promise.noise(tink_core_Promise.inSequence(result));
 	}
 	findSubfolder(directory) {
 		let _this = js_node_Fs.readdirSync(directory);
@@ -7489,18 +7505,12 @@ class setup_$hashlink_Setup {
 		}
 		switch(_g.length) {
 		case 0:
-			return tink_core_Outcome.Failure(new tink_core_TypedError(404,"No subfolder found in: " + directory + ".",{ fileName : "src/setup_hashlink/Setup.hx", lineNumber : 64, className : "setup_hashlink.Setup", methodName : "findSubfolder"}));
+			return tink_core_Outcome.Failure(new tink_core_TypedError(404,"No subfolder found in: " + directory + ".",{ fileName : "src/setup_hashlink/Setup.hx", lineNumber : 98, className : "setup_hashlink.Setup", methodName : "findSubfolder"}));
 		case 1:
 			return tink_core_Outcome.Success(_g[0]);
 		default:
-			return tink_core_Outcome.Failure(new tink_core_TypedError(409,"Multiple subfolders found in: " + directory + ".",{ fileName : "src/setup_hashlink/Setup.hx", lineNumber : 66, className : "setup_hashlink.Setup", methodName : "findSubfolder"}));
+			return tink_core_Outcome.Failure(new tink_core_TypedError(409,"Multiple subfolders found in: " + directory + ".",{ fileName : "src/setup_hashlink/Setup.hx", lineNumber : 100, className : "setup_hashlink.Setup", methodName : "findSubfolder"}));
 		}
-	}
-	getLinuxCommands() {
-		return ["sudo apt-get update","sudo apt-get install --assume-yes --no-install-recommends " + ["libmbedtls-dev","libopenal-dev","libpng-dev","libsdl2-dev","libturbojpeg0-dev","libuv1-dev","libvorbis-dev"].join(" "),"make","sudo make install","sudo ldconfig","export LD_LIBRARY_PATH=/usr/local/lib"];
-	}
-	getMacOsCommands() {
-		return ["brew bundle","make","sudo make install"];
 	}
 	normalizeSeparator(path) {
 		if(Sys.systemName() == "Windows") {
@@ -8156,6 +8166,15 @@ class tink_core_OutcomeTools {
 }
 tink_core_OutcomeTools.__name__ = true;
 class tink_core_Promise {
+	static noise(this1) {
+		if(this1.getStatus()._hx_index == 4) {
+			return tink_core_Promise.NEVER;
+		} else {
+			return tink_core_Promise.next(this1,function(v) {
+				return new tink_core__$Future_SyncFuture(new tink_core__$Lazy_LazyConst(tink_core_Outcome.Success(null)));
+			});
+		}
+	}
 	static next(this1,f,gather) {
 		return tink_core_Future.flatMap(this1,function(o) {
 			switch(o._hx_index) {
@@ -9729,6 +9748,7 @@ setup_$hashlink_Release.data = tink_pure_List.fromArray(new tink_json_Parser0().
 tink_core_Callback.depth = 0;
 tink_core_SimpleDisposable._hx_skip_constructor = false;
 tink_core_Future.NEVER = new tink_core__$Future_NeverFuture();
+tink_core_Promise.NEVER = tink_core_Future.NEVER;
 tink_json_JsonString.BACKSLASH = "\\";
 tink_parse_Char.byInt = new haxe_ds_IntMap();
 tink_parse_Char.WHITE = tink_parse_Char.oneOf([9,10,11,12,13,32]);

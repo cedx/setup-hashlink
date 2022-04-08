@@ -36,9 +36,8 @@ class Setup {
 		final cache = ToolCache.find("hashlink", release.version);
 		final promise = cache.length > 0 ? Promise.resolve(cache) : download().next(path -> ToolCache.cacheDir(path, "hashlink", release.version));
 		return promise.next(path -> #if !tink_unittest release.isSource ? compile(path) : #end Promise.resolve(path)).next(path ->  {
-			final resolvedPath = normalizeSeparator(path);
-			Core.addPath(release.isSource ? Path.join([resolvedPath, "bin"]) : resolvedPath);
-			resolvedPath;
+			Core.addPath(normalizeSeparator(release.isSource ? Path.join([path, "bin"]) : path));
+			normalizeSeparator(path);
 		});
 	}
 
@@ -53,8 +52,43 @@ class Setup {
 
 		final workingDirectory = Sys.getCwd();
 		Sys.setCwd(directory);
-		final promises = (platform == Linux ? getLinuxCommands() : getMacOsCommands()).map(command -> (Exec.exec(command): Promise<Int>));
-		return Promise.inSequence(promises).next(_ -> { Sys.setCwd(workingDirectory); "/usr/local"; });
+		final promise = platform == Linux ? compileLinux() : compileMacOs();
+		return promise.next(_ -> { Sys.setCwd(workingDirectory); "/usr/local"; });
+	}
+
+	/** Compiles the HashLink sources on the macOS platform. **/
+	function compileLinux() {
+		final dependencies = [
+			"libmbedtls-dev",
+			"libopenal-dev",
+			"libpng-dev",
+			"libsdl2-dev",
+			"libturbojpeg0-dev",
+			"libuv1-dev",
+			"libvorbis-dev"
+		];
+
+		final commands = [
+			"sudo apt-get update",
+			'sudo apt-get install --assume-yes --no-install-recommends ${dependencies.join(" ")}',
+			"make",
+			"sudo make install",
+			"sudo ldconfig"
+		];
+
+		return Promise.inSequence(commands.map(command -> (Exec.exec(command): Promise<Int>)))
+			.next(_ -> { Core.exportVariable("LD_LIBRARY_PATH", "/usr/local/bin"); Noise; });
+	}
+
+	/** Compiles the HashLink sources on the macOS platform. **/
+	function compileMacOs() {
+		final commands = [
+			"brew bundle",
+			"make",
+			"sudo make install"
+		];
+
+		return Promise.inSequence(commands.map(command -> (Exec.exec(command): Promise<Int>))).noise();
 	}
 
 	/** Determines the name of the single subfolder in the specified `directory`. **/
@@ -66,35 +100,6 @@ class Setup {
 			default: return Failure(new Error(Conflict, 'Multiple subfolders found in: $directory.'));
 		}
 	}
-
-	/** Returns the list of commands used to compile the HashLink sources on the Linux platform. **/
-	function getLinuxCommands() {
-		final dependencies = [
-			"libmbedtls-dev",
-			"libopenal-dev",
-			"libpng-dev",
-			"libsdl2-dev",
-			"libturbojpeg0-dev",
-			"libuv1-dev",
-			"libvorbis-dev"
-		];
-
-		return [
-			"sudo apt-get update",
-			'sudo apt-get install --assume-yes --no-install-recommends ${dependencies.join(" ")}',
-			"make",
-			"sudo make install",
-			"sudo ldconfig",
-			"export LD_LIBRARY_PATH=/usr/local/lib"
-		];
-	}
-
-	/** Returns the list of commands used to compile the HashLink sources on the macOS platform. **/
-	function getMacOsCommands() return [
-		"brew bundle",
-		"make",
-		"sudo make install"
-	];
 
 	/** Normalizes the segment separators of the given `path` using the platform-specific separator. **/
 	function normalizeSeparator(path: String)
