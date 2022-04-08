@@ -12,7 +12,7 @@ function main() {
 			case None: Core.setFailed("No release matching the version constraint.");
 			case Some(release): new Setup(release).install().handle(outcome -> switch outcome {
 				case Failure(error): Core.setFailed(error.message);
-				case Success(_): Core.info('HashLink ${release.version} successfully installed.');
+				case Success(path): Core.info('HashLink ${release.version} successfully installed in "$path".');
 			});
 		}
 	}
