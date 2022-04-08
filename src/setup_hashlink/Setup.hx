@@ -1,6 +1,7 @@
 package setup_hashlink;
 
 import js.actions.Core;
+import js.actions.Exec;
 import js.actions.ToolCache;
 import sys.FileSystem;
 using StringTools;
@@ -34,7 +35,7 @@ class Setup {
 	public function install() {
 		final cache = ToolCache.find("hashlink", release.version);
 		final promise = cache.length > 0 ? Promise.resolve(cache) : download().next(path -> ToolCache.cacheDir(path, "hashlink", release.version));
-		return promise.next(path -> #if !tink_unittest release.isSource ? compile(path) : #end Success(path)).next(path ->  {
+		return promise.next(path -> #if !tink_unittest release.isSource ? compile(path) : #end Promise.resolve(path)).next(path ->  {
 			final resolvedPath = normalizeSeparator(path);
 			Core.addPath(release.isSource ? Path.join([resolvedPath, "bin"]) : resolvedPath);
 			resolvedPath;
@@ -48,13 +49,12 @@ class Setup {
 	function compile(directory: String) {
 		final platform: Platform = Sys.systemName();
 		if (![Platform.Linux, Platform.MacOs].contains(platform))
-			return Failure(new Error(MethodNotAllowed, 'Compilation is not supported on $platform platform.'));
+			return Promise.reject(new Error(MethodNotAllowed, 'Compilation is not supported on $platform platform.'));
 
 		final workingDirectory = Sys.getCwd();
 		Sys.setCwd(directory);
-		for (command in (platform == Linux ? getLinuxCommands() : getMacOsCommands())) Sys.command(command);
-		Sys.setCwd(workingDirectory);
-		return Success("/usr/local");
+		final promises = (platform == Linux ? getLinuxCommands() : getMacOsCommands()).map(command -> (Exec.exec(command): Promise<Int>));
+		return Promise.inSequence(promises).next(_ -> { Sys.setCwd(workingDirectory); "/usr/local"; });
 	}
 
 	/** Determines the name of the single subfolder in the specified `directory`. **/
