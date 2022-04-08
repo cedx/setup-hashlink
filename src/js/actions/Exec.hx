@@ -6,7 +6,7 @@ import js.node.Buffer;
 import js.node.stream.Writable;
 
 /** Executes tools in a cross platform way. **/
-@:jsRequire("@actions/tool-cache")
+@:jsRequire("@actions/exec")
 extern class Exec {
 
 	/**
