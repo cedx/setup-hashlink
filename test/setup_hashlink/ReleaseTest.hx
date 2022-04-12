@@ -7,7 +7,11 @@ using AssertionTools;
 @:asserts class ReleaseTest {
 
 	/** A release that exists. **/
-	public static final existingRelease = new Release({version: "1.0.0", assets: [new Asset({platform: Windows, file: "hl-1.0.zip"})]});
+	public static final existingRelease = new Release({version: "1.0.0", assets: [
+		new Asset({platform: Linux, file: "hl-1.0.zip"}),
+		new Asset({platform: MacOs, file: "hl-1.0.zip"}),
+		new Asset({platform: Windows, file: "hl-1.0.zip"})
+	]});
 
 	/** A release that doesn't exist. **/
 	public static final nonexistentRelease = new Release({version: "666.6.6"});
