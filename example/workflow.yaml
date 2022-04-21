@@ -12,7 +12,7 @@ jobs:
       - name: Set up Lix
         uses: lix-pm/setup-lix@master
       - name: Set up HashLink
-        uses: cedx/setup-hashlink@v1
+        uses: cedx/setup-hashlink@v2
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
