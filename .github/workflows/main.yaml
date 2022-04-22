@@ -6,37 +6,27 @@ jobs:
     steps:
       - name: Fetch sources
         uses: actions/checkout@v3
-      - name: Set up Lix
-        uses: lix-pm/setup-lix@master
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           cache: npm
           node-version: 16
-      - name: Cache dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/haxe
-          key: haxe-${{runner.os}}-lix-${{hashFiles('.haxerc', 'haxe_libraries/*.hxml')}}
-          restore-keys: haxe-${{runner.os}}-lix-
       - name: Install dependencies
-        run: |
-          lix download
-          npm install
+        run: npm install
       - name: Run tests
-        run: haxe test.hxml
+        run: npm test
       - name: Collect code coverage
         if: success()
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           path-to-lcov: var/lcov.info
-  action:
-    runs-on: ${{matrix.platform}}
-    needs: test
-    strategy:
-      matrix:
-        platform: [macos-latest, ubuntu-latest, windows-latest]
-    steps:
-      - uses: cedx/setup-hashlink@v1
-      - run: hl --version
+  # action:
+  #   runs-on: ${{matrix.platform}}
+  #   needs: test
+  #   strategy:
+  #     matrix:
+  #       platform: [macos-latest, ubuntu-latest, windows-latest]
+  #   steps:
+  #     - uses: cedx/setup-hashlink@v2
+  #     - run: hl --version
