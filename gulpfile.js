@@ -9,7 +9,8 @@ import replace from "gulp-replace";
 const sources = ["*.js", "bin/*.js", "lib/**/*.js"];
 
 /** Builds the project. */
-export default function build() {
+export default async function build() {
+	await clean();
 	return exec("npx", ["tsc"]);
 }
 
@@ -63,7 +64,7 @@ export function watch() {
  * @param {string[]} [args] The command arguments.
  * @return {Promise<void>} Resolves when the command is finally terminated.
  */
-function exec(command, args = []) {
+ function exec(command, args = []) {
 	return new Promise((resolve, reject) => spawn(command, args, {shell: true, stdio: "inherit"})
-		.on("close", code => code ? reject(new Error(`${command} => ${code}`)) : resolve()));
+		.on("close", code => code ? reject(new Error(args.length ? `${command} ${args.join(" ")}` : command)) : resolve()));
 }
