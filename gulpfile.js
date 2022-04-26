@@ -1,32 +1,43 @@
 import {spawn} from "node:child_process";
 import {readFileSync} from "node:fs";
-import {readFile} from "node:fs/promises";
+import {cp, readFile, writeFile} from "node:fs/promises";
+import {EOL} from "node:os";
 import del from "del";
 import gulp from "gulp";
 import replace from "gulp-replace";
 
+// The package configuration.
+const pkg = JSON.parse(readFileSync("package.json", "utf8"));
+
 // The file patterns providing the list of source files.
-const sources = ["*.js", "bin/*.js", "lib/**/*.js"];
+const sources = ["*.js", "lib/**/*.js"];
+
+/** The default task. */
+export default gulp.series(
+	clean,
+	build
+);
 
 /** Builds the project. */
-export default async function build() {
-	await clean();
-	return exec("npx", ["tsc"]);
+export async function build() {
+	await exec("npx", ["ncc", "build", "lib/index.js", "--minify", "--out=var", "--target=es2022"]);
+	await writeFile("bin/setup_hashlink.js", `#!/usr/bin/env node${EOL}` + await readFile("var/index.js", "utf8"));
+	return exec("npx", ["tsc", "--project", "lib/jsconfig.json"]);
 }
 
 /** Deletes all generated files and reset any saved state. */
 export function clean() {
-	return del("var/**/*");
+	return del(["share", "var/**/*"]);
 }
 
 /** Builds the documentation. */
 export async function doc() {
-	await del("docs");
-	return exec("npx", ["jsdoc", "--configure", "etc/jsdoc.json"]);
+	await exec("npx", ["typedoc", "--options", "etc/typedoc.json"]);
+	return cp("www/favicon.ico", "docs/favicon.ico");
 }
 
 /** Fixes the coding standards issues. */
-export function format() {
+export function fix() {
 	return exec("npx", ["eslint", "--config=etc/eslint.json", "--fix", ...sources]);
 }
 
@@ -37,9 +48,7 @@ export function lint() {
 
 /** Publishes the package in the registry. */
 export async function publish() {
-	// TODO NO! await exec("npm", ["publish"]);
-	const {version} = JSON.parse(await readFile("package.json", "utf8"));
-	for (const command of [["tag"], ["push", "origin"]]) await exec("git", [...command, `v${version}`]);
+	for (const command of [["tag"], ["push", "origin"]]) await exec("git", [...command, `v${pkg.version}`]);
 }
 
 /** Runs the test suite. */
@@ -49,13 +58,12 @@ export function test() {
 
 /** Updates the version number in the sources. */
 export function version() {
-	const {version} = JSON.parse(readFileSync("package.json", "utf8"));
-	return gulp.src("README.md").pipe(replace(/action\/v\d+(\.\d+){2}/, `action/v${version}`)).pipe(gulp.dest("."));
+	return gulp.src("README.md").pipe(replace(/action\/v\d+(\.\d+){2}/, `action/v${pkg.version}`)).pipe(gulp.dest("."));
 }
 
 /** Watches for file changes. */
 export function watch() {
-	return exec("npx", ["tsc", "--watch"]);
+	return exec("npx", ["tsc", "--project", "lib/jsconfig.json", "--watch"]);
 }
 
 /**
