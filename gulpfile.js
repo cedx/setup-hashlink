@@ -10,7 +10,7 @@ import replace from "gulp-replace";
 const pkg = JSON.parse(readFileSync("package.json", "utf8"));
 
 // The file patterns providing the list of source files.
-const sources = ["*.js", "lib/**/*.js"];
+const sources = ["*.js", "lib/**/*.js", "test/**/*.js"];
 
 /** The default task. */
 export default gulp.series(
