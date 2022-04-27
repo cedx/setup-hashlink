@@ -13,10 +13,14 @@ jobs:
         uses: lix-pm/setup-lix@master
       - name: Set up HashLink
         uses: cedx/setup-hashlink@v2
+        with:
+          version: version
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
-          path: ~/haxe
+          path: |
+            ~/haxe
+            ~/AppData/Roaming/haxe
           key: haxe-${{runner.os}}-lix-${{hashFiles('.haxerc', 'haxe_libraries/*.hxml')}}
           restore-keys: haxe-${{runner.os}}-lix-
       - name: Install dependencies

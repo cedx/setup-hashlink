@@ -21,12 +21,12 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           path-to-lcov: var/lcov.info
-  # action:
-  #   runs-on: ${{matrix.platform}}
-  #   needs: test
-  #   strategy:
-  #     matrix:
-  #       platform: [macos-latest, ubuntu-latest, windows-latest]
-  #   steps:
-  #     - uses: cedx/setup-hashlink@main
-  #     - run: hl --version
+  action:
+    runs-on: ${{matrix.platform}}
+    needs: test
+    strategy:
+      matrix:
+        platform: [macos-latest, ubuntu-latest, windows-latest]
+    steps:
+      - uses: cedx/setup-hashlink@main
+      - run: hl --version
