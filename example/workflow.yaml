@@ -14,7 +14,7 @@ jobs:
       - name: Set up HashLink
         uses: cedx/setup-hashlink@v2
         with:
-          version: version
+          version: latest
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
