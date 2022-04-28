@@ -73,7 +73,7 @@ export function watch() {
  * @param {string[]} [args] The command arguments.
  * @return {Promise<void>} Resolves when the command is finally terminated.
  */
- function exec(command, args = []) {
+function exec(command, args = []) {
 	return new Promise((resolve, reject) => spawn(command, args, {shell: true, stdio: "inherit"})
 		.on("close", code => code ? reject(new Error(args.length ? `${command} ${args.join(" ")}` : command)) : resolve()));
 }

@@ -14,7 +14,7 @@ const nonExistentRelease = new Release({version: "666.6.6"});
 /**
  * Tests the features of the {@link Release} class.
  */
-describe("Release", function() {
+describe("Release", () => {
 	describe(".exists", () => {
 		it("should return `false` if the release does not exist", () => assert.ok(!nonExistentRelease.exists));
 		it("should return `true` if the release exists", () => assert.ok(existingRelease.exists));
@@ -35,19 +35,19 @@ describe("Release", function() {
 	});
 
 	describe(".url", () => {
-		it("should point to a GitHub tag if the release is provided as source code", () =>
-			assert.equal(nonExistentRelease.url.href, "https://github.com/HaxeFoundation/hashlink/archive/refs/tags/666.6.6.zip")
-		);
+		it("should point to a GitHub tag if the release is provided as source code", () => {
+			assert.equal(nonExistentRelease.url.href, "https://github.com/HaxeFoundation/hashlink/archive/refs/tags/666.6.6.zip");
+		});
 
-		it("should point to a GitHub release if the release is provided as binary", () =>
-			assert.equal(existingRelease.url.href, "https://github.com/HaxeFoundation/hashlink/releases/download/1.0/hl-1.0.zip")
-		);
+		it("should point to a GitHub release if the release is provided as binary", () => {
+			assert.equal(existingRelease.url.href, "https://github.com/HaxeFoundation/hashlink/releases/download/1.0/hl-1.0.zip");
+		});
 	});
 
 	describe(".find()", () => {
-		it("should return `undefined` if no release matches the version constraint", () =>
-			assert.equal(Release.find("666.6.6"), undefined)
-		);
+		it("should return `undefined` if no release matches the version constraint", () => {
+			assert.ok(!Release.find("666.6.6"));
+		});
 
 		it("should return the release corresponding to the version constraint if it exists", () => {
 			assert.equal(Release.find("*"), Release.latest);
@@ -58,22 +58,22 @@ describe("Release", function() {
 	});
 
 	describe(".get()", () => {
-		it("should return `undefined` if no release matches to the version number", () =>
-			assert.equal(Release.get("666.6.6"), undefined)
-		);
+		it("should return `undefined` if no release matches to the version number", () => {
+			assert.ok(!Release.get("666.6.6"));
+		});
 
-		it("should return the release corresponding to the version number if it exists", () =>
-			assert.equal(Release.get("1.0.0").version, "1.0.0")
-		);
+		it("should return the release corresponding to the version number if it exists", () => {
+			assert.equal(Release.get("1.0.0").version, "1.0.0");
+		});
 	});
 
 	describe(".getAsset()", () => {
-		it("should return `undefined` if no asset matches the platform", () =>
-			assert.equal(nonExistentRelease.getAsset(Platform.windows), undefined)
-		);
+		it("should return `undefined` if no asset matches the platform", () => {
+			assert.ok(!nonExistentRelease.getAsset(Platform.windows));
+		});
 
-		it("should return the asset corresponding to the platform number if it exists", () =>
-			assert.equal(existingRelease.getAsset(Platform.windows).file, "hl-1.0.zip")
-		);
+		it("should return the asset corresponding to the platform number if it exists", () => {
+			assert.equal(existingRelease.getAsset(Platform.windows).file, "hl-1.0.zip");
+		});
 	});
 });
