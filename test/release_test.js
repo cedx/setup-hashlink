@@ -52,8 +52,8 @@ describe("Release", () => {
 		it("should return the release corresponding to the version constraint if it exists", () => {
 			assert.equal(Release.find("*"), Release.latest);
 			assert.equal(Release.find("1.x"), Release.latest);
-			assert.equal(Release.find("=1.0.0").version, "1.0.0");
-			assert.equal(Release.find(">=1.0.0 <1.11.0").version, "1.10.0");
+			assert.equal(Release.find("=1.0.0")?.version, "1.0.0");
+			assert.equal(Release.find(">=1.0.0 <1.11.0")?.version, "1.10.0");
 		});
 	});
 
@@ -63,7 +63,7 @@ describe("Release", () => {
 		});
 
 		it("should return the release corresponding to the version number if it exists", () => {
-			assert.equal(Release.get("1.0.0").version, "1.0.0");
+			assert.equal(Release.get("1.0.0")?.version, "1.0.0");
 		});
 	});
 
@@ -73,7 +73,7 @@ describe("Release", () => {
 		});
 
 		it("should return the asset corresponding to the platform number if it exists", () => {
-			assert.equal(existingRelease.getAsset(Platform.windows).file, "hl-1.0.zip");
+			assert.equal(existingRelease.getAsset(Platform.windows)?.file, "hl-1.0.zip");
 		});
 	});
 });

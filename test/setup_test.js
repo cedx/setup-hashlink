@@ -31,7 +31,7 @@ describe("Setup", /** @this {Mocha.Suite} */ function() {
 	describe(".install()", () => {
 		it("should add the HashLink VM binaries to the PATH environment variable", async () => {
 			const path = await new Setup(Release.latest).install();
-			assert.ok(env.PATH.includes(path));
+			assert.ok(env.PATH?.includes(path));
 		});
 	});
 });
