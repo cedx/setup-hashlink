@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [2.0.0](https://github.com/cedx/setup-hashlink/compare/v1.3.0...v2.0.0)
+- Ported the source code to [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
+
 ## Version [1.3.0](https://github.com/cedx/setup-hashlink/compare/v1.2.3...v1.3.0)
 - Improved the compilation process.
 - Updated the externs of the `@actions/core` package.
