@@ -1,5 +1,5 @@
 {
-	"bin": "./bin/setup_hashlink.js",
+	"bin": "./bin/setup_hashlink.mjs",
 	"bugs": "https://github.com/cedx/setup-hashlink/issues",
 	"description": "Set up your GitHub Actions workflow with a specific version of the HashLink VM.",
 	"exports": "./lib/index.js",
@@ -48,7 +48,7 @@
 	},
 	"scripts": {
 		"prepack": "gulp",
-		"start": "node bin/setup_hashlink.js",
+		"start": "node bin/setup_hashlink.mjs",
 		"test": "c8 --all --include=lib/**/*.js --report-dir=var --reporter=lcovonly node_modules/.bin/mocha --recursive"
 	}
 }
