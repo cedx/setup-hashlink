@@ -26,7 +26,7 @@ jobs:
     needs: test
     strategy:
       matrix:
-        platform: [macos-latest, ubuntu-latest, windows-latest]
+        platform: [ubuntu-latest, windows-latest]
     steps:
       - uses: cedx/setup-hashlink@main
       - run: hl --version
