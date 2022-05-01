@@ -1,5 +1,4 @@
 {
-	"bin": "./bin/setup_hashlink.mjs",
 	"bugs": "https://github.com/cedx/setup-hashlink/issues",
 	"description": "Set up your GitHub Actions workflow with a specific version of the HashLink VM.",
 	"exports": "./lib/index.js",
@@ -15,6 +14,9 @@
 		"email": "cedric@belin.io",
 		"name": "Cédric Belin",
 		"url": "https://belin.io"
+	},
+	"bin": {
+		"setup_hashlink": "./bin/setup_hashlink.mjs"
 	},
 	"dependencies": {
 		"@actions/core": "^1.7.0",
