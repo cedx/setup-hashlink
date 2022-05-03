@@ -9,7 +9,7 @@
 	"repository": "github:cedx/setup-hashlink",
 	"type": "module",
 	"types": "./share/index.d.ts",
-	"version": "2.0.0",
+	"version": "2.1.0",
 	"author": {
 		"email": "cedric@belin.io",
 		"name": "Cédric Belin",
