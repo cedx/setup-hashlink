@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [2.1.0](https://github.com/cedx/setup-hashlink/compare/v2.0.0...v2.1.0)
+- Added [HashLink](https://hashlink.haxe.org) 1.12 to the supported releases.
+
 ## Version [2.0.0](https://github.com/cedx/setup-hashlink/compare/v1.3.0...v2.0.0)
 - Ported the source code to [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
 - Raised the [Node.js](https://nodejs.org) version used by the action runner.
