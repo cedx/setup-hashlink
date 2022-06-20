@@ -41,7 +41,7 @@ export async function publish() {
 
 /** Runs the test suite. */
 export function test() {
-	return exec("c8", ["--all", "--include=lib/**/*.js", "--report-dir=var", "--reporter=lcovonly", "node_modules/.bin/mocha", "--recursive"]);
+	return exec("c8", ["--all", "--include=lib/**/*.js", "--report-dir=var", "--reporter=lcovonly", "node", "--test"]);
 }
 
 /** Updates the version number in the sources. */
