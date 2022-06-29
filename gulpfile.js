@@ -1,13 +1,11 @@
-import {readFileSync} from "node:fs";
 import {cp, readFile, writeFile} from "node:fs/promises";
 import {EOL} from "node:os";
 import del from "del";
 import {execa} from "execa";
 import gulp from "gulp";
 import replace from "gulp-replace";
-
-// The package configuration.
-const pkg = JSON.parse(readFileSync("package.json", "utf8"));
+import config from "./jsconfig.json" assert {type: "json"};
+import pkg from "./package.json" assert {type: "json"};
 
 /** Builds the project. */
 export async function build() {
@@ -29,8 +27,7 @@ export async function doc() {
 
 /** Performs the static analysis of source code. */
 export async function lint() {
-	const {include} = JSON.parse(await readFile("jsconfig.json", "utf8"));
-	await exec("eslint", ["--config=etc/eslint.json", ...include]);
+	await exec("eslint", ["--config=etc/eslint.json", ...config.include]);
 	return exec("tsc", ["--project", "jsconfig.json"]);
 }
 
