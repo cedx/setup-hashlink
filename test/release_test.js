@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import {Platform, Release} from "../lib/index.js";
+import {Platform, Release} from "../src/index.js";
 
 // A release that exists.
 const existingRelease = new Release({version: "1.0.0", assets: [

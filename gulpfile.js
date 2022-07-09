@@ -9,14 +9,14 @@ import pkg from "./package.json" assert {type: "json"};
 
 /** Builds the project. */
 export async function build() {
-	await exec("ncc", ["build", "lib/main.js", "--minify", "--out=var", "--target=es2022"]);
+	await exec("ncc", ["build", "src/main.js", "--minify", "--out=var", "--target=es2022"]);
 	await writeFile("bin/setup_hashlink.mjs", `#!/usr/bin/env node${EOL}${await readFile("var/index.js", "utf8")}`);
-	return exec("tsc", ["--project", "lib/jsconfig.json"]);
+	return exec("tsc", ["--project", "src/jsconfig.json"]);
 }
 
 /** Deletes all generated files and reset any saved state. */
 export function clean() {
-	return del(["share", "var/**/*"]);
+	return del(["lib", "var/**/*"]);
 }
 
 /** Builds the documentation. */
@@ -38,7 +38,7 @@ export async function publish() {
 
 /** Runs the test suite. */
 export function test() {
-	return exec("c8", ["--all", "--include=lib/**/*.js", "--report-dir=var", "--reporter=lcovonly", "node", "--test"]);
+	return exec("c8", ["--all", "--include=src/**/*.js", "--report-dir=var", "--reporter=lcovonly", "node", "--test"]);
 }
 
 /** Updates the version number in the sources. */

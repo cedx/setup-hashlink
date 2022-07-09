@@ -1,14 +1,14 @@
 {
 	"bugs": "https://github.com/cedx/setup-hashlink/issues",
 	"description": "Set up your GitHub Actions workflow with a specific version of the HashLink VM.",
-	"exports": "./lib/index.js",
+	"exports": "./src/index.js",
 	"homepage": "https://github.com/marketplace/actions/setup-hashlink-vm",
 	"license": "MIT",
 	"name": "@cedx/setup-hashlink",
 	"private": true,
 	"repository": "github:cedx/setup-hashlink",
 	"type": "module",
-	"types": "./share/index.d.ts",
+	"types": "./lib/index.d.ts",
 	"version": "2.1.0",
 	"author": {
 		"email": "cedric@belin.io",
@@ -44,7 +44,7 @@
 	},
 	"files": [
 		"lib/",
-		"share/"
+		"src/"
 	],
 	"funding": {
 		"type": "github",
@@ -53,6 +53,6 @@
 	"scripts": {
 		"prepack": "gulp",
 		"start": "node bin/setup_hashlink.cjs",
-		"test": "c8 --all --include=lib/**/*.js --report-dir=var --reporter=lcovonly node --test"
+		"test": "c8 --all --include=src/**/*.js --report-dir=var --reporter=lcovonly node --test"
 	}
 }

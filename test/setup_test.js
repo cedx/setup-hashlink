@@ -3,7 +3,7 @@ import {existsSync} from "node:fs";
 import {join, resolve} from "node:path";
 import {env, platform} from "node:process";
 import test from "node:test";
-import {Platform, Release, Setup} from "../lib/index.js";
+import {Platform, Release, Setup} from "../src/index.js";
 
 // Initializes the environment.
 if (!env.RUNNER_TEMP) env.RUNNER_TEMP = resolve("var/tmp");
