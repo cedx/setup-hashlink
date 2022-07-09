@@ -1,7 +1,6 @@
 import {cp, readFile, writeFile} from "node:fs/promises";
 import {EOL} from "node:os";
 import del from "del";
-import {build as esbuild} from "esbuild";
 import {execa} from "execa";
 import gulp from "gulp";
 import replace from "gulp-replace";
@@ -10,7 +9,7 @@ import pkg from "./package.json" assert {type: "json"};
 
 /** Builds the project. */
 export async function build() {
-	await esbuild({bundle: true, entryPoints: ["lib/main.js"], format: "esm", minify: true, outfile: "var/index.js", platform: "node"});
+	await exec("ncc", ["build", "lib/main.js", "--minify", "--out=var", "--target=es2022"]);
 	await writeFile("bin/setup_hashlink.mjs", `#!/usr/bin/env node${EOL}${await readFile("var/index.js", "utf8")}`);
 	return exec("tsc", ["--project", "lib/jsconfig.json"]);
 }
