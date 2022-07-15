@@ -46,11 +46,6 @@ export function version() {
 	return gulp.src("README.md").pipe(replace(/action\/v\d+(\.\d+){2}/, `action/v${pkg.version}`)).pipe(gulp.dest("."));
 }
 
-/** Watches for file changes. */
-export function watch() {
-	return exec("tsc", ["--project", "jsconfig.json", "--watch"]);
-}
-
 /** Runs the default task. */
 export default gulp.series(
 	clean,
