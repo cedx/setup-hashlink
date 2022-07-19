@@ -1,6 +1,6 @@
 import {cp, readFile, writeFile} from "node:fs/promises";
 import {EOL} from "node:os";
-import del from "del";
+import {deleteAsync} from "del";
 import {execa} from "execa";
 import gulp from "gulp";
 import replace from "gulp-replace";
@@ -16,7 +16,7 @@ export async function build() {
 
 /** Deletes all generated files and reset any saved state. */
 export function clean() {
-	return del(["lib", "var/**/*"]);
+	return deleteAsync(["lib", "var/**/*"]);
 }
 
 /** Builds the documentation. */
