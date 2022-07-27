@@ -2,7 +2,6 @@ import assert from "node:assert/strict";
 import {existsSync} from "node:fs";
 import {join, resolve} from "node:path";
 import {env, platform} from "node:process";
-// @ts-expect-error TS2614
 import {describe, it} from "node:test";
 import {Platform, Release, Setup} from "../src/index.js";
 
