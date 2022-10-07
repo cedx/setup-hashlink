@@ -70,7 +70,7 @@ export class Release {
 	 */
 	get tag() {
 		const [major, minor, patch] = this.version.split(".");
-		return Number.parseInt(patch) > 0 ? `${major}.${minor}.${patch}` : `${major}.${minor}`;
+		return Number(patch) > 0 ? `${major}.${minor}.${patch}` : `${major}.${minor}`;
 	}
 
 	/**
