@@ -7,10 +7,10 @@ import {Platform, Release} from "#hashlink";
  */
 describe("Release", () => {
 	const nonExistentRelease = new Release({version: "666.6.6"});
-	const existingRelease = new Release({version: "1.0.0", assets: [
-		{platform: Platform.linux, file: "hl-1.0.zip"},
-		{platform: Platform.macOS, file: "hl-1.0.zip"},
-		{platform: Platform.windows, file: "hl-1.0.zip"}
+	const existingRelease = new Release({version: "1.13.0", assets: [
+		{platform: Platform.linux, file: "hashlink-1.13.0.zip"},
+		{platform: Platform.macOS, file: "hashlink-1.13.0.zip"},
+		{platform: Platform.windows, file: "hashlink-1.13.0.zip"}
 	]});
 
 	describe(".exists", () => {
@@ -28,7 +28,7 @@ describe("Release", () => {
 	});
 
 	describe(".tag", () => {
-		it("should not include the patch component if it's zero", () => assert.equal(existingRelease.tag, "1.0"));
+		it("should not include the patch component if it's zero", () => assert.equal(existingRelease.tag, "1.13"));
 		it("should include the patch component if it's greater than zero", () => assert.equal(nonExistentRelease.tag, "666.6.6"));
 	});
 
@@ -38,7 +38,7 @@ describe("Release", () => {
 		});
 
 		it("should point to a GitHub release if the release is provided as binary", () => {
-			assert.equal(existingRelease.url.href, "https://github.com/HaxeFoundation/hashlink/releases/download/1.0/hl-1.0.zip");
+			assert.equal(existingRelease.url.href, "https://github.com/HaxeFoundation/hashlink/releases/download/1.13/hashlink-1.13.0.zip");
 		});
 	});
 
@@ -51,7 +51,7 @@ describe("Release", () => {
 			assert.equal(Release.find("*"), Release.latest);
 			assert.equal(Release.find("1.x"), Release.latest);
 			assert.equal(Release.find("=1.0.0")?.version, "1.0.0");
-			assert.equal(Release.find(">=1.0.0 <1.11.0")?.version, "1.10.0");
+			assert.equal(Release.find(">=1.0.0 <2.0.0")?.version, "1.13.0");
 		});
 	});
 
@@ -61,7 +61,7 @@ describe("Release", () => {
 		});
 
 		it("should return the release corresponding to the version number if it exists", () => {
-			assert.equal(Release.get("1.0.0")?.version, "1.0.0");
+			assert.equal(Release.get("1.13.0")?.version, "1.13.0");
 		});
 	});
 
@@ -71,7 +71,7 @@ describe("Release", () => {
 		});
 
 		it("should return the asset corresponding to the platform number if it exists", () => {
-			assert.equal(existingRelease.getAsset(Platform.windows)?.file, "hl-1.0.zip");
+			assert.equal(existingRelease.getAsset(Platform.windows)?.file, "hashlink-1.13.0.zip");
 		});
 	});
 });
