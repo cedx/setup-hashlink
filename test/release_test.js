@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import {describe, it} from "node:test";
-import {Platform, Release} from "../src/index.js";
+import {Platform, Release} from "#hashlink";
 
 /**
  * Tests the features of the {@link Release} class.

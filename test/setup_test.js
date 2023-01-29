@@ -3,7 +3,7 @@ import {existsSync} from "node:fs";
 import {join, resolve} from "node:path";
 import {env, platform} from "node:process";
 import {describe, it} from "node:test";
-import {Platform, Release, Setup} from "../src/index.js";
+import {Platform, Release, Setup} from "#hashlink";
 
 /**
  * Tests the features of the {@link Setup} class.

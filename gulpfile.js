@@ -14,7 +14,7 @@ export async function build() {
 	return exec("tsc", ["--project", "src/jsconfig.json"]);
 }
 
-/** Deletes all generated files and reset any saved state. */
+/** Deletes all generated files. */
 export function clean() {
 	return deleteAsync(["lib", "var/**/*"]);
 }
@@ -31,7 +31,7 @@ export async function lint() {
 	return exec("tsc", ["--project", "jsconfig.json"]);
 }
 
-/** Publishes the package in the registry. */
+/** Publishes the package. */
 export async function publish() {
 	for (const command of [["tag"], ["push", "origin"]]) await exec("git", [...command, `v${pkg.version}`]);
 }
