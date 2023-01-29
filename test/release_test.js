@@ -43,7 +43,7 @@ describe("Release", () => {
 	});
 
 	describe(".find()", () => {
-		it("should return `undefined` if no release matches the version constraint", () => {
+		it("should return `null` if no release matches the version constraint", () => {
 			assert.ok(!Release.find("666.6.6"));
 		});
 
@@ -56,7 +56,7 @@ describe("Release", () => {
 	});
 
 	describe(".get()", () => {
-		it("should return `undefined` if no release matches to the version number", () => {
+		it("should return `null` if no release matches to the version number", () => {
 			assert.ok(!Release.get("666.6.6"));
 		});
 
@@ -66,7 +66,7 @@ describe("Release", () => {
 	});
 
 	describe(".getAsset()", () => {
-		it("should return `undefined` if no asset matches the platform", () => {
+		it("should return `null` if no asset matches the platform", () => {
 			assert.ok(!nonExistentRelease.getAsset(Platform.windows));
 		});
 
