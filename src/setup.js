@@ -58,8 +58,9 @@ export class Setup {
 	 * @throws {Error} The target platform is not supported.
 	 */
 	#compile(directory) {
-		if (![Platform.linux, Platform.macOS].includes(platform))
-			throw new Error(`Compilation is not supported on "${platform}" platform.`);
+		const supportedPlatforms = /** @type {string[]} */ ([Platform.linux, Platform.macOS]);
+		if (!supportedPlatforms.includes(platform))
+			throw Error(`Compilation is not supported on "${platform}" platform.`);
 
 		const workingDirectory = cwd();
 		chdir(directory);
@@ -114,6 +115,6 @@ export class Setup {
 	async #findSubfolder(directory) {
 		const folders = (await readdir(directory, {withFileTypes: true})).filter(entity => entity.isDirectory());
 		if (folders.length == 1) return folders[0].name;
-		throw new Error(`Unable to determine the single subfolder in: ${directory}`);
+		throw Error(`Unable to determine the single subfolder in: ${directory}`);
 	}
 }

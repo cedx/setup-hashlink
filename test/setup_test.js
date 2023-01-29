@@ -9,8 +9,8 @@ import {Platform, Release, Setup} from "#hashlink";
  * Tests the features of the {@link Setup} class.
  */
 describe("Setup", () => {
-	if (!env.RUNNER_TEMP) env.RUNNER_TEMP = resolve("var/tmp");
-	if (!env.RUNNER_TOOL_CACHE) env.RUNNER_TOOL_CACHE = resolve("var/cache");
+	env.RUNNER_TEMP ||= resolve("var/tmp");
+	env.RUNNER_TOOL_CACHE ||= resolve("var/cache");
 
 	describe(".download()", () => {
 		it("should properly download and extract the HashLink VM", async () => {
