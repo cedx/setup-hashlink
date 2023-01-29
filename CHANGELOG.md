@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [2.2.0](https://github.com/cedx/setup-hashlink/compare/v2.1.0...v2.2.0)
+- Added [HashLink](https://hashlink.haxe.org) 1.13 to the supported releases.
+
 ## Version [2.1.0](https://github.com/cedx/setup-hashlink/compare/v2.0.0...v2.1.0)
 - Added [HashLink](https://hashlink.haxe.org) 1.12 to the supported releases.
 
