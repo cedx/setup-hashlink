@@ -7,7 +7,7 @@
 	"private": true,
 	"repository": "github:cedx/setup-hashlink",
 	"type": "module",
-	"version": "2.1.0",
+	"version": "2.2.0",
 	"author": {
 		"email": "cedric@belin.io",
 		"name": "Cédric Belin",
