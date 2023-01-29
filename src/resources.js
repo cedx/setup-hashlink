@@ -8,7 +8,7 @@ export default [
 	{
 		version: "1.13.0",
 		assets: [
-			{platform: Platform.windows, file: "hl-1.13.0-win.zip"}
+			{platform: Platform.windows, file: "hashlink-1.13.0-win.zip"}
 		]
 	},
 	{
