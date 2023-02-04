@@ -1,4 +1,4 @@
-//! --class-path src
+//! --class-path src --library tink_core
 import setup_hashlink.Version;
 
 /** Runs the script. **/
