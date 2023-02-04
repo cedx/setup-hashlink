@@ -1,5 +1,6 @@
 package js.actions;
 
+import haxe.DynamicAccess;
 import js.lib.Promise;
 
 /** Functions necessary for downloading and caching tools. **/
@@ -16,7 +17,7 @@ extern class ToolCache {
 		Downloads a tool from the specified URL and streams it into a file.
 		Returns the path of the downloaded file.
 	**/
-	static function downloadTool(url: String, ?directory: String, ?authorization: String): Promise<String>;
+	static function downloadTool(url: String, ?directory: String, ?authorization: String, ?headers: DynamicAccess<String>): Promise<String>;
 
 	/**
 		Extracts the specified ZIP archive into the given directory.
