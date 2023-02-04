@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [3.0.0](https://github.com/cedx/setup-hashlink/compare/v2.2.0...v3.0.0)
+- Ported the source code to [Haxe](https://haxe.org).
+
 ## Version [2.2.0](https://github.com/cedx/setup-hashlink/compare/v2.1.0...v2.2.0)
 - Added [HashLink](https://hashlink.haxe.org) 1.13 to the supported releases.
 
