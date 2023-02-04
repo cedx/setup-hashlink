@@ -26,10 +26,5 @@
 	},
 	"engines": {
 		"node": ">=16.0.0"
-	},
-	"scripts": {
-		"prepack": "lix Dist",
-		"start": "node bin/setup_hashlink.js",
-		"test": "haxe test.hxml"
 	}
 }
