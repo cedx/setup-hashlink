@@ -1,0 +1,4 @@
+# @install: lix --silent download "haxelib:/tink_semver#0.1.0" into tink_semver/0.1.0/haxelib
+-lib tink_parse
+-cp ${HAXE_LIBCACHE}/tink_semver/0.1.0/haxelib/src
+-D tink_semver=0.1.0

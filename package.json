@@ -6,7 +6,7 @@
 	"name": "@cedx/setup-hashlink",
 	"private": true,
 	"repository": "github:cedx/setup-hashlink",
-	"type": "module",
+	"type": "commonjs",
 	"version": "2.2.0",
 	"author": {
 		"email": "cedric@belin.io",
@@ -14,7 +14,7 @@
 		"url": "https://belin.io"
 	},
 	"bin": {
-		"setup_hashlink": "./bin/setup_hashlink.mjs"
+		"setup_hashlink": "./bin/setup_hashlink.js"
 	},
 	"dependencies": {
 		"@actions/core": "^1.10.0",
