@@ -7,7 +7,7 @@ jobs:
       - name: Fetch sources
         uses: actions/checkout@v3
       - name: Set up Lix
-        uses: lix-pm/setup-lix@v15.12.0
+        uses: lix-pm/setup-lix@master
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:

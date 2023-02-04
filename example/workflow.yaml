@@ -10,7 +10,7 @@ jobs:
       - name: Fetch sources
         uses: actions/checkout@v3
       - name: Set up Lix
-        uses: lix-pm/setup-lix@v15.12.0
+        uses: lix-pm/setup-lix@master
       - name: Set up HashLink
         uses: cedx/setup-hashlink@v3
         with:
