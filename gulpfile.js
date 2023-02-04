@@ -10,7 +10,7 @@ import pkg from "./package.json" assert {type: "json"};
 /** Builds the project. */
 export async function build() {
 	await exec("ncc", ["build", "src/main.js", "--minify", "--out=var", "--target=es2022"]);
-	await writeFile("bin/setup_hashlink.mjs", `#!/usr/bin/env node${EOL}${await readFile("var/index.js", "utf8")}`);
+	await writeFile("bin/setup_hashlink.js", `#!/usr/bin/env node${EOL}${await readFile("var/index.js", "utf8")}`);
 	return exec("tsc", ["--project", "src/jsconfig.json"]);
 }
 
