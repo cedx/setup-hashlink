@@ -7,7 +7,7 @@ import sys.io.File;
 function main() {
 	if (FileSystem.exists("docs")) Tools.removeDirectory("docs");
 
-	Sys.command("haxe --define doc-gen --no-output --xml var/api.xml build.hxml");
+	Sys.command("haxe", ["--define", "doc-gen", "--no-output", "--xml", "var/api.xml", "build.hxml"]);
 	Sys.command("lix", [
 		"run", "dox",
 		"--define", "description", "Set up your GitHub Actions workflow with a specific version of the HashLink VM.",
