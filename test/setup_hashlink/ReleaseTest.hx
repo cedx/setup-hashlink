@@ -4,7 +4,7 @@ import setup_hashlink.Release.ReleaseAsset as Asset;
 using AssertionTools;
 
 /** Tests the features of the `Release` class. **/
-@:asserts class ReleaseTest {
+@:asserts final class ReleaseTest {
 
 	/** A release that exists. **/
 	public static final existingRelease = new Release({version: "1.13.0", assets: [

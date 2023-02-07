@@ -6,7 +6,7 @@ using StringTools;
 using haxe.io.Path;
 
 /** Tests the features of the `Setup` class. **/
-@:asserts class SetupTest {
+@:asserts final class SetupTest {
 
 	/** Creates a new test. **/
 	public function new() {}
