@@ -51,9 +51,13 @@ class Setup {
 	**/
 	function compile(directory: String) {
 		final platform: Platform = Sys.systemName();
-		return [Platform.Linux, Platform.MacOs].contains(platform)
-			? withWorkingDirectory(directory, () -> platform == Linux ? compileLinux() : compileMacOs())
-			: Promise.reject(new Error(MethodNotAllowed, 'Compilation is not supported on $platform platform.'));
+		if (![Platform.Linux, Platform.MacOs].contains(platform))
+			return Promise.reject(new Error(MethodNotAllowed, 'Compilation is not supported on $platform platform.'));
+
+		final workingDirectory = Sys.getCwd();
+		Sys.setCwd(directory);
+		final promise = platform == Linux ? compileLinux() : compileMacOs();
+		return promise.next(path -> { Sys.setCwd(workingDirectory); path; });
 	}
 
 	/** Compiles the HashLink sources on the macOS platform. **/
@@ -101,13 +105,4 @@ class Setup {
 	/** Normalizes the segment separators of the given `path` using the platform-specific separator. **/
 	function normalizeSeparator(path: String)
 		return Sys.systemName() == Platform.Windows ? path.replace("/", "\\") : path;
-
-	/** Temporarily sets the working `directory` and invokes the specified `callback` function in this context. **/
-	function withWorkingDirectory<T>(directory: String, callback: () -> T): T {
-		final workingDirectory = Sys.getCwd();
-		Sys.setCwd(directory);
-		final outcome = callback();
-		Sys.setCwd(workingDirectory);
-		return outcome;
-	}
 }
