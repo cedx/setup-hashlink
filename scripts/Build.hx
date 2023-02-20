@@ -1,6 +1,6 @@
 import sys.io.File;
 
-/** Runs the script. **/
+/** Builds the project. **/
 function main() {
 	Sys.command("haxe build.hxml");
 
