@@ -3,8 +3,8 @@
 --js var/tests.js
 --library instrument
 --library tink_unittest
---macro allowPackage('sys')
---macro instrument.Instrumentation.coverage(['setup_hashlink'], ['src'])
+--macro allowPackage("sys")
+--macro instrument.Instrumentation.coverage(["setup_hashlink"], ["src"])
 --main RunTests
 share/build.hxml
 --cmd node var/tests.js
