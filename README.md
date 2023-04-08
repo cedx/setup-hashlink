@@ -5,7 +5,7 @@ Set up your [GitHub Actions](https://docs.github.com/en/actions) workflow with a
 
 ## Documentation
 - [User guide](https://github.com/cedx/setup-hashlink/wiki)
-- [API reference](https://cedx.github.io/setup-hashlink)
+- [API reference](https://docs.belin.io/setup-hashlink)
 
 ## Development
 - [Git repository](https://github.com/cedx/setup-hashlink)
