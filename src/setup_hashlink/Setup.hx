@@ -97,7 +97,7 @@ class Setup {
 		final folders = FileSystem.readDirectory(directory).filter(name -> FileSystem.isDirectory(Path.join([directory, name])));
 		return switch folders.length {
 			case 0: return Failure(new Error(NotFound, 'No subfolder found in: $directory.'));
-			case 1: return Success(folders[0]);
+			case 1: return Success(folders.pop());
 			default: return Failure(new Error(Conflict, 'Multiple subfolders found in: $directory.'));
 		}
 	}
