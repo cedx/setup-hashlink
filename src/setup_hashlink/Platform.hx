@@ -4,11 +4,11 @@ package setup_hashlink;
 enum abstract Platform(String) from String to String {
 
 	/** Specifies a Linux platform. **/
-	var Linux = "Linux";
+	var Linux;
 
 	/** Specifies a macOS platform. **/
 	var MacOs = "Mac";
 
 	/** Specifies a Windows platform. **/
-	var Windows = "Windows";
+	var Windows;
 }
