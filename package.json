@@ -2,7 +2,7 @@
 	"bugs": "https://github.com/cedx/setup-hashlink/issues",
 	"description": "Set up your GitHub Actions workflow with a specific version of the HashLink VM.",
 	"files": [],
-	"homepage": "https://github.com/marketplace/actions/setup-hashlink-vm",
+	"homepage": "https://docs.belin.io/setup-hashlink",
 	"license": "MIT",
 	"name": "@cedx/setup-hashlink",
 	"private": true,

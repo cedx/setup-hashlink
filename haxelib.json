@@ -7,6 +7,6 @@
 	"name": "setup_hashlink",
 	"releasenote": "Ported the source code to Haxe.",
 	"tags": ["action", "ci", "github", "hashlink", "test", "vm", "workflow"],
-	"url": "https://github.com/cedx/setup-hashlink",
+	"url": "https://docs.belin.io/setup-hashlink",
 	"version": "3.0.0"
 }
