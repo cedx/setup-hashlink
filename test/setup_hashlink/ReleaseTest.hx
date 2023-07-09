@@ -8,9 +8,9 @@ using AssertionTools;
 
 	/** A release that exists. **/
 	public static final existingRelease = new Release({version: "1.13.0", assets: [
-		new Asset({platform: Linux, file: "hashlink-1.13.0.zip"}),
-		new Asset({platform: MacOs, file: "hashlink-1.13.0.zip"}),
-		new Asset({platform: Windows, file: "hashlink-1.13.0.zip"})
+		new Asset({os: Linux, file: "hashlink-1.13.0.zip"}),
+		new Asset({os: MacOs, file: "hashlink-1.13.0.zip"}),
+		new Asset({os: Windows, file: "hashlink-1.13.0.zip"})
 	]});
 
 	/** A release that doesn't exist. **/

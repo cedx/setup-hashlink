@@ -47,14 +47,14 @@ class Release implements Model {
 	/** The version number. **/
 	@:constant var version: String = @byDefault "0.0.0";
 
-	/** Finds a release that matches the specified version `constraint`. **/
+	/** Finds a release that matches the specified version constraint. **/
 	public static function find(constraint: Constraint) return data.first(release -> constraint.matches(release.version));
 
-	/** Gets the release corresponding to the specified `version`. **/
+	/** Gets the release corresponding to the specified version. **/
 	public static function get(version: Version) return data.first(release -> release.version == version);
 
-	/** Gets the asset corresponding to the specified `platform`. **/
-	public function getAsset(platform: Platform) return assets.first(asset -> asset.platform == platform);
+	/** Gets the asset corresponding to the specified operating system. **/
+	public function getAsset(os: OperatingSystem) return assets.first(asset -> asset.os == os);
 }
 
 /** Represents an asset of a GitHub release. **/
@@ -64,6 +64,6 @@ class ReleaseAsset implements Model {
 	/** The target file. **/
 	@:constant var file: String;
 
-	/** The target platform. **/
-	@:constant var platform: Platform;
+	/** The target operating system. **/
+	@:constant var os: OperatingSystem;
 }

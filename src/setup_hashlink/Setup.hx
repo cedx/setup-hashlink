@@ -50,13 +50,13 @@ class Setup {
 		Returns the path to the output directory.
 	**/
 	function compile(directory: String) {
-		final platform: Platform = Sys.systemName();
-		if (![Platform.Linux, Platform.MacOs].contains(platform))
-			return Promise.reject(new Error(MethodNotAllowed, 'Compilation is not supported on $platform platform.'));
+		final os: OperatingSystem = Sys.systemName();
+		if (![OperatingSystem.Linux, OperatingSystem.MacOs].contains(os))
+			return Promise.reject(new Error(MethodNotAllowed, 'Compilation is not supported on $os platform.'));
 
 		final workingDirectory = Sys.getCwd();
 		Sys.setCwd(directory);
-		final promise = platform == Linux ? compileLinux() : compileMacOs();
+		final promise = os == Linux ? compileLinux() : compileMacOs();
 		return promise.next(path -> { Sys.setCwd(workingDirectory); path; });
 	}
 
@@ -104,5 +104,5 @@ class Setup {
 
 	/** Normalizes the segment separators of the given `path` using the platform-specific separator. **/
 	function normalizeSeparator(path: String)
-		return Sys.systemName() == Platform.Windows ? path.replace("/", "\\") : path;
+		return Sys.systemName() == OperatingSystem.Windows ? path.replace("/", "\\") : path;
 }

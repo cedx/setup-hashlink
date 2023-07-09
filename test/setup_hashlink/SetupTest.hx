@@ -21,12 +21,12 @@ using haxe.io.Path;
 	/** Tests the `download()` method. **/
 	@:timeout(180_000)
 	public function testDownload() {
-		final platform: Platform = Sys.systemName();
+		final os: OperatingSystem = Sys.systemName();
 		final setup = new Setup(Release.latest);
 		final isSource = setup.release.isSource;
 
-		final executable = "hl" + if (isSource) ".vcxproj" else platform == Windows ? ".exe" : "";
-		final dynamicLibrary = "libhl" + if (isSource) ".vcxproj" else switch platform {
+		final executable = "hl" + if (isSource) ".vcxproj" else os == Windows ? ".exe" : "";
+		final dynamicLibrary = "libhl" + if (isSource) ".vcxproj" else switch os {
 			case MacOs: ".dylib";
 			case Windows: ".dll";
 			default: ".so";
