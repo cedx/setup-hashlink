@@ -22,17 +22,17 @@ using AssertionTools;
 	/** Tests the `exists` property. **/
 	@:variant(setup_hashlink.ReleaseTest.existingRelease, true)
 	@:variant(setup_hashlink.ReleaseTest.nonExistentRelease, false)
-	public function testExists(input: Release, output: Bool)
+	public function exists(input: Release, output: Bool)
 		return assert(input.exists == output);
 
 	/** Tests the `isSource` property. **/
 	@:variant(setup_hashlink.ReleaseTest.existingRelease, false)
 	@:variant(setup_hashlink.ReleaseTest.nonExistentRelease, true)
-	public function testIsSource(input: Release, output: Bool)
+	public function isSource(input: Release, output: Bool)
 		return assert(input.isSource == output);
 
 	/** Tests the `latest` property. **/
-	public function testLatest() {
+	public function latest() {
 		asserts.doesNotThrow(() -> Release.latest);
 		return asserts.done();
 	}
@@ -40,13 +40,13 @@ using AssertionTools;
 	/** Tests the `tag` property. **/
 	@:variant(setup_hashlink.ReleaseTest.existingRelease, "1.13")
 	@:variant(setup_hashlink.ReleaseTest.nonExistentRelease, "666.6.6")
-	public function testTag(input: Release, output: String)
+	public function tag(input: Release, output: String)
 		return assert(input.tag == output);
 
 	/** Tests the `url` property. **/
 	@:variant(setup_hashlink.ReleaseTest.existingRelease, "https://github.com/HaxeFoundation/hashlink/releases/download/1.13/hashlink-1.13.0.zip")
 	@:variant(setup_hashlink.ReleaseTest.nonExistentRelease, "https://github.com/HaxeFoundation/hashlink/archive/refs/tags/666.6.6.zip")
-	public function testUrl(input: Release, output: String)
+	public function url(input: Release, output: String)
 		return assert(input.url == output);
 
 	/** Tests the `find()` method. **/
@@ -55,7 +55,7 @@ using AssertionTools;
 	@:variant("=1.0.0", Some("1.0.0"))
 	@:variant(">=1.0.0 <1.14.0", Some("1.13.0"))
 	@:variant("666.6.6", None)
-	public function testFind(input: String, output: Option<String>) return switch Release.find(input) {
+	public function find(input: String, output: Option<String>) return switch Release.find(input) {
 		case None: assert(output == None);
 		case Some(release): assert(output.equals(release.version));
 	}
@@ -63,7 +63,7 @@ using AssertionTools;
 	/** Tests the `get()` method. **/
 	@:variant("1.13.0", Some("1.13.0"))
 	@:variant("666.6.6", None)
-	public function testGet(input: String, output: Option<String>) return switch Release.get(input) {
+	public function get(input: String, output: Option<String>) return switch Release.get(input) {
 		case None: assert(output == None);
 		case Some(release): assert(output.equals(release.version));
 	}
@@ -71,7 +71,7 @@ using AssertionTools;
 	/** Tests the `getAsset()` method. **/
 	@:variant(setup_hashlink.ReleaseTest.existingRelease, Some("hashlink-1.13.0.zip"))
 	@:variant(setup_hashlink.ReleaseTest.nonExistentRelease, None)
-	public function testGetAsset(input: Release, output: Option<String>) return switch input.getAsset(Windows) {
+	public function getAsset(input: Release, output: Option<String>) return switch input.getAsset(Windows) {
 		case None: assert(output == None);
 		case Some(asset): assert(output.equals(asset.file));
 	}

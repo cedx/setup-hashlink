@@ -11,16 +11,9 @@ using haxe.io.Path;
 	/** Creates a new test. **/
 	public function new() {}
 
-	/** Method invoked once before running the first test. **/
-	@:setup public function setup() {
-		if (Sys.getEnv("RUNNER_TEMP") == null) Sys.putEnv("RUNNER_TEMP", FileSystem.absolutePath("var/tmp"));
-		if (Sys.getEnv("RUNNER_TOOL_CACHE") == null) Sys.putEnv("RUNNER_TOOL_CACHE", FileSystem.absolutePath("var/cache"));
-		return Noise;
-	}
-
 	/** Tests the `download()` method. **/
 	@:timeout(180_000)
-	public function testDownload() {
+	public function download() {
 		final os: OperatingSystem = Sys.systemName();
 		final setup = new Setup(Release.latest);
 		final isSource = setup.release.isSource;
@@ -42,11 +35,18 @@ using haxe.io.Path;
 
 	/** Tests the `install()` method. **/
 	@:timeout(180_000)
-	public function testInstall() {
+	public function install() {
 		new Setup(Release.latest).install()
 			.next(path -> asserts.assert(Sys.getEnv("PATH").contains(path)))
 			.handle(asserts.handle);
 
 		return asserts;
+	}
+
+	/** Method invoked once before running the first test. **/
+	@:setup public function setup() {
+		if (Sys.getEnv("RUNNER_TEMP") == null) Sys.putEnv("RUNNER_TEMP", FileSystem.absolutePath("var/tmp"));
+		if (Sys.getEnv("RUNNER_TOOL_CACHE") == null) Sys.putEnv("RUNNER_TOOL_CACHE", FileSystem.absolutePath("var/cache"));
+		return Noise;
 	}
 }
