@@ -20,13 +20,9 @@ class Setup {
 		Downloads and extracts the ZIP archive of the HashLink VM.
 		Returns the path to the extracted directory.
 	**/
-	public function download() {
-		var directory: String;
-		return ToolCache.downloadTool(release.url).toPromise()
-			.next(file -> ToolCache.extractZip(file))
-			.next(path -> findSubfolder(directory = path))
-			.next(name -> normalizeSeparator(Path.join([directory, name])));
-	}
+	public function download() return ToolCache.downloadTool(release.url).toPromise()
+		.next(file -> ToolCache.extractZip(file))
+		.next(path -> findSubfolder(path).next(name -> normalizeSeparator(Path.join([path, name]))));
 
 	/**
 		Installs the HashLink VM, after downloading it if required.
