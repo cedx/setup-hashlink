@@ -1,5 +1,3 @@
-import sys.io.File;
-
 /** Builds the project. **/
 function main() {
 	final debug = Sys.args().contains("--debug");

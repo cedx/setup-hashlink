@@ -40,8 +40,9 @@ class Setup {
 
 		final needsToBeCompiled = release.isSource && Sys.getEnv("GITHUB_ACTIONS") == "true";
 		return promise.next(path -> needsToBeCompiled ? compile(path) : Promise.resolve(path)).next(path -> {
-			Core.addPath(normalizeSeparator(release.isSource ? Path.join([path, "bin"]) : path));
-			normalizeSeparator(path);
+			final normalizedPath = normalizeSeparator(path);
+			Core.addPath(release.isSource ? normalizeSeparator(Path.join([path, "bin"])) : normalizedPath);
+			normalizedPath;
 		});
 	}
 
