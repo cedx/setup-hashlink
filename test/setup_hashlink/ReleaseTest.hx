@@ -53,7 +53,7 @@ using AssertionTools;
 	@:variant("*", Some(setup_hashlink.Release.latest.version))
 	@:variant("1.x", Some(setup_hashlink.Release.latest.version))
 	@:variant("=1.0.0", Some("1.0.0"))
-	@:variant(">=1.0.0 <2.0.0", Some("1.13.0"))
+	@:variant(">=1.0.0 <1.11.0", Some("1.10.0"))
 	@:variant("666.6.6", None)
 	public function find(input: String, output: Option<String>) return switch Release.find(input) {
 		case None: assert(output == None);
