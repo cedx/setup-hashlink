@@ -44,10 +44,10 @@ using AssertionTools;
 		return assert(input.tag == output);
 
 	/** Tests the `url` property. **/
-	@:variant(setup_hashlink.ReleaseTest.existingRelease, "https://github.com/HaxeFoundation/hashlink/releases/download/1.13/hashlink-1.13.0.zip")
-	@:variant(setup_hashlink.ReleaseTest.nonExistentRelease, "https://github.com/HaxeFoundation/hashlink/archive/refs/tags/666.6.6.zip")
+	@:variant(setup_hashlink.ReleaseTest.existingRelease, "releases/download/1.13/hashlink-1.13.0.zip")
+	@:variant(setup_hashlink.ReleaseTest.nonExistentRelease, "archive/refs/tags/666.6.6.zip")
 	public function url(input: Release, output: String)
-		return assert(input.url == output);
+		return assert(input.url == 'https://github.com/HaxeFoundation/hashlink/$output');
 
 	/** Tests the `find()` method. **/
 	@:variant("*", Some(setup_hashlink.Release.latest.version))
