@@ -16,7 +16,10 @@ extern class Core {
 	/** Logs the specified `message`. **/
 	static function info(message: String): Void;
 
-	/** Gets the value of an input. **/
+	/** Gets the boolean value of an input. **/
+	static function getBooleanInput(name: String, ?options: InputOptions): Bool;
+
+	/** Gets the string value of an input. **/
 	static function getInput(name: String, ?options: InputOptions): String;
 
 	/** Logs the specified `message` and sets the action status to failed. **/
