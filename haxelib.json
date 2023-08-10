@@ -5,7 +5,7 @@
 	"description": "Set up your GitHub Actions workflow with a specific version of the HashLink VM.",
 	"license": "MIT",
 	"name": "setup_hashlink",
-	"releasenote": "Ported the source code to Haxe.",
+	"releasenote": "Avoid overwriting the `LD_LIBRARY_PATH` environment variable.",
 	"tags": ["action", "ci", "github", "hashlink", "test", "vm", "workflow"],
 	"url": "https://docs.belin.io/setup-hashlink",
 	"version": "3.0.1"
