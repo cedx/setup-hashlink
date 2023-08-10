@@ -78,7 +78,9 @@ class Setup {
 		];
 
 		commands.iter(command -> Sys.command(command));
-		Core.exportVariable("LD_LIBRARY_PATH", "/usr/local/bin");
+
+		final libPath = (Sys.getEnv("LD_LIBRARY_PATH") ?? "").trim();
+		Core.exportVariable("LD_LIBRARY_PATH", libPath.length > 0 ? '/usr/local/bin:$libPath' : "/usr/local/bin");
 		return Promise.resolve("/usr/local");
 	}
 
