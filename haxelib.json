@@ -8,5 +8,5 @@
 	"releasenote": "Ported the source code to Haxe.",
 	"tags": ["action", "ci", "github", "hashlink", "test", "vm", "workflow"],
 	"url": "https://docs.belin.io/setup-hashlink",
-	"version": "3.0.0"
+	"version": "3.0.1"
 }
