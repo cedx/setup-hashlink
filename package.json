@@ -6,7 +6,7 @@
 	"license": "MIT",
 	"name": "@cedx/setup-hashlink",
 	"private": true,
-	"repository": "github:cedx/setup-hashlink",
+	"repository": "cedx/setup-hashlink",
 	"type": "commonjs",
 	"version": "3.0.1",
 	"author": {
