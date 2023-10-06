@@ -6,7 +6,6 @@
 	},
 	"checks": [
 		{"type": "BlockBreakingConditional"},
-		{"type": "ConditionalCompilation"},
 		{"type": "EmptyBlock"},
 
 		{"type": "ArrowFunction", "props": {"allowCurlyBody": true}},
