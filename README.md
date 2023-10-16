@@ -1,5 +1,5 @@
 # Setup HashLink VM
-![Node.js](https://badgen.net/badge/node/%3E%3D16.0.0/green) ![Action](https://badgen.net/badge/action/v3.0.1/blue) ![License](https://badgen.net/badge/license/MIT/blue) ![Coverage](https://badgen.net/codecov/c/github/cedx/setup-hashlink)
+![Node.js](https://badgen.net/badge/node/%3E%3D20.0.0/green) ![Action](https://badgen.net/badge/action/v3.0.1/blue) ![License](https://badgen.net/badge/license/MIT/blue) ![Coverage](https://badgen.net/codecov/c/github/cedx/setup-hashlink)
 
 Set up your [GitHub Actions](https://docs.github.com/en/actions) workflow with a specific version of the [HashLink VM](https://hashlink.haxe.org).
 
