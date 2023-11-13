@@ -15,7 +15,7 @@ function main() {
 		"--define", "source-path", "https://github.com/cedx/setup-hashlink/blob/main/src",
 		"--define", "themeColor", "0xea8220",
 		"--define", "version", Platform.packageVersion,
-		"--define", "website", "https://docs.belin.io/setup-hashlink",
+		"--define", "website", "https://cedx.github.io/setup-hashlink",
 		"--input-path", "var",
 		"--output-path", "docs/api",
 		"--title", "Setup HashLink VM",

@@ -4,8 +4,8 @@
 Set up your [GitHub Actions](https://docs.github.com/en/actions) workflow with a specific version of the [HashLink VM](https://hashlink.haxe.org).
 
 ## Documentation
-- [User guide](https://docs.belin.io/setup-hashlink)
-- [API reference](https://docs.belin.io/setup-hashlink/api)
+- [User guide](https://cedx.github.io/setup-hashlink)
+- [API reference](https://cedx.github.io/setup-hashlink/api)
 
 ## Development
 - [Git repository](https://github.com/cedx/setup-hashlink)
@@ -13,4 +13,4 @@ Set up your [GitHub Actions](https://docs.github.com/en/actions) workflow with a
 - [Submit an issue](https://github.com/cedx/setup-hashlink/issues)
 
 ## License
-[Setup HashLink VM](https://docs.belin.io/setup-hashlink) is distributed under the MIT License.
+[Setup HashLink VM](https://cedx.github.io/setup-hashlink) is distributed under the MIT License.
