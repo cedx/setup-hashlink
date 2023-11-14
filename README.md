@@ -13,4 +13,4 @@ Set up your [GitHub Actions](https://docs.github.com/en/actions) workflow with a
 - [Submit an issue](https://github.com/cedx/setup-hashlink/issues)
 
 ## License
-[Setup HashLink VM](https://cedx.github.io/setup-hashlink) is distributed under the MIT License.
+[Setup HashLink VM](https://github.com/cedx/setup-hashlink) is distributed under the MIT License.
