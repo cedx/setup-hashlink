@@ -11,4 +11,4 @@ Allowed values are:
 - a strict version number: `=1.0.0`, `=1.13.0`, etc.
 - a version specification: `1.10.x`, `>=1.0.0 <1.13.0`, `=1.0.0 || ^1.10.0`, etc.
 
-> The version constraint follows the syntax and semantics of the [tink_semver](https://lib.haxe.org/p/tink_semver) package.
+> The version constraint follows the syntax and semantics of the [tink_semver](https://github.com/haxetink/tink_semver) library.
