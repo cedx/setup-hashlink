@@ -22,7 +22,7 @@ using haxe.io.Path;
 		final dynamicLibrary = "libhl" + if (isSource) ".vcxproj" else switch os {
 			case MacOs: ".dylib";
 			case Windows: ".dll";
-			default: ".so";
+			case _: ".so";
 		}
 
 		setup.download().next(path -> {

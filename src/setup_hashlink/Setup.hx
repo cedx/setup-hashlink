@@ -97,7 +97,7 @@ class Setup {
 		return switch folders.length {
 			case 0: Failure(new Error(NotFound, 'No subfolder found in: $directory.'));
 			case 1: Success(folders.pop());
-			default: Failure(new Error(Conflict, 'Multiple subfolders found in: $directory.'));
+			case _: Failure(new Error(Conflict, 'Multiple subfolders found in: $directory.'));
 		}
 	}
 
