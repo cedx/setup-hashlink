@@ -49,7 +49,7 @@ class Setup {
 	function compile(directory: String) {
 		final os: OperatingSystem = Sys.systemName();
 		if (![OperatingSystem.Linux, OperatingSystem.MacOs].contains(os))
-			return Promise.reject(new Error(MethodNotAllowed, 'Compilation is not supported on $os platform.'));
+			return Promise.reject(new Error(NotImplemented, 'Compilation is not supported on $os platform.'));
 
 		final workingDirectory = Sys.getCwd();
 		Sys.setCwd(directory);
