@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [3.1.0](https://github.com/cedx/setup-hashlink/compare/v3.0.1...v3.1.0)
+- Added [HashLink](https://hashlink.haxe.org) 1.14 to the supported releases.
+
 ## Version [3.0.1](https://github.com/cedx/setup-hashlink/compare/v3.0.0...v3.0.1)
 - Avoid overwriting the `LD_LIBRARY_PATH` environment variable.
 

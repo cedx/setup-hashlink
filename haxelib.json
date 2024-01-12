@@ -5,7 +5,7 @@
 	"description": "Set up your GitHub Actions workflow with a specific version of the HashLink VM.",
 	"license": "MIT",
 	"name": "setup_hashlink",
-	"releasenote": "Avoid overwriting the `LD_LIBRARY_PATH` environment variable.",
+	"releasenote": "Added HashLink 1.14 to the supported releases.",
 	"tags": ["action", "ci", "github", "hashlink", "test", "vm", "workflow"],
 	"url": "https://github.com/cedx/setup-hashlink",
 	"version": "3.1.0"
