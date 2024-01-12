@@ -6,7 +6,7 @@
 	"private": true,
 	"repository": "cedx/setup-hashlink",
 	"type": "commonjs",
-	"version": "3.0.1",
+	"version": "3.1.0",
 	"author": {
 		"email": "cedric@belin.io",
 		"name": "Cédric Belin",

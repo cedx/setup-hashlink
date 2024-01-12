@@ -8,5 +8,5 @@
 	"releasenote": "Avoid overwriting the `LD_LIBRARY_PATH` environment variable.",
 	"tags": ["action", "ci", "github", "hashlink", "test", "vm", "workflow"],
 	"url": "https://github.com/cedx/setup-hashlink",
-	"version": "3.0.1"
+	"version": "3.1.0"
 }
