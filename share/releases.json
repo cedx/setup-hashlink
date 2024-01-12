@@ -1,5 +1,11 @@
 [
 	{
+		"version": "1.14.0",
+		"assets": [
+			{"os": "Windows", "file": "hashlink-1.14.0-win.zip"}
+		]
+	},
+	{
 		"version": "1.13.0",
 		"assets": [
 			{"os": "Windows", "file": "hashlink-1.13.0-win.zip"}
