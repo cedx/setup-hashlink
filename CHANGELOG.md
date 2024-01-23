@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [4.0.0](https://github.com/cedx/setup-hashlink/compare/v3.1.0...v4.0.0)
+- Ported the source code to [TypeScript](https://www.typescriptlang.org).
+
 ## Version [3.1.0](https://github.com/cedx/setup-hashlink/compare/v3.0.1...v3.1.0)
 - Added [HashLink](https://hashlink.haxe.org) 1.14 to the supported releases.
 
