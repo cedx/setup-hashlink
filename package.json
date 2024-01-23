@@ -20,7 +20,13 @@
 		"@actions/tool-cache": "^2.0.1"
 	},
 	"devDependencies": {
-		"esbuild": "^0.19.11"
+		"@types/node": "^20.11.5",
+		"@typescript-eslint/eslint-plugin": "^6.19.1",
+		"@typescript-eslint/parser": "^6.19.1",
+		"esbuild": "^0.19.11",
+		"eslint": "^8.56.0",
+		"typedoc": "^0.25.7",
+		"typescript": "^5.3.3"
 	},
 	"engines": {
 		"node": ">=20.0.0"
