@@ -27,11 +27,6 @@ jobs:
           npm ci
       - name: Run tests
         run: haxe test.hxml
-      - name: Collect code coverage
-        if: success()
-        uses: codecov/codecov-action@v3
-        with:
-          files: var/lcov.info
   action:
     runs-on: ${{matrix.platform}}
     needs: test

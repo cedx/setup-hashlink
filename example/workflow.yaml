@@ -27,9 +27,3 @@ jobs:
         run: lix download
       - name: Run tests
         run: haxe test.hxml
-      - name: Collect code coverage
-        if: success()
-        uses: codecov/codecov-action@v3
-        with:
-          flags: ${{matrix.platform}}
-          files: lcov.info

@@ -25,4 +25,3 @@ steps:
 - [Learn GitHub Actions](https://docs.github.com/en/actions/learn-github-actions)
 - [GitHub marketplace](https://github.com/marketplace/actions/setup-hashlink-vm)
 - [API reference](api/)
-- [Code coverage](https://app.codecov.io/gh/cedx/setup-hashlink)
