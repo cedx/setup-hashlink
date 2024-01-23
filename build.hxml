@@ -1,4 +1,0 @@
---js bin/setup_hashlink.js
---macro setup_hashlink.Macro.shebang("node")
---main setup_hashlink.Program
-share/build.hxml
