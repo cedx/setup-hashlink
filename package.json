@@ -5,15 +5,15 @@
 	"name": "@cedx/setup-hashlink",
 	"private": true,
 	"repository": "cedx/setup-hashlink",
-	"type": "commonjs",
-	"version": "3.1.0",
+	"type": "module",
+	"version": "4.0.0",
 	"author": {
 		"email": "cedric@belin.io",
 		"name": "Cédric Belin",
 		"url": "https://belin.io"
 	},
 	"bin": {
-		"setup_hashlink": "./bin/setup_hashlink.js"
+		"setup_hashlink": "./bin/setup_hashlink.mjs"
 	},
 	"dependencies": {
 		"@actions/core": "^1.10.1",
@@ -24,5 +24,29 @@
 	},
 	"engines": {
 		"node": ">=20.0.0"
+	},
+	"exports": {
+		"types": "./lib/index.d.ts",
+		"import": "./lib/index.js"
+	},
+	"files": [
+		"lib/",
+		"src/"
+	],
+	"keywords": [
+		"action",
+		"ci",
+		"github",
+		"hashlink",
+		"test",
+		"vm",
+		"workflow"
+	],
+	"scripts": {
+		"build": "tsc --project src/tsconfig.json && esbuild --allow-overwrite --bundle --format=esm --legal-comments=none --log-level=warning --minify --outfile=bin/setup_hashlink.mjs --platform=node src/cli.ts",
+		"clean": "node tool/clean.js",
+		"dist": "npm run clean && npm run build && node tool/dist.js && git update-index --chmod=+x bin/setup_hashlink.mjs",
+		"doc": "typedoc --options etc/typedoc.json && node tool/doc.js",
+		"lint": "tsc --project tsconfig.json && eslint --config=etc/eslint.json src tool"
 	}
 }
