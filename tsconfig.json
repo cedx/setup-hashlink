@@ -1,0 +1,16 @@
+{
+	"include": ["src/**/*.ts", "tool/*.js"],
+	"compilerOptions": {
+		"allowJs": true,
+		"baseUrl": ".",
+		"checkJs": true,
+		"esModuleInterop": true,
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
+		"noEmit": true,
+		"resolveJsonModule": true,
+		"paths": {"@cedx/setup-hashlink": ["src"]},
+		"strict": true,
+		"target": "ESNext"
+	}
+}
