@@ -20,6 +20,16 @@ export function parseJson(path) {
 }
 
 /**
+ * Replaces in the specified file the substring which the pattern matches with the given replacement.
+ * @param {string} file The path of the file to process.
+ * @param {RegExp} pattern The pattern to search for.
+ * @param {string} replacement The string to replace.
+ */
+export function replaceInFile(file, pattern, replacement) {
+	writeFileSync(file, readFileSync(file, {encoding: "utf8"}).replace(pattern, replacement));
+}
+
+/**
  * Adds a shebang to the specified source file.
  * @param {string} path The path to the source file.
  * @param {string} executable The name of the executable to prepend.
