@@ -6,7 +6,7 @@ with a specific version of the [HashLink VM](https://hashlink.haxe.org).
 If you haven't used GitHub Actions before, be sure to check out the [related documentation](https://docs.github.com/en/actions/quickstart), 
 as it explains how to create and configure a workflow.
 
-Setup the HashLink VM in a workflow:
+Set up the HashLink VM in a workflow:
 
 ```yaml
 steps:
