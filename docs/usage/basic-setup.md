@@ -1,5 +1,5 @@
 # Basic setup
-Setup a specific version of the [HashLink VM](https://hashlink.haxe.org):
+Set up a specific version of the [HashLink VM](https://hashlink.haxe.org):
 
 ```yaml
 jobs:
@@ -10,7 +10,7 @@ jobs:
       - uses: lix-pm/setup-lix@master
       - uses: cedx/setup-hashlink@v4
         with:
-          version: 1.13.0
+          version: 1.14.0
       - run: hl --version
       - run: lix download
       - run: haxe test.hxml
