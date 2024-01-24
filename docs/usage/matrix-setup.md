@@ -11,9 +11,9 @@ jobs:
         platform: [macos-latest, ubuntu-latest, windows-latest]
         version: [1.x, latest]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: lix-pm/setup-lix@master
-      - uses: cedx/setup-hashlink@v3
+      - uses: cedx/setup-hashlink@v4
         with:
           version: ${{matrix.version}}
       - run: hl --version
