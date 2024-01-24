@@ -46,7 +46,7 @@ describe("Release", () => {
 			equal(Release.find("*"), Release.latest);
 			equal(Release.find("1.x"), Release.latest);
 			equal(Release.find("=1.0.0")?.version, "1.0.0");
-			equal(Release.find(">=1.0.0 <2.0.0")?.version, "1.14.0");
+			equal(Release.find(">=1.0.0 <1.11.0")?.version, "1.10.0");
 		});
 	});
 
@@ -56,7 +56,9 @@ describe("Release", () => {
 	});
 
 	describe(".getAsset()", () => {
-		it("should return `null` if no asset matches the platform", () => ok(!nonExistentRelease.getAsset("win32")));
+		it("should return `null` if no asset matches the platform", () =>
+			ok(!nonExistentRelease.getAsset("win32")));
+
 		it("should return the asset corresponding to the platform number if it exists", () =>
 			equal(existingRelease.getAsset("win32")?.file, "hashlink-1.14.0.zip"));
 	});
