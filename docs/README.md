@@ -16,8 +16,8 @@ steps:
 
 ## Usage
 - [Inputs](usage/inputs.md)
-- [Basic setup](usage/basic-setup.md)
-- [Matrix setup](usage/matrix-setup.md)
+- [Basic setup](usage/basic_setup.md)
+- [Matrix setup](usage/matrix_setup.md)
 
 > A sample workflow can be found in this [workflow.yaml](https://github.com/cedx/setup-hashlink/blob/main/example/workflow.yaml) file.
 
