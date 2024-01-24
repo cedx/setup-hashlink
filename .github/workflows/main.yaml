@@ -6,27 +6,15 @@ jobs:
     steps:
       - name: Fetch sources
         uses: actions/checkout@v4
-      - name: Set up Lix
-        uses: lix-pm/setup-lix@master
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           cache: npm
           node-version: 21
-      - name: Cache dependencies
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/haxe
-            ~/AppData/Roaming/haxe
-          key: haxe-${{runner.os}}-lix-${{hashFiles('.haxerc', 'haxe_libraries/*.hxml')}}
-          restore-keys: haxe-${{runner.os}}-lix-
       - name: Install dependencies
-        run: |
-          lix download
-          npm ci
+        run: npm ci
       - name: Run tests
-        run: haxe test.hxml
+        run: npm test
   action:
     runs-on: ${{matrix.platform}}
     needs: test
