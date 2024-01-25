@@ -12,7 +12,7 @@ describe("Setup", () => {
 	env.RUNNER_TEMP ||= resolve("var/tmp");
 	env.RUNNER_TOOL_CACHE ||= resolve("var/cache");
 
-	describe(".download()", () => {
+	describe("download()", () => {
 		it("should properly download and extract the HashLink VM", async () => {
 			const setup = new Setup(Release.latest);
 			const executable = `hl${setup.release.isSource ? ".vcxproj" : platform == "win32" ? ".exe" : ""}`;
@@ -23,7 +23,7 @@ describe("Setup", () => {
 		});
 	});
 
-	describe(".install()", () => {
+	describe("install()", () => {
 		it("should add the HashLink VM binaries to the PATH environment variable", async () => {
 			const path = await new Setup(Release.latest).install();
 			ok(env.PATH?.includes(path));

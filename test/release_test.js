@@ -13,26 +13,26 @@ describe("Release", () => {
 		{platform: "win32", file: "hashlink-1.14.0.zip"}
 	]);
 
-	describe(".exists", () => {
+	describe("exists", () => {
 		it("should return `false` if the release does not exist", () => ok(!nonExistentRelease.exists));
 		it("should return `true` if the release exists", () => ok(existingRelease.exists));
 	});
 
-	describe(".isSource", () => {
+	describe("isSource", () => {
 		it("should return `false` if the release is provided as binary", () => ok(!existingRelease.isSource));
 		it("should return `true` if the release is provided as source code", () => ok(nonExistentRelease.isSource));
 	});
 
-	describe(".latest", () => {
+	describe("latest", () => {
 		it("should exist", () => ok(Release.latest.exists));
 	});
 
-	describe(".tag", () => {
+	describe("tag", () => {
 		it("should not include the patch component if it's zero", () => equal(existingRelease.tag, "1.14"));
 		it("should include the patch component if it's greater than zero", () => equal(nonExistentRelease.tag, "666.6.6"));
 	});
 
-	describe(".url", () => {
+	describe("url", () => {
 		it("should point to a GitHub tag if the release is provided as source code", () =>
 			equal(nonExistentRelease.url.href, "https://github.com/HaxeFoundation/hashlink/archive/refs/tags/666.6.6.zip"));
 
@@ -40,7 +40,7 @@ describe("Release", () => {
 			equal(existingRelease.url.href, "https://github.com/HaxeFoundation/hashlink/releases/download/1.14/hashlink-1.14.0.zip"));
 	});
 
-	describe(".find()", () => {
+	describe("find()", () => {
 		it("should return `null` if no release matches the version constraint", () =>
 			ok(!Release.find("666.6.6")));
 
@@ -52,12 +52,12 @@ describe("Release", () => {
 		});
 	});
 
-	describe(".get()", () => {
+	describe("get()", () => {
 		it("should return `null` if no release matches to the version number", () => ok(!Release.get("666.6.6")));
 		it("should return the release corresponding to the version number if it exists", () => equal(Release.get("1.14.0")?.version, "1.14.0"));
 	});
 
-	describe(".getAsset()", () => {
+	describe("getAsset()", () => {
 		it("should return `null` if no asset matches the platform", () =>
 			ok(!nonExistentRelease.getAsset("win32")));
 
