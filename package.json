@@ -60,8 +60,8 @@
 		"build": "tsc --project src/tsconfig.json && esbuild --allow-overwrite --bundle --legal-comments=none --log-level=warning --minify --outfile=bin/setup_hashlink.cjs --platform=node src/cli.ts",
 		"clean": "node tool/clean.js",
 		"dist": "npm run clean && npm run build && node tool/dist.js && git update-index --chmod=+x bin/setup_hashlink.cjs",
-		"doc": "typedoc --options etc/typedoc.json && node tool/doc.js",
-		"lint": "tsc --project tsconfig.json && eslint --config=etc/eslint.json src test tool",
+		"doc": "typedoc --options etc/typedoc.js && node tool/doc.js",
+		"lint": "tsc --project tsconfig.json && eslint --config=etc/eslint.cjs src test tool",
 		"release": "npm run dist && node tool/publish.js",
 		"test": "npm run build && node --test --test-reporter=spec"
 	}

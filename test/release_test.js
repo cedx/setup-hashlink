@@ -41,7 +41,9 @@ describe("Release", () => {
 	});
 
 	describe(".find()", () => {
-		it("should return `null` if no release matches the version constraint", () => ok(!Release.find("666.6.6")));
+		it("should return `null` if no release matches the version constraint", () =>
+			ok(!Release.find("666.6.6")));
+
 		it("should return the release corresponding to the version constraint if it exists", () => {
 			equal(Release.find("*"), Release.latest);
 			equal(Release.find("1.x"), Release.latest);
