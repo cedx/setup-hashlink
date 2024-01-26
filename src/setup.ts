@@ -1,10 +1,9 @@
-import {exec} from "node:child_process";
 import {readdir} from "node:fs/promises";
 import {join} from "node:path";
 import {chdir, cwd, env, platform} from "node:process";
-import {promisify} from "node:util";
 import {addPath, exportVariable} from "@actions/core";
 import {cacheDir, downloadTool, extractZip, find} from "@actions/tool-cache";
+import {execa} from "execa";
 import type {Release} from "./release.js";
 
 /**
@@ -88,9 +87,7 @@ export class Setup {
 			"sudo ldconfig"
 		];
 
-		const execAsync = promisify(exec);
-		for (const command of commands) await execAsync(command);
-
+		for (const command of commands) await execa(command);
 		const libPath = (env.LD_LIBRARY_PATH ?? "").trim();
 		exportVariable("LD_LIBRARY_PATH", libPath ? `/usr/local/bin:${libPath}` : "/usr/local/bin");
 		return "/usr/local";
@@ -102,8 +99,7 @@ export class Setup {
 	 */
 	async #compileMacOS(): Promise<string> {
 		const commands = ["brew bundle", "make", "sudo make install"];
-		const execAsync = promisify(exec);
-		for (const command of commands) await execAsync(command);
+		for (const command of commands) await execa(command);
 		return "/usr/local";
 	}
 
