@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [4.0.1](https://github.com/cedx/setup-hashlink/compare/v4.0.0...v4.0.1)
+- Improve the compilation stage.
+
 ## Version [4.0.0](https://github.com/cedx/setup-hashlink/compare/v3.1.0...v4.0.0)
 - Ported the source code to [TypeScript](https://www.typescriptlang.org).
 
