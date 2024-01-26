@@ -87,7 +87,7 @@ export class Setup {
 			"sudo ldconfig"
 		];
 
-		for (const command of commands) await execa(command);
+		for (const command of commands) await execa(command, {shell: true});
 		const libPath = (env.LD_LIBRARY_PATH ?? "").trim();
 		exportVariable("LD_LIBRARY_PATH", libPath ? `/usr/local/bin:${libPath}` : "/usr/local/bin");
 		return "/usr/local";
@@ -99,7 +99,7 @@ export class Setup {
 	 */
 	async #compileMacOS(): Promise<string> {
 		const commands = ["brew bundle", "make", "sudo make install"];
-		for (const command of commands) await execa(command);
+		for (const command of commands) await execa(command, {shell: true});
 		return "/usr/local";
 	}
 
