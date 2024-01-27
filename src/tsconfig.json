@@ -5,7 +5,6 @@
 	"compilerOptions": {
 		"declaration": true,
 		"declarationMap": true,
-		"isolatedModules": true,
 		"noEmit": false,
 		"outDir": "../lib"
 	}
