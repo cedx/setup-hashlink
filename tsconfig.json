@@ -9,6 +9,7 @@
 		"module": "NodeNext",
 		"moduleResolution": "NodeNext",
 		"noEmit": true,
+		"noImplicitOverride": true,
 		"resolveJsonModule": true,
 		"paths": {"@cedx/setup-hashlink": ["src"]},
 		"strict": true,
