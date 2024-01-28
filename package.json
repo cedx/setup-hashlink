@@ -22,7 +22,7 @@
 		"semver": "^7.5.4"
 	},
 	"devDependencies": {
-		"@types/node": "^20.11.8",
+		"@types/node": "^20.11.9",
 		"@types/semver": "^7.5.6",
 		"@typescript-eslint/eslint-plugin": "^6.19.1",
 		"@typescript-eslint/parser": "^6.19.1",
@@ -59,7 +59,7 @@
 		"workflow"
 	],
 	"scripts": {
-		"build": "tsc --project src/tsconfig.json && esbuild --allow-overwrite --bundle --legal-comments=none --log-level=warning --minify --outfile=bin/setup_hashlink.cjs --platform=node src/cli/main.ts",
+		"build": "tsc --project src/tsconfig.json && esbuild \"--banner:js=#!/usr/bin/env node\" --bundle --legal-comments=none --log-level=warning --minify --outfile=bin/setup_hashlink.cjs --platform=node src/cli/main.ts",
 		"clean": "node tool/clean.js",
 		"dist": "npm run clean && npm run build && node tool/dist.js && git update-index --chmod=+x bin/setup_hashlink.cjs",
 		"doc": "typedoc --options etc/typedoc.js && node tool/doc.js",
