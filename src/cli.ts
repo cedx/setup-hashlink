@@ -1,9 +1,9 @@
 import {getInput, info, setFailed} from "@actions/core";
-import {Release, Setup} from "../index.js";
+import {Release, Setup} from "./index.js";
 
 /**
  * Application entry point.
- * @returns Resolves when Apache Ant has been installed.
+ * @returns Resolves when HashLink has been installed.
  */
 async function main(): Promise<void> {
 	const version = getInput("version");
