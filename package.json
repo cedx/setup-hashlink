@@ -22,7 +22,7 @@
 		"semver": "^7.6.0"
 	},
 	"devDependencies": {
-		"@types/node": "^20.11.17",
+		"@types/node": "^20.11.19",
 		"@types/semver": "^7.5.7",
 		"@typescript-eslint/eslint-plugin": "^7.0.1",
 		"@typescript-eslint/parser": "^7.0.1",
@@ -59,12 +59,13 @@
 		"workflow"
 	],
 	"scripts": {
-		"build": "tsc --project src/tsconfig.json && esbuild \"--banner:js=#!/usr/bin/env node\" --bundle --legal-comments=none --log-level=warning --minify --outfile=bin/setup_hashlink.cjs --platform=node src/cli.ts",
+		"build": "tsc --project src/tsconfig.json && esbuild \"--banner:js=#!/usr/bin/env node\" --bundle --legal-comments=none --minify --outfile=bin/setup_hashlink.cjs --platform=node src/cli.ts",
 		"clean": "node tool/clean.js",
 		"dist": "npm run clean && npm run build && node tool/dist.js && git update-index --chmod=+x bin/setup_hashlink.cjs",
 		"doc": "typedoc --options etc/typedoc.js && node tool/doc.js",
 		"lint": "npm run build && tsc --project tsconfig.json && eslint --config=etc/eslint.cjs src test tool",
 		"release": "npm run dist && node tool/publish.js",
-		"test": "npm run build && node --test --test-reporter=spec"
+		"test": "npm run build && node --test --test-reporter=spec",
+		"watch": "esbuild --bundle --legal-comments=none --outfile=bin/setup_hashlink.cjs --platform=node --watch src/cli.ts"
 	}
 }
