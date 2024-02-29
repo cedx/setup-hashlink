@@ -4,8 +4,8 @@
 Set up your [GitHub Actions](https://docs.github.com/en/actions) workflow with a specific version of the [HashLink VM](https://hashlink.haxe.org).
 
 ## Documentation
-- [User guide](https://cedx.github.io/setup-hashlink)
-- [API reference](https://cedx.github.io/setup-hashlink/api)
+- [User guide](https://docs.belin.io/setup-hashlink)
+- [API reference](https://docs.belin.io/setup-hashlink/api)
 
 ## Development
 - [Git repository](https://github.com/cedx/setup-hashlink)
