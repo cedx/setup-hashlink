@@ -1,6 +1,6 @@
 import {equal, ok} from "node:assert/strict";
 import {describe, it} from "node:test";
-import {Release} from "#setupHashlink";
+import {Release} from "@cedx/setup-hashlink";
 
 /**
  * Tests the features of the {@link Release} class.

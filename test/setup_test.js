@@ -3,7 +3,7 @@ import {access} from "node:fs/promises";
 import {join, resolve} from "node:path";
 import {env, platform} from "node:process";
 import {describe, it} from "node:test";
-import {Release, Setup} from "#setupHashlink";
+import {Release, Setup} from "@cedx/setup-hashlink";
 
 /**
  * Tests the features of the {@link Setup} class.
