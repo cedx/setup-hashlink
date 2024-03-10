@@ -1,6 +1,7 @@
 {
 	"bugs": "https://github.com/cedx/setup-hashlink/issues",
 	"description": "Set up your GitHub Actions workflow with a specific version of the HashLink VM.",
+	"homepage": "https://docs.belin.io/setup-hashlink",
 	"license": "MIT",
 	"name": "@cedx/setup-hashlink",
 	"private": true,
@@ -28,8 +29,8 @@
 		"del": "^7.1.0",
 		"esbuild": "^0.20.1",
 		"eslint": "^8.57.0",
-		"typedoc": "^0.25.11",
-		"typescript": "^5.3.3",
+		"typedoc": "^0.25.12",
+		"typescript": "^5.4.2",
 		"typescript-eslint": "^7.1.1"
 	},
 	"engines": {
