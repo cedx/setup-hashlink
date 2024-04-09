@@ -1,5 +1,6 @@
-name: main
+name: continuous-integration
 on: push
+
 jobs:
   test:
     runs-on: ${{matrix.platform}}

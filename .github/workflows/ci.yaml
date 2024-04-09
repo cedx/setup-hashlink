@@ -1,0 +1,51 @@
+name: continuous-integration
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch sources
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          cache: npm
+          node-version: 21
+      - name: Install dependencies
+        run: npm ci
+      - name: Run tests
+        run: npm test
+  run:
+    needs: test
+    runs-on: ${{matrix.platform}}
+    strategy:
+      matrix:
+        platform: [macos-latest, ubuntu-latest, windows-latest]
+    steps:
+      - uses: cedx/setup-hashlink@main
+      - run: hl --version
+  deploy:
+    needs: run
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch sources
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          cache: npm
+          node-version: 21
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          cache: pip
+          python-version: 3.12
+      - name: Install dependencies
+        run: |
+          npm ci
+          pip install --requirement=etc/requirements.txt
+      - name: Deploy documentation
+        run: |
+          npx gulp doc
+          mkdocs gh-deploy --config-file=etc/mkdocs.yaml --force

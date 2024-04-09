@@ -11,4 +11,5 @@ Allowed values are:
 - a strict version number: `1.0.0`, `=1.14.0`, etc.
 - a version specification: `1.14.x`, `>=1.0.0 <1.14.0`, `=1.0.0 || ^1.14.0`, etc.
 
-> The version constraint follows the syntax and semantics of the [semver](https://www.npmjs.com/package/semver) package.
+!!! tip
+    The version constraint follows the syntax and semantics of the [semver](https://www.npmjs.com/package/semver) package.

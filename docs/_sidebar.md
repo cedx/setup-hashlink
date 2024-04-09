@@ -1,7 +1,0 @@
-- Usage
-	- [Inputs](usage/inputs.md)
-	- [Basic setup](usage/basic_setup.md)
-	- [Matrix setup](usage/matrix_setup.md)
-- [API reference](api/)
-- [Changelog](changelog.md)
-- [License](license.md)

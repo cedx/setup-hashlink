@@ -28,10 +28,9 @@ export async function dist() {
 
 // Builds the documentation.
 export async function doc() {
-	await build();
-	await $`typedoc --options etc/typedoc.js`;
 	for (const file of ["CHANGELOG.md", "LICENSE.md"]) await cp(file, `docs/${file.toLowerCase()}`);
-	return cp("docs/favicon.ico", "docs/api/favicon.ico");
+	await build();
+	return $`typedoc --options etc/typedoc.js`;
 }
 
 // Performs the static analysis of source code.
@@ -44,6 +43,12 @@ export async function lint() {
 // Publishes the package.
 export async function publish() {
 	for (const action of [["tag"], ["push", "origin"]]) await $`git ${action} v${pkg.version}`;
+}
+
+// Starts the development server.
+export async function serve() {
+	await doc();
+	return $({stdio: "inherit"})`mkdocs serve --config-file=etc/mkdocs.yaml`;
 }
 
 // Runs the test suite.
