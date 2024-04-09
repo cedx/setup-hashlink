@@ -16,7 +16,7 @@ export async function build() {
 
 // Deletes all generated files.
 export function clean() {
-	return deleteAsync(["bin/*.map", "lib", "var/**/*"]);
+	return deleteAsync(["bin/*.map", "lib", "var/**/*", "www"]);
 }
 
 // Packages the application.
