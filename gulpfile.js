@@ -1,13 +1,23 @@
 import {cp} from "node:fs/promises";
 import {deleteAsync} from "del";
+import esbuild from "esbuild";
 import {$} from "execa";
 import gulp from "gulp";
 import replace from "gulp-replace";
 import pkg from "./package.json" with {type: "json"};
 
 // Builds the project.
-export function build() {
-	return $`tsc --project src/tsconfig.json`;
+export async function build() {
+	await $`tsc --project src`;
+	return esbuild.build({
+		banner: {js: "#!/usr/bin/env node"},
+		bundle: true,
+		entryPoints: ["src/cli.js"],
+		legalComments: "none",
+		minify: true,
+		outfile: "bin/setup_hashlink.cjs",
+		platform: "node"
+	});
 }
 
 // Deletes all generated files.
@@ -24,7 +34,7 @@ export async function doc() {
 // Performs the static analysis of source code.
 export async function lint() {
 	await $`tsc --project tsconfig.json`;
-	return $`eslint --config=etc/eslint.config.js gulpfile.js bin etc src test`;
+	return $`eslint --config=etc/eslint.config.js gulpfile.js etc src test`;
 }
 
 // Publishes the package.
