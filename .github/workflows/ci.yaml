@@ -17,11 +17,12 @@ jobs:
       - name: Run tests
         run: npm test
   run:
+    continue-on-error: ${{matrix.platform == 'macos-latest'}}
     needs: test
     runs-on: ${{matrix.platform}}
     strategy:
       matrix:
-        platform: [ubuntu-latest, windows-latest]
+        platform: [macos-latest, ubuntu-latest, windows-latest]
     steps:
       - uses: cedx/setup-hashlink@main
       - run: hl --version
