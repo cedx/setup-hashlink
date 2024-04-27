@@ -1,9 +1,11 @@
-#!/usr/bin/env node
 import {getInput, info, setFailed} from "@actions/core";
-import {Release, Setup} from "../src/index.js";
+import {Release, Setup} from "./index.js";
 
-// Start the application.
-try {
+/**
+ * Application entry point.
+ * @returns {Promise<void>} Resolves when HashLink has been installed.
+ */
+async function main() {
 	const version = getInput("version");
 	const release = Release.find(!version || version == "latest" ? "*" : version);
 	if (!release) throw Error("No release matching the version constraint.");
@@ -11,6 +13,6 @@ try {
 	const path = await new Setup(release).install();
 	info(`HashLink ${release.version} successfully installed in "${path}".`);
 }
-catch(error) {
-	setFailed(error instanceof Error ? error : String(error))
-}
+
+// Start the application.
+main().catch(error => setFailed(error instanceof Error ? error : String(error)));

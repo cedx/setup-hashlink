@@ -1,6 +1,6 @@
 import process from "node:process";
 import semver, {SemVer} from "semver";
-import releases from "../res/releases.json" with {type: "json"};
+import data from "./data.js";
 
 /**
  * Represents a GitHub release.
@@ -19,7 +19,7 @@ export class Release {
 	 * @type {Release[]}
 	 * @readonly
 	 */
-	static #data = releases.map(release => new this(release.version, release.assets));
+	static #data = data.map(release => new this(release.version, release.assets));
 
 	/**
 	 * The associated assets.
