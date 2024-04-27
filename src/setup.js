@@ -4,7 +4,6 @@ import {chdir, cwd, env, platform} from "node:process";
 import {addPath, exportVariable} from "@actions/core";
 import {cacheDir, downloadTool, extractZip, find} from "@actions/tool-cache";
 import {execa} from "execa";
-import type {Release} from "./release.js";
 
 /**
  * Manages the download and installation of the HashLink VM.
@@ -13,31 +12,33 @@ export class Setup {
 
 	/**
 	 * The release to download and install.
+	 * @type {import("./release.js").Release}
+	 * @readonly
 	 */
-	readonly release: Release;
+	release;
 
 	/**
 	 * Creates a new setup.
-	 * @param release The release to download and install.
+	 * @param {import("./release.js").Release} release The release to download and install.
 	 */
-	constructor(release: Release) {
+	constructor(release) {
 		this.release = release;
 	}
 
 	/**
 	 * Downloads and extracts the ZIP archive of the HashLink VM.
-	 * @returns The path to the extracted directory.
+	 * @returns {Promise<string>} The path to the extracted directory.
 	 */
-	async download(): Promise<string> {
+	async download() {
 		const path = await extractZip(await downloadTool(this.release.url.href));
 		return join(path, await this.#findSubfolder(path));
 	}
 
 	/**
 	 * Installs the HashLink VM, after downloading it if required.
-	 * @returns The path to the installation directory.
+	 * @returns {Promise<string>} The path to the installation directory.
 	 */
-	async install(): Promise<string> {
+	async install() {
 		let directory = find("hashlink", this.release.version);
 		if (!directory) {
 			const path = await this.download();
@@ -51,10 +52,10 @@ export class Setup {
 
 	/**
 	 * Compiles the sources of the HashLink VM located in the specified directory.
-	 * @param directory The path to the directory containing the HashLink sources.
-	 * @returns The path to the output directory.
+	 * @param {string} directory The path to the directory containing the HashLink sources.
+	 * @returns {Promise<string>} The path to the output directory.
 	 */
-	async #compile(directory: string): Promise<string> {
+	async #compile(directory) {
 		if (!["darwin", "linux"].includes(platform)) throw Error(`Compilation is not supported on "${platform}" platform.`);
 
 		const workingDirectory = cwd();
@@ -66,9 +67,9 @@ export class Setup {
 
 	/**
 	 * Compiles the HashLink sources on the Linux platform.
-	 * @returns The path to the output directory.
+	 * @returns {Promise<string>} The path to the output directory.
 	 */
-	async #compileLinux(): Promise<string> {
+	async #compileLinux() {
 		const dependencies = [
 			"libmbedtls-dev",
 			"libopenal-dev",
@@ -95,9 +96,9 @@ export class Setup {
 
 	/**
 	 * Compiles the HashLink sources on the macOS platform.
-	 * @returns The path to the output directory.
+	 * @returns {Promise<string>} The path to the output directory.
 	 */
-	async #compileMacOS(): Promise<string> {
+	async #compileMacOS() {
 		const commands = ["brew bundle", "make", "sudo make install"];
 		for (const command of commands) await execa(command, {shell: true});
 		return "/usr/local";
@@ -105,10 +106,10 @@ export class Setup {
 
 	/**
 	 * Determines the name of the single subfolder in the specified directory.
-	 * @param directory The directory path.
-	 * @returns The name of the single subfolder in the specified directory.
+	 * @param {string} directory The directory path.
+	 * @returns {Promise<string>} The name of the single subfolder in the specified directory.
 	 */
-	async #findSubfolder(directory: string): Promise<string> {
+	async #findSubfolder(directory) {
 		const folders = (await readdir(directory, {withFileTypes: true})).filter(entity => entity.isDirectory());
 		switch (folders.length) {
 			case 0: throw Error(`No subfolder found in: ${directory}.`);

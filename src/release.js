@@ -1,6 +1,6 @@
 import process from "node:process";
 import semver, {SemVer} from "semver";
-import data from "./data.js";
+import releases from "../res/releases.json" with {type: "json"};
 
 /**
  * Represents a GitHub release.
@@ -9,111 +9,115 @@ export class Release {
 
 	/**
 	 * The base URL of the releases.
+	 * @type {URL}
+	 * @readonly
 	 */
-	static readonly #baseUrl = new URL("https://github.com/HaxeFoundation/hashlink/");
+	static #baseUrl = new URL("https://github.com/HaxeFoundation/hashlink/");
 
 	/**
 	 * The list of all releases.
+	 * @type {Release[]}
+	 * @readonly
 	 */
-	static readonly #data = data.map(release => new this(release.version, release.assets));
+	static #data = releases.map(release => new this(release.version, release.assets));
 
 	/**
 	 * The associated assets.
+	 * @type {ReleaseAsset[]}
+	 * @readonly
 	 */
-	readonly assets: ReleaseAsset[];
+	assets;
 
 	/**
 	 * The version number.
+	 * @type {string}
+	 * @readonly
 	 */
-	readonly version: string;
+	version;
 
 	/**
 	 * Creates a new release.
-	 * @param version The version number.
-	 * @param assets The associated assets.
+	 * @param {string} version The version number.
+	 * @param {ReleaseAsset[]} assets The associated assets.
 	 */
-	constructor(version: string, assets: ReleaseAsset[] = []) {
+	constructor(version, assets = []) {
 		this.assets = assets;
 		this.version = version;
 	}
 
 	/**
 	 * The latest release.
+	 * @type {Release}
 	 */
-	static get latest(): Release {
+	static get latest() {
 		return this.#data[0];
 	}
 
 	/**
 	 * Value indicating whether this release exists.
+	 * @type {boolean}
 	 */
-	get exists(): boolean {
+	get exists() {
 		return Release.#data.some(release => release.version == this.version);
 	}
 
 	/**
 	 * Value indicating whether this release is provided as source code.
+	 * @type {boolean}
 	 */
-	get isSource(): boolean {
+	get isSource() {
 		return !this.getAsset(process.platform);
 	}
 
 	/**
 	 * The associated Git tag.
+	 * @type {string}
 	 */
-	get tag(): string {
+	get tag() {
 		const {major, minor, patch} = new SemVer(this.version);
 		return patch > 0 ? `${major}.${minor}.${patch}` : `${major}.${minor}`;
 	}
 
 	/**
 	 * The download URL.
+	 * @type {URL}
 	 */
-	get url(): URL {
+	get url() {
 		const asset = this.getAsset(process.platform);
 		return new URL(asset ? `releases/download/${this.tag}/${asset.file}` : `archive/refs/tags/${this.tag}.zip`, Release.#baseUrl);
 	}
 
 	/**
 	 * Finds a release that matches the specified version constraint.
-	 * @param constraint The version constraint.
-	 * @returns The release corresponding to the specified constraint.
+	 * @param {string} constraint The version constraint.
+	 * @returns {Release|null} The release corresponding to the specified constraint.
 	 */
-	static find(constraint: string): Release|null {
+	static find(constraint) {
 		return this.#data.find(release => semver.satisfies(release.version, constraint)) ?? null;
 	}
 
 	/**
 	 * Gets the release corresponding to the specified version.
-	 * @param version The version number of a release.
-	 * @returns The release corresponding to the specified version.
+	 * @param {string} version The version number of a release.
+	 * @returns {Release|null} The release corresponding to the specified version.
 	 */
-	static get(version: string): Release|null {
+	static get(version) {
 		return this.#data.find(release => release.version == version) ?? null;
 	}
 
 	/**
 	 * Gets the asset corresponding to the specified platform.
-	 * @param platform The target platform.
-	 * @returns The asset corresponding to the specified platform.
+	 * @param {NodeJS.Platform} platform The target platform.
+	 * @returns {ReleaseAsset|null} The asset corresponding to the specified platform.
 	 */
-	getAsset(platform: NodeJS.Platform): ReleaseAsset|null {
+	getAsset(platform) {
 		return this.assets.find(asset => asset.platform == platform) ?? null;
 	}
 }
 
 /**
  * Represents an asset of a GitHub release.
+ * @typedef {object} ReleaseAsset
+ * @property {string} file The target file.
+ * @property {string} platform The target platform.
  */
-export interface ReleaseAsset {
-
-	/**
-	 * The target file.
-	 */
-	readonly file: string;
-
-	/**
-	 * The target platform.
-	 */
-	readonly platform: string;
-}
