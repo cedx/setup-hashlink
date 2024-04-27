@@ -1,6 +1,6 @@
 {
-	"extends": "../tsconfig",
-	"include": ["index.ts"],
+	"extends": "../tsconfig.json",
+	"include": ["**/*.js"],
 	"compilerOptions": {
 		"declaration": true,
 		"declarationMap": true,
