@@ -20,17 +20,17 @@
 		"@actions/core": "^1.10.1",
 		"@actions/tool-cache": "^2.0.1",
 		"execa": "^8.0.1",
-		"semver": "^7.6.0"
+		"semver": "^7.6.1"
 	},
 	"devDependencies": {
 		"@babel/eslint-parser": "^7.24.5",
 		"@babel/plugin-syntax-import-attributes": "^7.24.1",
 		"@types/gulp": "^4.0.17",
-		"@types/node": "^20.12.6",
+		"@types/node": "^20.12.10",
 		"@types/semver": "^7.5.8",
 		"del": "^7.1.0",
-		"esbuild": "^0.20.2",
-		"eslint": "^9.1.1",
+		"esbuild": "^0.21.1",
+		"eslint": "^9.2.0",
 		"globals": "^15.1.0",
 		"gulp": "^5.0.0",
 		"gulp-replace": "^1.1.4",
