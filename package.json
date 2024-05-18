@@ -30,7 +30,7 @@
 		"@types/semver": "^7.5.8",
 		"del": "^7.1.0",
 		"esbuild": "^0.21.3",
-		"eslint": "^9.2.0",
+		"eslint": "^9.3.0",
 		"globals": "^15.2.0",
 		"gulp": "^5.0.0",
 		"gulp-replace": "^1.1.4",
