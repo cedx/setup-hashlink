@@ -45,7 +45,7 @@ export class Setup {
 			directory = await cacheDir(path, "hashlink", this.release.version);
 		}
 
-		if (this.release.isSource && env.GITHUB_ACTIONS == "true") await this.#compile(directory);
+		if (this.release.isSource && env.NODE_ENV != "test") await this.#compile(directory);
 		addPath(this.release.isSource ? join(directory, "bin") : directory);
 		return directory;
 	}

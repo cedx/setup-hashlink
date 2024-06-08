@@ -16,6 +16,8 @@ jobs:
         run: npm ci
       - name: Run tests
         run: npm test
+        env:
+          NODE_ENV: test
   run:
     continue-on-error: ${{matrix.platform == 'macos-latest'}}
     needs: test
