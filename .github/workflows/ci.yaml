@@ -19,12 +19,11 @@ jobs:
         env:
           NODE_ENV: test
   run:
-    continue-on-error: ${{matrix.platform == 'macos-latest'}}
     needs: test
     runs-on: ${{matrix.platform}}
     strategy:
       matrix:
-        platform: [macos-latest, ubuntu-latest, windows-latest]
+        platform: [ubuntu-latest, windows-latest]
     steps:
       - uses: cedx/setup-hashlink@main
       - run: hl --version

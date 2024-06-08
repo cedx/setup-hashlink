@@ -6,7 +6,7 @@ jobs:
     runs-on: ${{matrix.platform}}
     strategy:
       matrix:
-        platform: [macos-latest, ubuntu-latest, windows-latest]
+        platform: [ubuntu-latest, windows-latest]
     steps:
       - name: Fetch sources
         uses: actions/checkout@v4
