@@ -1,4 +1,5 @@
 import {cp} from "node:fs/promises";
+import {env} from "node:process";
 import {deleteAsync} from "del";
 import esbuild from "esbuild";
 import {$} from "execa";
@@ -50,6 +51,7 @@ export async function serve() {
 
 // Runs the test suite.
 export function test() {
+	env.NODE_ENV = "test";
 	return $`node --test --test-reporter=spec`;
 }
 
