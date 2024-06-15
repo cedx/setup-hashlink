@@ -1,10 +1,9 @@
-import {cp} from "node:fs/promises";
+import {cp, readFile, writeFile} from "node:fs/promises";
 import {env} from "node:process";
 import {deleteAsync} from "del";
 import esbuild from "esbuild";
 import {$} from "execa";
 import gulp from "gulp";
-import replace from "gulp-replace";
 import pkg from "./package.json" with {type: "json"};
 
 // Builds the project.
@@ -56,10 +55,9 @@ export function test() {
 }
 
 // Updates the version number in the sources.
-export function version() {
-	return gulp.src("README.md")
-		.pipe(replace(/action\/v\d+(\.\d+){2}/, `action/v${pkg.version}`))
-		.pipe(gulp.dest("."));
+export async function version() {
+	const file = "README.md";
+	return writeFile(file, (await readFile(file, "utf8")).replace(/action\/v\d+(\.\d+){2}/, `action/v${pkg.version}`));
 }
 
 // The default task.
