@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [4.0.2](https://github.com/cedx/setup-hashlink/compare/v4.0.1...v4.0.2)
+- Migrated the documentation to the [GitHub wiki](https://github.com/cedx/setup-hashlink/wiki).
+
 ## Version [4.0.1](https://github.com/cedx/setup-hashlink/compare/v4.0.0...v4.0.1)
 - Improved the compilation stage.
 
