@@ -27,8 +27,9 @@ export function clean() {
 
 // Performs the static analysis of source code.
 export async function lint() {
+	await build();
 	await $`tsc --project tsconfig.json`;
-	return $`eslint --config=etc/eslint.config.js gulpfile.js src test`;
+	return $`eslint --config=etc/eslint.js gulpfile.js src test`;
 }
 
 // Publishes the package.
@@ -37,8 +38,9 @@ export async function publish() {
 }
 
 // Runs the test suite.
-export function test() {
+export async function test() {
 	env.NODE_ENV = "test";
+	await build();
 	return $`node --test --test-reporter=spec`;
 }
 
