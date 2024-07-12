@@ -1,11 +1,10 @@
 {
 	"extends": "../tsconfig.json",
-	"exclude": ["cli.js"],
-	"include": ["**/*.js"],
+	"exclude": ["cli.ts"],
+	"include": ["**/*.ts"],
 	"compilerOptions": {
 		"declaration": true,
 		"declarationMap": true,
-		"emitDeclarationOnly": true,
 		"incremental": true,
 		"noEmit": false,
 		"outDir": "../lib",
