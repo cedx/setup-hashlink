@@ -8,6 +8,7 @@
 		"incremental": true,
 		"noEmit": false,
 		"outDir": "../lib",
+		"rootDir": ".",
 		"tsBuildInfoFile": "../var/tsbuildinfo.json"
 	}
 }
