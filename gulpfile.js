@@ -11,7 +11,7 @@ const $ = execa({preferLocal: true, stdio: "inherit"});
 
 // Builds the project.
 export async function build() {
-	await $`tsc --project src`;
+	await $`tsc --project src/tsconfig.json`;
 	return esbuild.build({
 		banner: {js: "#!/usr/bin/env node"},
 		bundle: true,
