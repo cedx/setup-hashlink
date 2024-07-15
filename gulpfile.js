@@ -11,7 +11,7 @@ const $ = execa({preferLocal: true, stdio: "inherit"});
 
 // Builds the project.
 export async function build() {
-	await $`tsc --project src/tsconfig.json`;
+	await $`tsc --build src/tsconfig.json`;
 	return esbuild.build({
 		banner: {js: "#!/usr/bin/env node"},
 		bundle: true,
@@ -31,7 +31,7 @@ export function clean() {
 // Performs the static analysis of source code.
 export async function lint() {
 	await build();
-	await $`tsc --project tsconfig.json`;
+	await $`tsc --build tsconfig.json`;
 	return $`eslint --config=etc/eslint.js gulpfile.js src test`;
 }
 
