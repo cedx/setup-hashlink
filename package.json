@@ -31,7 +31,7 @@
 		"esbuild": "^0.23.0",
 		"gulp": "^5.0.0",
 		"typescript": "^5.5.3",
-		"typescript-eslint": "^8.0.0-alpha.47"
+		"typescript-eslint": "^8.0.0-alpha.48"
 	},
 	"engines": {
 		"node": ">=22.0.0"
