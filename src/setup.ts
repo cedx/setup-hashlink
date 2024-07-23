@@ -1,9 +1,9 @@
-import {readdir} from "node:fs/promises";
-import {join} from "node:path";
-import {chdir, cwd, env, platform} from "node:process";
 import {addPath, exportVariable} from "@actions/core";
 import {cacheDir, downloadTool, extractZip, find} from "@actions/tool-cache";
 import {execa} from "execa";
+import {readdir} from "node:fs/promises";
+import {join} from "node:path";
+import {chdir, cwd, env, platform} from "node:process";
 import type {Release} from "./release.js";
 
 /**
