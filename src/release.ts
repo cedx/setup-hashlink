@@ -15,12 +15,12 @@ export class Release {
 	/**
 	 * The list of all releases.
 	 */
-	static readonly #data: Release[] = data.map(release => new this(release.version, release.assets));
+	static readonly #data: Array<Release> = data.map(release => new this(release.version, release.assets));
 
 	/**
 	 * The associated assets.
 	 */
-	readonly assets: ReleaseAsset[];
+	readonly assets: Array<ReleaseAsset>;
 
 	/**
 	 * The version number.
@@ -32,7 +32,7 @@ export class Release {
 	 * @param version The version number.
 	 * @param assets The associated assets.
 	 */
-	constructor(version: string, assets: ReleaseAsset[] = []) {
+	constructor(version: string, assets: Array<ReleaseAsset> = []) {
 		this.assets = assets;
 		this.version = version;
 	}
