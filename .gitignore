@@ -1,6 +1,9 @@
 /**/.DS_Store
+/bin/*.map
 /lib/
 /node_modules/
 /npm-debug.log
+/res/
+/run.n
 /var/
 /wiki/
