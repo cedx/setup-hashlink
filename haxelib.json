@@ -1,0 +1,12 @@
+{
+	"classPath": "src/",
+	"contributors": ["cedx"],
+	"dependencies": {"coconut.data": "", "hxnodejs": "", "tink_json": "", "tink_semver": "", "tink_url": ""},
+	"description": "Set up your GitHub Actions workflow with a specific version of the HashLink VM.",
+	"license": "MIT",
+	"name": "setup_hashlink",
+	"releasenote": "Ported the source code to Haxe.",
+	"tags": ["action", "ci", "github", "hashlink", "test", "vm", "workflow"],
+	"url": "https://github.com/cedx/setup-hashlink",
+	"version": "5.0.0"
+}
