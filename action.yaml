@@ -14,4 +14,4 @@ inputs:
 
 runs:
   using: node20
-  main: bin/setup_hashlink.cjs
+  main: bin/setup_hashlink.js
