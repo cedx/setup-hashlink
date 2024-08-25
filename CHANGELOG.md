@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [5.0.0](https://github.com/cedx/setup-hashlink/compare/v4.0.2...v5.0.0)
+- Ported the source code to [Haxe](https://haxe.org).
+
 ## Version [4.0.2](https://github.com/cedx/setup-hashlink/compare/v4.0.1...v4.0.2)
 - Migrated the documentation to the [GitHub wiki](https://github.com/cedx/setup-hashlink/wiki).
 
