@@ -25,19 +25,5 @@
 	},
 	"engines": {
 		"node": ">=22.0.0"
-	},
-	"keywords": [
-		"action",
-		"ci",
-		"github",
-		"hashlink",
-		"test",
-		"vm",
-		"workflow"
-	],
-	"scripts": {
-		"postpublish": "gulp publish",
-		"prepack": "gulp",
-		"test": "gulp build && node --test --test-reporter=spec"
 	}
 }
