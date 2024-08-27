@@ -2,7 +2,7 @@
 --dce full
 --define analyzer-optimize
 --define js-es=6
---define js-global=global
+--define js-global=globalThis
 --define no-deprecation-warnings
 --library coconut.data
 --library hxnodejs
