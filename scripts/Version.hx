@@ -1,8 +1,13 @@
 //! --class-path src --library tink_core
 import setup_hashlink.Platform;
+import sys.io.File;
 
 /** Updates the version number in the sources. **/
 function main() {
-	Tools.replaceInFile("package.json", ~/"version": "\d+(\.\d+){2}"/, '"version": "${Platform.packageVersion}"');
-	Tools.replaceInFile("README.md", ~/action\/v\d+(\.\d+){2}/, 'action/v${Platform.packageVersion}');
+	replaceInFile("package.json", ~/"version": "\d+(\.\d+){2}"/, '"version": "${Platform.packageVersion}"');
+	replaceInFile("README.md", ~/action\/v\d+(\.\d+){2}/, 'action/v${Platform.packageVersion}');
 }
+
+/** Replaces in the specified `file` the substring which the `pattern` matches with the given `replacement`. **/
+private function replaceInFile(file: String, pattern: EReg, replacement: String)
+	File.saveContent(file, pattern.replace(File.getContent(file), replacement));
