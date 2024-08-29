@@ -38,7 +38,7 @@
 		{"type": "MethodName"},
 		{"type": "ModifierOrder"},
 		{"type": "MultipleVariableDeclarations"},
-		{"type": "NestedControlFlow"},
+		{"type": "NestedControlFlow", "props": {"max": 4}},
 		{"type": "NestedForDepth"},
 		{"type": "NestedIfDepth"},
 		{"type": "NestedTryDepth"},
