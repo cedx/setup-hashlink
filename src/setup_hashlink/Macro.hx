@@ -16,6 +16,7 @@ abstract class Macro {
 	});
 
 	/** Enables or disables the verification of peer certificates during SSL handshake. **/
-	public static function verifySslCerts(value: Bool) Socket.DEFAULT_VERIFY_CERT = value;
+	public static function verifySslCerts(value: Bool): Void
+		Socket.DEFAULT_VERIFY_CERT = value;
 }
 #end
