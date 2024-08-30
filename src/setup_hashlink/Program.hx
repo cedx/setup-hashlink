@@ -1,12 +1,12 @@
 package setup_hashlink;
 
 import js.actions.Core;
-import js.Node.process;
+import js.Node;
 import tink.semver.Constraint;
 
 /** Application entry point. **/
 function main() {
-	process.title = "Setup HashLink VM";
+	Node.process.title = "Setup HashLink VM";
 
 	final version = Core.getInput("version");
 	switch Constraint.parse(version.length == 0 || version == "latest" ? "*" : version) {
