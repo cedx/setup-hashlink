@@ -5,8 +5,8 @@
 	"description": "Set up your GitHub Actions workflow with a specific version of the HashLink VM.",
 	"license": "MIT",
 	"name": "setup_hashlink",
-	"releasenote": "Ported the source code to Haxe.",
+	"releasenote": "Updated the Linux/macOS compilation step.",
 	"tags": ["action", "ci", "github", "hashlink", "test", "vm", "workflow"],
 	"url": "https://github.com/cedx/setup-hashlink",
-	"version": "5.0.1"
+	"version": "5.1.0"
 }

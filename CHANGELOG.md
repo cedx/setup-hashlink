@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [5.0.1](https://github.com/cedx/setup-hashlink/compare/v5.0.0...v5.0.1)
+- Updated the Linux/macOS compilation step.
+
 ## Version [5.0.0](https://github.com/cedx/setup-hashlink/compare/v4.0.2...v5.0.0)
 - Ported the source code to [Haxe](https://haxe.org).
 
