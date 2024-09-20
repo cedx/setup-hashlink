@@ -8,5 +8,5 @@
 	"releasenote": "Ported the source code to Haxe.",
 	"tags": ["action", "ci", "github", "hashlink", "test", "vm", "workflow"],
 	"url": "https://github.com/cedx/setup-hashlink",
-	"version": "5.0.0"
+	"version": "5.0.1"
 }
