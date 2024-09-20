@@ -61,11 +61,13 @@ class Setup {
 	/** Compiles the HashLink sources on the macOS platform. **/
 	function compileLinux(): Promise<String> {
 		final dependencies = [
+			"libglu1-mesa-dev",
 			"libmbedtls-dev",
 			"libopenal-dev",
 			"libpng-dev",
 			"libsdl2-dev",
-			"libturbojpeg0-dev",
+			"libsqlite3-dev",
+			"libturbojpeg-dev",
 			"libuv1-dev",
 			"libvorbis-dev"
 		];
@@ -87,7 +89,7 @@ class Setup {
 
 	/** Compiles the HashLink sources on the macOS platform. **/
 	function compileMacOs(): Promise<String> {
-		final commands = ["brew bundle", "make", "sudo make install"];
+		final commands = ["brew bundle", "make", "sudo make codesign_osx", "sudo make install"];
 		commands.iter(command -> Sys.command(command));
 		return Promise.resolve("/usr/local");
 	}
