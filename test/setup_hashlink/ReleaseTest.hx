@@ -1,16 +1,15 @@
 package setup_hashlink;
 
-import setup_hashlink.Release.ReleaseAsset as Asset;
-using AssertionTools;
+import setup_hashlink.Release.ReleaseAsset;
 
 /** Tests the features of the `Release` class. **/
 @:asserts final class ReleaseTest {
 
 	/** A release that exists. **/
 	public static final existingRelease = new Release({version: "1.14.0", assets: [
-		new Asset({os: Linux, file: "hashlink-1.14.0.zip"}),
-		new Asset({os: MacOs, file: "hashlink-1.14.0.zip"}),
-		new Asset({os: Windows, file: "hashlink-1.14.0.zip"})
+		new ReleaseAsset({os: Linux, file: "hashlink-1.14.0.zip"}),
+		new ReleaseAsset({os: MacOs, file: "hashlink-1.14.0.zip"}),
+		new ReleaseAsset({os: Windows, file: "hashlink-1.14.0.zip"})
 	]});
 
 	/** A release that doesn't exist. **/
