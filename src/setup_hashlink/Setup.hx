@@ -89,9 +89,17 @@ class Setup {
 
 	/** Compiles the HashLink sources on the macOS platform. **/
 	function compileMacOs(): Promise<String> {
-		final commands = ["brew bundle", "make", "sudo make codesign_osx", "sudo make install"];
+		final prefix = "/usr/local";
+		final commands = [
+			"brew bundle",
+			"make",
+			"sudo make codesign_osx",
+			"sudo make install",
+			'sudo install_name_tool -change libhl.dylib $prefix/lib/libhl.dylib $prefix/bin/hl'
+		];
+
 		commands.iter(command -> Sys.command(command));
-		return Promise.resolve("/usr/local");
+		return Promise.resolve(prefix);
 	}
 
 	/** Determines the name of the single subfolder in the specified `directory`. **/
