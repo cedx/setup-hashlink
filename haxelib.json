@@ -8,5 +8,5 @@
 	"releasenote": "Updated the Linux/macOS compilation step.",
 	"tags": ["action", "ci", "github", "hashlink", "test", "vm", "workflow"],
 	"url": "https://github.com/cedx/setup-hashlink",
-	"version": "5.1.0"
+	"version": "5.1.1"
 }
