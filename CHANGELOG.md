@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [5.1.1](https://github.com/cedx/setup-hashlink/compare/v5.1.0...v5.1.1)
+- Fixed the macOS compilation.
+
 ## Version [5.1.0](https://github.com/cedx/setup-hashlink/compare/v5.0.0...v5.1.0)
 - Updated the Linux/macOS compilation step.
 
