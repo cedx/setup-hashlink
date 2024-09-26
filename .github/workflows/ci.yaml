@@ -37,5 +37,5 @@ jobs:
         platform: [macos-latest]
     steps:
       - uses: cedx/setup-hashlink@main
-      - run: hl --version
       - run: otool -L /usr/local/bin/hl
+      - run: hl --version
