@@ -95,7 +95,8 @@ class Setup {
 			"make",
 			"sudo make codesign_osx",
 			"sudo make install",
-			'sudo install_name_tool -change libhl.dylib $prefix/lib/libhl.dylib $prefix/bin/hl'
+			'sudo install_name_tool -add_rpath $prefix/lib/libhl.dylib $prefix/bin/hl',
+			'sudo install_name_tool -delete_rpath libhl.dylib $prefix/bin/hl'
 		];
 
 		commands.iter(command -> Sys.command(command));
