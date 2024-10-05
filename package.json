@@ -17,7 +17,7 @@
 		"setup_hashlink": "bin/setup_hashlink.js"
 	},
 	"dependencies": {
-		"@actions/core": "^1.11.0",
+		"@actions/core": "^1.11.1",
 		"@actions/tool-cache": "^2.0.1"
 	},
 	"devDependencies": {
