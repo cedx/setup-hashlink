@@ -27,6 +27,6 @@
 		"node": ">=20.0.0"
 	},
 	"scripts": {
-		"test": "haxe test.hxml"
+		"test": "lix Test"
 	}
 }

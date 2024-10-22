@@ -27,7 +27,7 @@ jobs:
           lix download
           npm ci
       - name: Run tests
-        run: haxe test.hxml
+        run: lix Test
   run:
     needs: test
     runs-on: ${{matrix.platform}}
