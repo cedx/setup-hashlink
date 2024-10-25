@@ -1,5 +1,5 @@
 //! --class-path src --library tink_core
-import setup_hashlink.Platform;
+import hashlink.Platform;
 import sys.io.File;
 
 /** Updates the version number in the sources. **/

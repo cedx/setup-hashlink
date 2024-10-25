@@ -1,4 +1,4 @@
-package setup_hashlink;
+package hashlink;
 
 import sys.FileSystem;
 using Lambda;

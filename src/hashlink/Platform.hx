@@ -1,4 +1,4 @@
-package setup_hashlink;
+package hashlink;
 
 #if macro
 import haxe.Json;

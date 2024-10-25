@@ -2,7 +2,7 @@
 	"defaultSeverity": "ERROR",
 	"exclude": {
 		"path": "RELATIVE_TO_PROJECT",
-		"HiddenField": ["src/setup_hashlink/Release"]
+		"HiddenField": ["src/hashlink/Release"]
 	},
 	"checks": [
 		{"type": "ArrayAccess"},

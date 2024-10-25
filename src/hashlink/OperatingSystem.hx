@@ -1,4 +1,4 @@
-package setup_hashlink;
+package hashlink;
 
 /** Defines the operating system or platform of the HashLink VM. **/
 enum abstract OperatingSystem(String) from String to String {

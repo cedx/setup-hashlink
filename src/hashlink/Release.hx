@@ -1,4 +1,4 @@
-package setup_hashlink;
+package hashlink;
 
 import coconut.data.List;
 import coconut.data.Model;
@@ -9,7 +9,7 @@ import tink.semver.Constraint;
 import tink.semver.Version;
 
 /** Represents a GitHub release. **/
-@:jsonParse(json -> new setup_hashlink.Release(json))
+@:jsonParse(json -> new hashlink.Release(json))
 class Release implements Model {
 
 	/** The latest release. **/
@@ -61,7 +61,7 @@ class Release implements Model {
 }
 
 /** Represents an asset of a GitHub release. **/
-@:jsonParse(json -> new setup_hashlink.Release.ReleaseAsset(json))
+@:jsonParse(json -> new hashlink.Release.ReleaseAsset(json))
 class ReleaseAsset implements Model {
 
 	/** The target file. **/

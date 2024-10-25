@@ -1,6 +1,6 @@
-package setup_hashlink;
+package hashlink;
 
-import setup_hashlink.Release.ReleaseAsset;
+import hashlink.Release.ReleaseAsset;
 
 /** Tests the features of the `Release` class. **/
 @:asserts final class ReleaseTest {
@@ -19,14 +19,14 @@ import setup_hashlink.Release.ReleaseAsset;
 	public function new() {}
 
 	/** Tests the `exists` property. **/
-	@:variant(setup_hashlink.ReleaseTest.existingRelease, true)
-	@:variant(setup_hashlink.ReleaseTest.nonExistentRelease, false)
+	@:variant(hashlink.ReleaseTest.existingRelease, true)
+	@:variant(hashlink.ReleaseTest.nonExistentRelease, false)
 	public function exists(input: Release, output: Bool)
 		return assert(input.exists == output);
 
 	/** Tests the `isSource` property. **/
-	@:variant(setup_hashlink.ReleaseTest.existingRelease, false)
-	@:variant(setup_hashlink.ReleaseTest.nonExistentRelease, true)
+	@:variant(hashlink.ReleaseTest.existingRelease, false)
+	@:variant(hashlink.ReleaseTest.nonExistentRelease, true)
 	public function isSource(input: Release, output: Bool)
 		return assert(input.isSource == output);
 
@@ -37,20 +37,20 @@ import setup_hashlink.Release.ReleaseAsset;
 	}
 
 	/** Tests the `tag` property. **/
-	@:variant(setup_hashlink.ReleaseTest.existingRelease, "1.14")
-	@:variant(setup_hashlink.ReleaseTest.nonExistentRelease, "666.6.6")
+	@:variant(hashlink.ReleaseTest.existingRelease, "1.14")
+	@:variant(hashlink.ReleaseTest.nonExistentRelease, "666.6.6")
 	public function tag(input: Release, output: String)
 		return assert(input.tag == output);
 
 	/** Tests the `url` property. **/
-	@:variant(setup_hashlink.ReleaseTest.existingRelease, "releases/download/1.14/hashlink-1.14.0.zip")
-	@:variant(setup_hashlink.ReleaseTest.nonExistentRelease, "archive/refs/tags/666.6.6.zip")
+	@:variant(hashlink.ReleaseTest.existingRelease, "releases/download/1.14/hashlink-1.14.0.zip")
+	@:variant(hashlink.ReleaseTest.nonExistentRelease, "archive/refs/tags/666.6.6.zip")
 	public function url(input: Release, output: String)
 		return assert(input.url == 'https://github.com/HaxeFoundation/hashlink/$output');
 
 	/** Tests the `find()` method. **/
-	@:variant("*", Some(setup_hashlink.Release.latest.version))
-	@:variant("1.x", Some(setup_hashlink.Release.latest.version))
+	@:variant("*", Some(hashlink.Release.latest.version))
+	@:variant("1.x", Some(hashlink.Release.latest.version))
 	@:variant("=1.0.0", Some("1.0.0"))
 	@:variant(">=1.0.0 <1.11.0", Some("1.10.0"))
 	@:variant("666.6.6", None)
@@ -68,8 +68,8 @@ import setup_hashlink.Release.ReleaseAsset;
 	}
 
 	/** Tests the `getAsset()` method. **/
-	@:variant(setup_hashlink.ReleaseTest.existingRelease, Some("hashlink-1.14.0.zip"))
-	@:variant(setup_hashlink.ReleaseTest.nonExistentRelease, None)
+	@:variant(hashlink.ReleaseTest.existingRelease, Some("hashlink-1.14.0.zip"))
+	@:variant(hashlink.ReleaseTest.nonExistentRelease, None)
 	public function getAsset(input: Release, output: Option<String>) return switch input.getAsset(Windows) {
 		case None: assert(output == None);
 		case Some(asset): assert(output.equals(asset.file));

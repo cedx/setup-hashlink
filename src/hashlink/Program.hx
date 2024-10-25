@@ -1,4 +1,4 @@
-package setup_hashlink;
+package hashlink;
 
 import js.actions.Core;
 import js.Node;
