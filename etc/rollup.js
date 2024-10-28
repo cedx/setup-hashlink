@@ -7,5 +7,9 @@ const terser = require("@rollup/plugin-terser");
 module.exports = {
 	input: "bin/setup_hashlink.js",
 	output: {file: "bin/setup_hashlink.js", format: "cjs"},
-	plugins: [resolve(), commonjs(), terser()]
+	plugins: [
+		resolve(),
+		commonjs({sourceMap: false}),
+		terser({compress: true, format: {comments: false}, mangle: true})
+	]
 };
