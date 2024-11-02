@@ -4,8 +4,11 @@ import terser from "@rollup/plugin-terser";
 
 /** @type {import("rollup").RollupOptions} */
 export default {
-	input: "bin/setup_hashlink.js",
-	output: {file: "bin/setup_hashlink.js", format: "cjs"},
+	input: "lib/cli.js",
+	output: {
+		banner: "#!/usr/bin/env node",
+		file: "bin/setup_hashlink.js"
+	},
 	plugins: [
 		resolve(),
 		commonjs({sourceMap: false}),
