@@ -6,8 +6,8 @@
 	"name": "@cedx/setup-hashlink",
 	"private": true,
 	"repository": "cedx/setup-hashlink",
-	"type": "commonjs",
-	"version": "5.1.1",
+	"type": "module",
+	"version": "6.0.0",
 	"author": {
 		"email": "cedric@belin.io",
 		"name": "Cédric Belin",
@@ -21,15 +21,32 @@
 		"@actions/tool-cache": "^2.0.1"
 	},
 	"devDependencies": {
+		"@coffeelint/cli": "^5.2.11",
 		"@rollup/plugin-commonjs": "^28.0.1",
 		"@rollup/plugin-node-resolve": "^15.3.0",
 		"@rollup/plugin-terser": "^0.4.4",
+		"@types/node": "^22.8.6",
+		"coffeescript": "^2.7.0",
 		"rollup": "^4.24.3"
 	},
 	"engines": {
 		"node": ">=20.0.0"
 	},
+	"files": [
+		"lib/",
+		"res/",
+		"src/"
+	],
+	"keywords": [
+		"action",
+		"ci",
+		"github",
+		"hashlink",
+		"test",
+		"vm",
+		"workflow"
+	],
 	"scripts": {
-		"test": "lix Test"
+		"test": "cake test"
 	}
 }
