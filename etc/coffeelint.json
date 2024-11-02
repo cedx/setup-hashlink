@@ -1,0 +1,209 @@
+{
+  "arrow_spacing": {
+    "type": "style",
+    "level": "error"
+  },
+  "braces_spacing": {
+    "type": "style",
+    "level": "error",
+    "spaces": 0,
+    "empty_object_spaces": 0
+  },
+  "bracket_spacing": {
+    "type": "style",
+    "level": "error",
+    "spaces": 0,
+    "empty_array_spaces": 0,
+    "exceptions": []
+  },
+  "camel_case_classes": {
+    "type": "style",
+    "level": "error"
+  },
+  "coffeescript_error": {
+    "level": "error"
+  },
+  "colon_assignment_spacing": {
+    "type": "style",
+    "level": "error",
+    "spacing": {
+      "left": 0,
+      "right": 1
+    }
+  },
+  "cyclomatic_complexity": {
+    "type": "problem",
+    "level": "error",
+    "value": 10
+  },
+  "duplicate_key": {
+    "type": "problem",
+    "level": "error"
+  },
+  "empty_constructor_needs_parens": {
+    "type": "style",
+    "level": "ignore"
+  },
+  "ensure_comprehensions": {
+    "type": "style",
+    "level": "error"
+  },
+  "eol_last": {
+    "type": "style",
+    "level": "error"
+  },
+  "indentation": {
+    "type": "problem",
+    "value": 1,
+    "level": "error"
+  },
+  "line_endings": {
+    "type": "problem",
+    "level": "ignore",
+    "value": "windows"
+  },
+  "max_line_length": {
+    "type": "style",
+    "value": 160,
+    "level": "error",
+    "limitComments": true
+  },
+  "missing_fat_arrows": {
+    "type": "problem",
+    "level": "error",
+    "is_strict": true
+  },
+  "missing_parseint_radix": {
+    "type": "problem",
+    "level": "error"
+  },
+  "newlines_after_classes": {
+    "type": "style",
+    "value": 1,
+    "level": "error"
+  },
+  "no_backticks": {
+    "type": "problem",
+    "level": "error"
+  },
+  "no_debugger": {
+    "type": "problem",
+    "level": "error",
+    "console": false
+  },
+  "no_empty_functions": {
+    "type": "problem",
+    "level": "error"
+  },
+  "no_empty_param_list": {
+    "type": "style",
+    "level": "error"
+  },
+  "no_implicit_braces": {
+    "type": "style",
+    "level": "ignore",
+    "strict": false
+  },
+  "no_implicit_parens": {
+    "type": "style",
+    "level": "ignore",
+    "strict": true
+  },
+  "no_interpolation_in_single_quotes": {
+    "type": "problem",
+    "level": "error"
+  },
+  "no_nested_string_interpolation": {
+    "type": "problem",
+    "level": "error"
+  },
+  "no_plusplus": {
+    "type": "style",
+    "level": "ignore"
+  },
+  "no_private_function_fat_arrows": {
+    "type": "style",
+    "level": "error"
+  },
+  "no_spaces": {
+    "type": "style",
+    "level": "error"
+  },
+  "no_stand_alone_at": {
+    "type": "style",
+    "level": "error"
+  },
+  "no_tabs": {
+    "type": "style",
+    "level": "ignore"
+  },
+  "no_this": {
+    "type": "style",
+    "level": "error"
+  },
+  "no_throwing_strings": {
+    "type": "problem",
+    "level": "error"
+  },
+  "no_trailing_semicolons": {
+    "type": "style",
+    "level": "error"
+  },
+  "no_trailing_whitespace": {
+    "type": "style",
+    "level": "error",
+    "allowed_in_comments": false,
+    "allowed_in_empty_lines": true
+  },
+  "no_unnecessary_double_quotes": {
+    "type": "style",
+    "level": "ignore"
+  },
+  "no_unnecessary_fat_arrows": {
+    "type": "style",
+    "level": "error"
+  },
+  "non_empty_constructor_needs_parens": {
+    "type": "style",
+    "level": "ignore"
+  },
+  "object_shorthand": {
+    "type": "style",
+    "level": "error"
+  },
+  "prefer_english_operator": {
+    "type": "style",
+    "level": "error",
+    "doubleNotLevel": "error",
+    "ops": [
+      "and",
+      "or",
+      "not",
+      "is",
+      "isnt"
+    ]
+  },
+  "prefer_fat_arrows_in_methods": {
+    "type": "style",
+    "level": "error"
+  },
+  "prefer_logical_operator": {
+    "type": "style",
+    "level": "ignore",
+    "doubleNotLevel": "ignore"
+  },
+  "space_operators": {
+    "type": "style",
+    "level": "error",
+    "default_parameters": true
+  },
+  "spacing_after_comma": {
+    "type": "style",
+    "level": "error",
+    "ignore_elision": true
+  },
+  "transform_messes_up_line_numbers": {
+    "type": "style",
+    "level": "error"
+  }
+}
