@@ -40,7 +40,6 @@
 	},
 	"files": [
 		"lib/",
-		"res/",
 		"src/"
 	],
 	"keywords": [
