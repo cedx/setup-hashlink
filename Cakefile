@@ -19,7 +19,7 @@ task "dist", "Packages the project.", ->
 	invoke "build"
 	invoke "version"
 	npx "rollup", "--config=etc/rollup.js"
-	run "git", "update-index" "--chmod=+x", "bin/setup_hashlink.js"
+	run "git", "update-index", "--chmod=+x", "bin/setup_hashlink.js"
 
 task "lint", "Performs the static analysis of source code.", ->
 	npx "coffeelint", "--file=etc/coffeelint.json", "Cakefile", "src", "test"
@@ -35,7 +35,7 @@ task "test", "Runs the test suite.", ->
 
 task "version", "Updates the version number in the sources.", ->
 	replaceInFile = (file, pattern, replacement) -> writeFileSync file, (readFileSync file, "utf8").replace(pattern, replacement)
-	replaceInFile "README.md", ~/action\/v\d+(\.\d+){2}/, "action/v#{pkg.version}"
+	replaceInFile "README.md", /action\/v\d+(\.\d+){2}/, "action/v#{pkg.version}"
 
 task "watch", "Watches for file changes.", ->
 	sourcemaps = if options.map then ["--map"] else []
