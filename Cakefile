@@ -39,7 +39,7 @@ task "version", "Updates the version number in the sources.", ->
 
 task "watch", "Watches for file changes.", (options) ->
 	sourcemaps = if options.map then ["--map"] else []
-	run "coffee", "--compile", sourcemaps..., "--no-header", "--output", "lib", "--watch", "src"
+	run "coffee", "--compile", sourcemaps..., "--no-header", "--output", "lib", "--watch", "src", "test"
 
 ###*
 # Executes a command from a local package.
