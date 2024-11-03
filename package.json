@@ -18,7 +18,8 @@
 	},
 	"dependencies": {
 		"@actions/core": "^1.11.1",
-		"@actions/tool-cache": "^2.0.1"
+		"@actions/tool-cache": "^2.0.1",
+		"semver": "^7.6.3"
 	},
 	"devDependencies": {
 		"@coffeelint/cli": "^5.2.11",
@@ -26,6 +27,7 @@
 		"@rollup/plugin-node-resolve": "^15.3.0",
 		"@rollup/plugin-terser": "^0.4.4",
 		"@types/node": "^22.8.6",
+		"@types/semver": "^7.5.8",
 		"coffeescript": "^2.7.0",
 		"rollup": "^4.24.3"
 	},

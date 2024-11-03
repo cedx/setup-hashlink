@@ -37,7 +37,7 @@ task "version", "Updates the version number in the sources.", ->
 	replaceInFile = (file, pattern, replacement) -> writeFileSync file, (readFileSync file, "utf8").replace(pattern, replacement)
 	replaceInFile "README.md", /action\/v\d+(\.\d+){2}/, "action/v#{pkg.version}"
 
-task "watch", "Watches for file changes.", ->
+task "watch", "Watches for file changes.", (options) ->
 	sourcemaps = if options.map then ["--map"] else []
 	run "coffee", "--compile", sourcemaps..., "--no-header", "--output", "lib", "--watch", "src"
 
