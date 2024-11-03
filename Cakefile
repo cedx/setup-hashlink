@@ -11,7 +11,7 @@ task "build", "Builds the project.", (options) ->
 	run "coffee", "--compile", sourcemaps..., "--no-header", "--output", "lib", "src"
 
 task "clean", "Deletes all generated files.", ->
-	rmSync join("lib", file), force: yes, recursive: yes
+	rmSync join("lib", file) for file in readdirSync "lib" when not file.endsWith ".d.ts"
 	rmSync join("var", file), recursive: yes for file in readdirSync "var" when file isnt ".gitkeep"
 
 task "dist", "Packages the project.", ->
