@@ -4,6 +4,7 @@ import terser from "@rollup/plugin-terser";
 
 /** @type {import("rollup").RollupOptions} */
 export default {
+	context: "this",
 	input: "lib/cli.js",
 	output: {
 		banner: "#!/usr/bin/env node",
