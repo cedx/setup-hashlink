@@ -29,7 +29,7 @@
 		"@types/node": "^22.8.7",
 		"@types/semver": "^7.5.8",
 		"coffeescript": "^2.7.0",
-		"rollup": "^4.24.3"
+		"rollup": "^4.24.4"
 	},
 	"engines": {
 		"node": ">=20.0.0"
