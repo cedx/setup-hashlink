@@ -1,6 +1,6 @@
 {spawnSync} = require "node:child_process"
 {readdirSync, readFileSync, rmSync, writeFileSync} = require "node:fs"
-{extname, join} = require "node:path"
+{join} = require "node:path"
 {env} = require "node:process"
 pkg = require "./package.json"
 
