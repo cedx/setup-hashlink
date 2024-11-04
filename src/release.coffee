@@ -34,7 +34,7 @@ export class Release
 		get: ->
 			asset = @getAsset process.platform
 			path = if asset then "releases/download/#{@tag}/#{asset.file}" else "archive/refs/tags/#{@tag}.zip"
-			return new URL path, Release.baseUrl
+			new URL path, Release.baseUrl
 
 	# Creates a new release.
 	constructor: (version, assets = []) ->

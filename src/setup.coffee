@@ -90,5 +90,5 @@ export class Setup
 		folders = (await readdir directory, withFileTypes: true).filter (entity) -> entity.isDirectory()
 		switch folders.length
 			when 0 then throw Error "No subfolder found in: #{directory}."
-			when 1 then return folders[0].name
+			when 1 then folders[0].name
 			else throw Error "Multiple subfolders found in: #{directory}."
