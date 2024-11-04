@@ -8,7 +8,7 @@ try
 
 	version = getInput "version"
 	release = Release.find if not version or version is "latest" then "*" else version
-	throw Error "No release matching the version constraint." if not release
+	throw Error "No release matching the version constraint." unless release
 
 	path = await new Setup(release).install()
 	info "HashLink #{release.version} successfully installed in \"#{path}\"."
