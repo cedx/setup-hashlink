@@ -15,9 +15,7 @@ task "clean", "Deletes all generated files.", ->
 	rmSync join("var", file), recursive: yes for file in readdirSync "var" when file isnt ".gitkeep"
 
 task "dist", "Packages the project.", ->
-	invoke "clean"
-	invoke "build"
-	invoke "version"
+	invoke script for script in ["clean", "build", "version"]
 	rmSync "lib/cakefile.js"
 	npx "rollup", "--config=etc/rollup.js"
 	run "git", "update-index", "--chmod=+x", "bin/setup_hashlink.js"
