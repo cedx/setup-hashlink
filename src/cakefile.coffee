@@ -2,7 +2,7 @@
 {readdirSync, readFileSync, rmSync, writeFileSync} = require "node:fs"
 {join} = require "node:path"
 {env} = require "node:process"
-pkg = require "./package.json"
+pkg = require "../package.json"
 
 option "-m", "--map", "Whether to generate source maps."
 
@@ -18,6 +18,7 @@ task "dist", "Packages the project.", ->
 	invoke "clean"
 	invoke "build"
 	invoke "version"
+	rmSync "lib/cakefile.js"
 	npx "rollup", "--config=etc/rollup.js"
 	run "git", "update-index", "--chmod=+x", "bin/setup_hashlink.js"
 
