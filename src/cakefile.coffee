@@ -23,7 +23,7 @@ task "dist", "Packages the project.", ->
 	run "git", "update-index", "--chmod=+x", "bin/setup_hashlink.js"
 
 task "lint", "Performs the static analysis of source code.", ->
-	npx "coffeelint", "--file=etc/coffeelint.json", "Cakefile", "src", "test"
+	npx "coffeelint", "--file=etc/coffeelint.json", "src", "test"
 
 task "publish", "Publishes the package.", ->
 	invoke "dist"
