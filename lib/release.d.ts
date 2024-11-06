@@ -1,20 +1,4 @@
 /**
- * Represents an asset of a GitHub release.
- */
-export type ReleaseAsset = {
-
-	/**
-	 * The target file.
-	 */
-	file: string;
-
-	/**
-	 * The target platform.
-	 */
-	platform: NodeJS.Platform;
-}
-
-/**
  * Represents a GitHub release.
  */
 export class Release {
@@ -80,4 +64,20 @@ export class Release {
 	 * @returns The asset corresponding to the specified platform, or `null` if not found.
 	 */
 	getAsset(platform: NodeJS.Platform): ReleaseAsset|null;
+}
+
+/**
+ * Represents an asset of a GitHub release.
+ */
+export type ReleaseAsset = {
+
+	/**
+	 * The target file.
+	 */
+	file: string;
+
+	/**
+	 * The target platform.
+	 */
+	platform: NodeJS.Platform;
 }
