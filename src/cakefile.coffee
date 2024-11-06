@@ -40,19 +40,10 @@ task "watch", "Watches for file changes.", (options) ->
 	sourcemaps = if options.map then ["--map"] else []
 	run "coffee", "--compile", sourcemaps..., "--no-header", "--output", "lib", "--watch", "src", "test"
 
-###*
 # Executes a command from a local package.
-# @param {string} command The command to run.
-# @param {...string} args The command arguments.
-###
 npx = (command, args...) -> run "npm", "exec", "--", command, args...
 
-###*
 # Spawns a new process using the specified command.
-# @param {string} command The command to run.
-# @param {...string} args The command arguments.
-# @returns {Promise<void>} Resolves when the command is terminated.
-###
 run = (command, args...) ->
 	{status} = spawnSync command, args, shell: yes, stdio: "inherit"
 	unless status is 0
