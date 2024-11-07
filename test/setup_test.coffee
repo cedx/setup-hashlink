@@ -17,7 +17,7 @@ describe "Setup", ->
 			dynamicLib = "libhl#{if release.isSource then ".vcxproj" else if platform is "darwin" then ".dylib" else if platform is "win32" then ".dll" else ".so"}"
 
 			path = await new Setup(release).download()
-			doesNotReject Promise.all [executable, dynamicLib].map (file) -> access join path, file
+			await doesNotReject Promise.all [executable, dynamicLib].map (file) -> access(join path, file)
 
 	describe "install()", ->
 		it "should add the HashLink VM binaries to the PATH environment variable", ->
