@@ -87,7 +87,7 @@ export class Setup
 
 	# Determines the name of the single subfolder in the specified directory.
 	_findSubfolder: (directory) ->
-		folders = (await readdir directory, withFileTypes: true).filter (entity) -> entity.isDirectory()
+		folders = (await readdir directory, withFileTypes: yes).filter (entity) -> entity.isDirectory()
 		switch folders.length
 			when 0 then throw Error "No subfolder found in: #{directory}."
 			when 1 then folders[0].name
