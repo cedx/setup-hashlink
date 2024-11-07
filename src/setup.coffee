@@ -65,7 +65,7 @@ export class Setup
 			"sudo ldconfig"
 		]
 
-		await run command, maxBuffer: 10 * 1024 * 1024 for command in commands
+		await run command, maxBuffer: 10 * 1024 * 1024 for command from commands
 		libPath = (env.LD_LIBRARY_PATH ? "").trim()
 		prefix = "/usr/local"
 		exportVariable "LD_LIBRARY_PATH", if libPath then "#{prefix}/bin:#{libPath}" else "#{prefix}/bin"
@@ -82,7 +82,7 @@ export class Setup
 			"sudo install_name_tool -change libhl.dylib #{prefix}/lib/libhl.dylib #{prefix}/bin/hl"
 		]
 
-		await run command, maxBuffer: 10 * 1024 * 1024 for command in commands
+		await run command, maxBuffer: 10 * 1024 * 1024 for command from commands
 		prefix
 
 	# Determines the name of the single subfolder in the specified directory.
