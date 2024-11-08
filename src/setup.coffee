@@ -39,7 +39,7 @@ export class Setup
 
 		workingDirectory = cwd()
 		chdir directory
-		path = await (if platform is "darwin" then @_compileMacOs() else @_compileLinux())
+		path = await if platform is "darwin" then @_compileMacOs() else @_compileLinux()
 		chdir workingDirectory
 		path
 
