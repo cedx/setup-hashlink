@@ -11,6 +11,15 @@ export class Release
 	# The list of all releases.
 	@data = data.map (release) -> new Release release.version, release.assets
 
+	# Creates a new release.
+	constructor: (version, assets = []) ->
+
+		# The associated assets.
+		@assets = assets
+
+		# The version number.
+		@version = version
+
 	# The latest release.
 	Object.defineProperty @, "latest",
 		get: -> @data.at(0) or null
@@ -35,15 +44,6 @@ export class Release
 			asset = @getAsset process.platform
 			path = if asset then "releases/download/#{@tag}/#{asset.file}" else "archive/refs/tags/#{@tag}.zip"
 			new URL path, Release.baseUrl
-
-	# Creates a new release.
-	constructor: (version, assets = []) ->
-
-		# The associated assets.
-		@assets = assets
-
-		# The version number.
-		@version = version
 
 	# Finds a release that matches the specified version constraint.
 	@find: (constraint) -> (@data.find (release) -> semver.satisfies release.version, constraint) or null
