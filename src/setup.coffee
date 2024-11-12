@@ -66,7 +66,7 @@ export class Setup
 		]
 
 		await run command, maxBuffer: 10 * 1024 * 1024 for command from commands
-		libPath = (env.LD_LIBRARY_PATH ? "").trim()
+		libPath = (env.LD_LIBRARY_PATH or "").trim()
 		prefix = "/usr/local"
 		exportVariable "LD_LIBRARY_PATH", if libPath then "#{prefix}/bin:#{libPath}" else "#{prefix}/bin"
 		prefix
