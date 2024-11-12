@@ -34,7 +34,7 @@ task "test", "Runs the test suite.", ->
 	run "node", "--enable-source-maps", "--test", "--test-reporter=spec", "lib/**/*_test.js"
 
 task "version", "Updates the version number in the sources.", ->
-	replaceInFile = (file, pattern, replacement) -> writeFileSync file, (readFileSync file, "utf8").replace(pattern, replacement)
+	replaceInFile = (file, pattern, replacement) -> writeFileSync file, readFileSync(file, "utf8").replace(pattern, replacement)
 	replaceInFile "README.md", /action\/v\d+(\.\d+){2}/, "action/v#{pkg.version}"
 
 task "watch", "Watches for file changes.", (options) ->
