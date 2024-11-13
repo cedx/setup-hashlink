@@ -26,9 +26,11 @@
 		"@rollup/plugin-commonjs": "^28.0.1",
 		"@rollup/plugin-node-resolve": "^15.3.0",
 		"@rollup/plugin-terser": "^0.4.4",
+		"@types/gulp": "^4.0.17",
 		"@types/node": "^22.9.0",
 		"@types/semver": "^7.5.8",
 		"coffeescript": "^2.7.0",
+		"gulp": "^5.0.0",
 		"rollup": "^4.25.0"
 	},
 	"engines": {
@@ -52,6 +54,6 @@
 		"workflow"
 	],
 	"scripts": {
-		"test": "cake test"
+		"test": "gulp test"
 	}
 }
