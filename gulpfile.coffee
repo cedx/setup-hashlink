@@ -2,12 +2,10 @@ import gulp from "gulp"
 import {spawn} from "node:child_process"
 import {readdir, readFile, rm, writeFile} from "node:fs/promises"
 import {join} from "node:path"
-import {env} from "node:process"
 
 # Builds the project.
 export build = ->
-	sourcemaps = if env.NODE_ENV is "production" then [] else ["--map"]
-	await npx "coffee", "--compile", sourcemaps..., "--no-header", "--output", "lib", "src"
+	await npx "coffee", "--compile", "--no-header", "--output", "lib", "src"
 
 # Deletes all generated files.
 export clean = ->
@@ -16,7 +14,6 @@ export clean = ->
 
 # Packages the project.
 export dist = ->
-	env.NODE_ENV = "production"
 	await build()
 	await npx "rollup", "--config=etc/rollup.js"
 	await run "git", "update-index", "--chmod=+x", "bin/setup_hashlink.js"
@@ -34,7 +31,6 @@ export publish = ->
 
 # Runs the test suite.
 export test = ->
-	env.NODE_ENV = "test"
 	await npx "coffee", "--compile", "--map", "--no-header", "--output", "lib", "src", "test"
 	await run "node", "--enable-source-maps", "--test"
 
