@@ -35,7 +35,7 @@ export class Setup
 	# Compiles the sources of the HashLink VM located in the specified directory.
 	# Returns the path to the output directory.
 	_compile: (directory) ->
-		Promise.reject Error "Compilation is not supported on \"#{platform}\" platform." if platform not in ["darwin", "linux"]
+		return Promise.reject Error "Compilation is not supported on \"#{platform}\" platform." if platform not in ["darwin", "linux"]
 
 		workingDirectory = cwd()
 		chdir directory
