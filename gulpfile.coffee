@@ -6,7 +6,8 @@ import {env} from "node:process"
 
 # Builds the project.
 export build = ->
-	await npx "coffee", "--compile", "--no-header", "--output", "lib", "src"
+	sourcemaps = if env.NODE_ENV is "production" then [] else ["--map"]
+	await npx "coffee", "--compile", sourcemaps..., "--no-header", "--output", "lib", "src"
 
 # Deletes all generated files.
 export clean = ->
