@@ -11,7 +11,7 @@ export default {
 		file: "bin/setup_hashlink.js"
 	},
 	plugins: [
-		resolve(),
+		resolve({preferBuiltins: true}),
 		commonjs({sourceMap: false}),
 		terser({compress: true, format: {comments: false}, mangle: true})
 	]
