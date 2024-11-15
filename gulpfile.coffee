@@ -42,7 +42,7 @@ export version = ->
 
 # Watches for file changes.
 export watch = ->
-	await npx "coffee", "--compile", "--no-header", "--output", "lib", "--watch", "src", "test"
+	npx "coffee", "--compile", "--no-header", "--output", "lib", "--watch", "src", "test"
 
 # The default task.
 export default gulp.series clean, dist, version
