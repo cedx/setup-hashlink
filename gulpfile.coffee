@@ -48,7 +48,7 @@ export watch = ->
 export default gulp.series clean, dist, version
 
 # Executes a command from a local package.
-npx = (command, args...) -> run "npm", "exec", "--", command, ...args
+npx = (command, args...) -> run "npm", "exec", "--", command, args...
 
 # Spawns a new process using the specified command.
 run = (command, args...) -> new Promise (resolve, reject) ->
