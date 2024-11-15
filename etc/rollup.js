@@ -2,7 +2,9 @@ import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import terser from "@rollup/plugin-terser";
 
-/** @type {import("rollup").RollupOptions} */
+/**
+ * @type {import("rollup").RollupOptions}
+ */
 export default {
 	context: "this",
 	input: "lib/cli.js",
