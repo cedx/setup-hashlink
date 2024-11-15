@@ -3,6 +3,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import terser from "@rollup/plugin-terser";
 
 /**
+ * The build options.
  * @type {import("rollup").RollupOptions}
  */
 export default {
