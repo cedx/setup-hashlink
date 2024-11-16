@@ -24,7 +24,7 @@ export lint = ->
 
 # Publishes the package.
 export publish = ->
-	{default: {version}} = await import("./package.json", with: {type: "json"})
+	{default: {version}} = await import("./package.json", with: type: "json")
 	await npx "gulp"
 	await run "npm", "publish", "--registry=#{registry}" for registry from ["https://registry.npmjs.org", "https://npm.pkg.github.com"]
 	await run "git", action..., "v#{version}" for action from [["tag"], ["push", "origin"]]
@@ -37,7 +37,7 @@ export test = ->
 # Updates the version number in the sources.
 export version = ->
 	file = "README.md"
-	{default: {version}} = await import("./package.json", with: {type: "json"})
+	{default: {version}} = await import("./package.json", with: type: "json")
 	await writeFile file, (await readFile file, "utf8").replace /action\/v\d+(\.\d+){2}/, "action/v#{version}"
 
 # Watches for file changes.
