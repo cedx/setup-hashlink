@@ -27,11 +27,11 @@
 		"@rollup/plugin-node-resolve": "^15.3.0",
 		"@rollup/plugin-terser": "^0.4.4",
 		"@types/gulp": "^4.0.17",
-		"@types/node": "^22.9.1",
+		"@types/node": "^22.9.3",
 		"@types/semver": "^7.5.8",
 		"coffeescript": "^2.7.0",
 		"gulp": "^5.0.0",
-		"rollup": "^4.27.3"
+		"rollup": "^4.27.4"
 	},
 	"engines": {
 		"node": ">=20.0.0"
