@@ -25,21 +25,21 @@ export class Release
 		get: -> @data.at(0) or null
 
 	# Value indicating whether this release exists.
-	Object.defineProperty @prototype, "exists",
+	Object.defineProperty @::, "exists",
 		get: -> Release.data.some (release) => release.version is @version
 
 	# Value indicating whether this release is provided as source code.
-	Object.defineProperty @prototype, "isSource",
+	Object.defineProperty @::, "isSource",
 		get: -> not @getAsset process.platform
 
 	# The associated Git tag.
-	Object.defineProperty @prototype, "tag",
+	Object.defineProperty @::, "tag",
 		get: ->
 			{major, minor, patch} = new SemVer @version
 			if patch > 0 then "#{major}.#{minor}.#{patch}" else "#{major}.#{minor}"
 
 	# The download URL.
-	Object.defineProperty @prototype, "url",
+	Object.defineProperty @::, "url",
 		get: ->
 			asset = @getAsset process.platform
 			path = if asset then "releases/download/#{@tag}/#{asset.file}" else "archive/refs/tags/#{@tag}.zip"
