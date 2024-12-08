@@ -21,29 +21,24 @@ export class Release
 		@version = version
 
 	# The latest release.
-	Object.defineProperty @, "latest",
-		get: -> @data.at(0) or null
+	Object.defineProperty @, "latest", get: -> @data.at(0) or null
 
 	# Value indicating whether this release exists.
-	Object.defineProperty @::, "exists",
-		get: -> Release.data.some (release) => release.version is @version
+	Object.defineProperty @::, "exists", get: -> Release.data.some (release) => release.version is @version
 
 	# Value indicating whether this release is provided as source code.
-	Object.defineProperty @::, "isSource",
-		get: -> not @getAsset process.platform
+	Object.defineProperty @::, "isSource", get: -> not @getAsset process.platform
 
 	# The associated Git tag.
-	Object.defineProperty @::, "tag",
-		get: ->
-			{major, minor, patch} = new SemVer @version
-			if patch > 0 then "#{major}.#{minor}.#{patch}" else "#{major}.#{minor}"
+	Object.defineProperty @::, "tag", get: ->
+		{major, minor, patch} = new SemVer @version
+		if patch > 0 then "#{major}.#{minor}.#{patch}" else "#{major}.#{minor}"
 
 	# The download URL.
-	Object.defineProperty @::, "url",
-		get: ->
-			asset = @getAsset process.platform
-			path = if asset then "releases/download/#{@tag}/#{asset.file}" else "archive/refs/tags/#{@tag}.zip"
-			new URL path, Release.baseUrl
+	Object.defineProperty @::, "url", get: ->
+		asset = @getAsset process.platform
+		path = if asset then "releases/download/#{@tag}/#{asset.file}" else "archive/refs/tags/#{@tag}.zip"
+		new URL path, Release.baseUrl
 
 	# Finds a release that matches the specified version constraint.
 	@find: (constraint) -> (@data.find (release) -> semver.satisfies release.version, constraint) or null
