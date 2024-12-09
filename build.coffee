@@ -1,7 +1,7 @@
 {spawnSync} = require "node:child_process"
 {readdirSync, readFileSync, rmSync, writeFileSync} = require "node:fs"
 {join} = require "node:path"
-pkg = require "../package.json"
+pkg = require "./package.json"
 
 task "build", "Builds the project.", ->
 	npx "coffee", "--compile", "--no-header", "--output", "lib", "src"
