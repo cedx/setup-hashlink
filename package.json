@@ -23,8 +23,8 @@
 	},
 	"devDependencies": {
 		"@coffeelint/cli": "^5.2.11",
-		"@rollup/plugin-commonjs": "^28.0.1",
-		"@rollup/plugin-node-resolve": "^15.3.0",
+		"@rollup/plugin-commonjs": "^28.0.2",
+		"@rollup/plugin-node-resolve": "^16.0.0",
 		"@rollup/plugin-terser": "^0.4.4",
 		"@types/node": "^22.10.2",
 		"@types/semver": "^7.5.8",
