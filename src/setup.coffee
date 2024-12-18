@@ -28,7 +28,7 @@ export class Setup
 	# Returns the path to the installation directory.
 	install: ->
 		directory = if path = find("hashlink", @release.version) then path else await cacheDir (await @download()), "hashlink", @release.version
-		await @_compile directory if @release.isSource and env.GITHUB_ACTIONS is "true"
+		await @_compile directory if @release.isSource and env.CI is "true"
 		addPath if @release.isSource then join directory, "bin" else directory
 		directory
 
