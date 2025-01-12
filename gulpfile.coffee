@@ -15,7 +15,16 @@ export clean = ->
 # Packages the project.
 export dist = ->
 	await build()
-	await npx "rollup", "--config=etc/rollup.js"
+	await npx "esbuild",
+		"\"--banner:js=#!/usr/bin/env node\"",
+		"--bundle",
+		"--format=esm",
+		"--legal-comments=none",
+		"--log-level=warning",
+		"--minify",
+		"--outfile=bin/setup_hashlink.js",
+		" --platform=node",
+		"lib/cli.js"
 	await run "git", "update-index", "--chmod=+x", "bin/setup_hashlink.js"
 
 # Performs the static analysis of source code.
