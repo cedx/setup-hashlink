@@ -3,7 +3,8 @@ import process from "node:process"
 import {Release} from "./release.js"
 import {Setup} from "./setup.js"
 
-try
+# Application entry point.
+main = ->
 	process.title = "Setup HashLink VM"
 
 	version = getInput "version"
@@ -13,5 +14,5 @@ try
 	path = await new Setup(release).install()
 	info "HashLink #{release.version} successfully installed in \"#{path}\"."
 
-catch error
-	setFailed if error instanceof Error then error else String error
+# Start the application.
+main().catch error -> setFailed if error instanceof Error then error else String error

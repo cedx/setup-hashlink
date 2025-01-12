@@ -14,7 +14,7 @@
 		"url": "https://belin.io"
 	},
 	"bin": {
-		"setup_hashlink": "bin/setup_hashlink.js"
+		"setup_hashlink": "bin/setup_hashlink.cjs"
 	},
 	"dependencies": {
 		"@actions/core": "^1.11.1",

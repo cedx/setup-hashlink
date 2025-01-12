@@ -18,14 +18,13 @@ export dist = ->
 	await npx "esbuild",
 		"\"--banner:js=#!/usr/bin/env node\"",
 		"--bundle",
-		"--format=esm",
 		"--legal-comments=none",
 		"--log-level=warning",
 		"--minify",
-		"--outfile=bin/setup_hashlink.js",
+		"--outfile=bin/setup_hashlink.cjs",
 		" --platform=node",
 		"lib/cli.js"
-	await run "git", "update-index", "--chmod=+x", "bin/setup_hashlink.js"
+	await run "git", "update-index", "--chmod=+x", "bin/setup_hashlink.cjs"
 
 # Performs the static analysis of source code.
 export lint = ->
