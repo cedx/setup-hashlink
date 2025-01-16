@@ -18,13 +18,13 @@
 	},
 	"dependencies": {
 		"@actions/core": "^1.11.1",
-		"@actions/tool-cache": "^2.0.1",
+		"@actions/tool-cache": "^2.0.2",
 		"semver": "^7.6.3"
 	},
 	"devDependencies": {
 		"@coffeelint/cli": "^5.2.11",
 		"@types/gulp": "^4.0.17",
-		"@types/node": "^22.10.6",
+		"@types/node": "^22.10.7",
 		"@types/semver": "^7.5.8",
 		"coffeescript": "^2.7.0",
 		"esbuild": "^0.24.2",
