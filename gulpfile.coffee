@@ -53,7 +53,7 @@ export watch = ->
 	npx "coffee", "--compile", "--no-header", "--output", "lib", "--watch", "src", "test"
 
 # The default task.
-export default gulp.series clean, dist, version
+export default gulp.series clean, version, dist
 
 # Executes a command from a local package.
 npx = (command, args...) -> run "npm", "exec", "--", command, args...
