@@ -16,13 +16,13 @@ export clean = ->
 export dist = ->
 	await build()
 	await npx "esbuild",
-		"\"--banner:js=#!/usr/bin/env node\"",
-		"--bundle",
-		"--legal-comments=none",
-		"--log-level=warning",
-		"--minify",
-		"--outfile=bin/setup_hashlink.cjs",
-		"--platform=node",
+		"\"--banner:js=#!/usr/bin/env node\""
+		"--bundle"
+		"--legal-comments=none"
+		"--log-level=warning"
+		"--minify"
+		"--outfile=bin/setup_hashlink.cjs"
+		"--platform=node"
 		"lib/cli.js"
 	await run "git", "update-index", "--chmod=+x", "bin/setup_hashlink.cjs"
 
