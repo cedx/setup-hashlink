@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [6.1.0](https://github.com/cedx/setup-hashlink/compare/v6.0.0...v6.1.0)
+- Ported the source code to [TypeScript](https://www.typescriptlang.org).
+
 ## Version [6.0.0](https://github.com/cedx/setup-hashlink/compare/v5.1.1...v6.0.0)
 - Ported the source code to [CoffeeScript](https://coffeescript.org).
 
