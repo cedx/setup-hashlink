@@ -7,7 +7,7 @@
 	"private": true,
 	"repository": "cedx/setup-hashlink",
 	"type": "module",
-	"version": "6.0.0",
+	"version": "6.1.0",
 	"author": {
 		"email": "cedric@belin.io",
 		"name": "Cédric Belin",
@@ -35,7 +35,7 @@
 		"node": ">=20.0.0"
 	},
 	"exports": {
-		"types": "./src/index.d.ts",
+		"types": "./lib/index.d.ts",
 		"default": "./lib/index.js"
 	},
 	"files": [
@@ -51,9 +51,6 @@
 		"vm",
 		"workflow"
 	],
-	"publishConfig": {
-		"access": "public"
-	},
 	"scripts": {
 		"test": "gulp test"
 	}
