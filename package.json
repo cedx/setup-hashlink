@@ -22,13 +22,14 @@
 		"semver": "^7.6.3"
 	},
 	"devDependencies": {
-		"@coffeelint/cli": "^5.2.11",
+		"@types/eslint__js": "^8.42.3",
 		"@types/gulp": "^4.0.17",
-		"@types/node": "^22.10.10",
+		"@types/node": "^22.12.0",
 		"@types/semver": "^7.5.8",
-		"coffeescript": "^2.7.0",
 		"esbuild": "^0.24.2",
-		"gulp": "^5.0.0"
+		"gulp": "^5.0.0",
+		"typescript": "^5.7.3",
+		"typescript-eslint": "^8.22.0"
 	},
 	"engines": {
 		"node": ">=20.0.0"
