@@ -20,4 +20,4 @@ async function main(): Promise<void> {
 }
 
 // Start the application.
-main().catch(error => setFailed(error instanceof Error ? error : String(error)));
+main().catch((error: unknown) => setFailed(error instanceof Error ? error : String(error)));
