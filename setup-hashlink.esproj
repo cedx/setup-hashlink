@@ -6,10 +6,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Remove="setup-hashlink.slnx" />
+		<None Remove="bin\**" />
 		<None Remove="docs\**" />
 		<None Remove="lib\**" />
 		<None Remove="var\**" />
-		<None Remove="setup-hashlink.slnx" />
+		<TypeScriptConfiguration Remove="bin\**" />
 		<TypeScriptConfiguration Remove="docs\**" />
 		<TypeScriptConfiguration Remove="lib\**" />
 		<TypeScriptConfiguration Remove="var\**" />
