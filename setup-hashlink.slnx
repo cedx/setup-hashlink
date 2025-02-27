@@ -1,6 +1,0 @@
-<Solution>
-	<Project Path="setup-hashlink.esproj">
-		<Build />
-		<Deploy />
-	</Project>
-</Solution>
