@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/1.0.2191419">
+	<PropertyGroup>
+		<Company>Belin.io</Company>
+		<Copyright>© Cédric Belin</Copyright>
+		<Description>Set up your GitHub Actions workflow with a specific version of the HashLink VM.</Description>
+		<Product>Setup HashLink VM</Product>
+		<Version>6.1.0</Version>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<PackageJsonDirectory>$(SolutionDir)</PackageJsonDirectory>
+		<ShouldRunBuildScript>false</ShouldRunBuildScript>
+		<ShouldRunNpmInstall>false</ShouldRunNpmInstall>
+	</PropertyGroup>
+</Project>

@@ -1,6 +1,6 @@
 import gulp from "gulp";
 import {spawn} from "node:child_process";
-import {readdir, readFile, rm, writeFile} from "node:fs/promises";
+import {glob, readdir, readFile, rm, writeFile} from "node:fs/promises";
 import {join} from "node:path";
 import pkg from "./package.json" with {type: "json"};
 
@@ -56,6 +56,8 @@ export async function test() {
 /** Updates the version number in the sources. */
 export async function version() {
 	await replaceInFile("README.md", /action\/v\d+(\.\d+){2}/, `action/v${pkg.version}`);
+	for await (const file of glob("*/*.esproj"))
+		await replaceInFile(file, /<Version>\d+(\.\d+){2}<\/Version>/, `<Version>${pkg.version}</Version>`);
 }
 
 /** The default task. */
@@ -66,6 +68,7 @@ export default gulp.series(clean, version, dist);
  * @param {string} file The path of the file to be processed.
  * @param {RegExp} pattern The regular expression to find.
  * @param {string} replacement The replacement text.
+ * @returns {Promise<void>} Resolves when the replacement has been completed.
  */
 async function replaceInFile(file, pattern, replacement) {
 	await writeFile(file, (await readFile(file, "utf8")).replace(pattern, replacement));
