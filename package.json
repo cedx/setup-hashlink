@@ -23,7 +23,7 @@
 	},
 	"devDependencies": {
 		"@types/gulp": "^4.0.17",
-		"@types/node": "^22.13.11",
+		"@types/node": "^22.13.13",
 		"@types/semver": "^7.5.8",
 		"esbuild": "^0.25.1",
 		"gulp": "^5.0.0",
