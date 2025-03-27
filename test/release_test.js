@@ -7,10 +7,10 @@ import {Release} from "@cedx/setup-hashlink";
  */
 describe("Release", () => {
 	const nonExistingRelease = new Release("666.6.6");
-	const existingRelease = new Release("1.14.0", [
-		{platform: "darwin", file: "hashlink-1.14.0.zip"},
-		{platform: "linux", file: "hashlink-1.14.0.zip"},
-		{platform: "win32", file: "hashlink-1.14.0.zip"}
+	const existingRelease = new Release("1.15.0", [
+		{platform: "darwin", file: "hashlink-1.15.0.zip"},
+		{platform: "linux", file: "hashlink-1.15.0.zip"},
+		{platform: "win32", file: "hashlink-1.15.0.zip"}
 	]);
 
 	describe("exists", () => {
@@ -28,7 +28,7 @@ describe("Release", () => {
 	});
 
 	describe("tag", () => {
-		it("should not include the patch component if it's zero", () => equal(existingRelease.tag, "1.14"));
+		it("should not include the patch component if it's zero", () => equal(existingRelease.tag, "1.15"));
 		it("should include the patch component if it's greater than zero", () => equal(nonExistingRelease.tag, "666.6.6"));
 	});
 
@@ -37,7 +37,7 @@ describe("Release", () => {
 			equal(nonExistingRelease.url.href, "https://github.com/HaxeFoundation/hashlink/archive/refs/tags/666.6.6.zip"));
 
 		it("should point to a GitHub release if the release is provided as binary", () =>
-			equal(existingRelease.url.href, "https://github.com/HaxeFoundation/hashlink/releases/download/1.14/hashlink-1.14.0.zip"));
+			equal(existingRelease.url.href, "https://github.com/HaxeFoundation/hashlink/releases/download/1.15/hashlink-1.15.0.zip"));
 	});
 
 	describe("find()", () => {
@@ -54,7 +54,7 @@ describe("Release", () => {
 
 	describe("get()", () => {
 		it("should return `null` if no release matches to the version number", () => ok(!Release.get("666.6.6")));
-		it("should return the release corresponding to the version number if it exists", () => equal(Release.get("1.14.0")?.version, "1.14.0"));
+		it("should return the release corresponding to the version number if it exists", () => equal(Release.get("1.15.0")?.version, "1.15.0"));
 	});
 
 	describe("getAsset()", () => {
@@ -62,6 +62,6 @@ describe("Release", () => {
 			ok(!nonExistingRelease.getAsset("win32")));
 
 		it("should return the asset corresponding to the platform number if it exists", () =>
-			equal(existingRelease.getAsset("win32")?.file, "hashlink-1.14.0.zip"));
+			equal(existingRelease.getAsset("win32")?.file, "hashlink-1.15.0.zip"));
 	});
 });

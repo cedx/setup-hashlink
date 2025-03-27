@@ -1,4 +1,5 @@
 [
+	{"version": "1.15.0", "assets": [{"platform": "win32", "file": "hashlink-1.15.0-win.zip"}]},
 	{"version": "1.14.0", "assets": [{"platform": "win32", "file": "hashlink-1.14.0-win.zip"}]},
 	{"version": "1.13.0", "assets": [{"platform": "win32", "file": "hashlink-1.13.0-win.zip"}]},
 	{"version": "1.12.0", "assets": [{"platform": "win32", "file": "hl-1.12.0-win.zip"}]},
