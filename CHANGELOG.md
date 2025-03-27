@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [6.2.0](https://github.com/cedx/setup-hashlink/compare/v6.1.0...v6.2.0)
+- Added [HashLink](https://hashlink.haxe.org) 1.15 to the supported releases.
+
 ## Version [6.1.0](https://github.com/cedx/setup-hashlink/compare/v6.0.0...v6.1.0)
 - Ported the source code to [TypeScript](https://www.typescriptlang.org).
 
