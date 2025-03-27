@@ -1,6 +1,6 @@
 import gulp from "gulp";
 import {spawn} from "node:child_process";
-import {glob, readdir, readFile, rm, writeFile} from "node:fs/promises";
+import {readdir, readFile, rm, writeFile} from "node:fs/promises";
 import {join} from "node:path";
 import pkg from "./package.json" with {type: "json"};
 
@@ -56,8 +56,6 @@ export async function test() {
 /** Updates the version number in the sources. */
 export async function version() {
 	await replaceInFile("README.md", /action\/v\d+(\.\d+){2}/, `action/v${pkg.version}`);
-	for await (const file of glob("*/*.esproj"))
-		await replaceInFile(file, /<Version>\d+(\.\d+){2}<\/Version>/, `<Version>${pkg.version}</Version>`);
 }
 
 /** The default task. */
