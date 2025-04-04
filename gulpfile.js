@@ -31,7 +31,7 @@ export async function dist() {
 		"--minify",
 		"--outfile=bin/setup_hashlink.cjs",
 		"--platform=node",
-		"lib/cli.js");
+		"lib/Program.js");
 	await run("git", "update-index", "--chmod=+x", "bin/setup_hashlink.cjs");
 }
 

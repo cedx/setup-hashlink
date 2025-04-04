@@ -5,7 +5,7 @@ import {readdir} from "node:fs/promises";
 import {join} from "node:path";
 import {chdir, cwd, env, platform} from "node:process";
 import {promisify} from "node:util";
-import type {Release} from "./release.js";
+import type {Release} from "./Release.js";
 
 /**
  * Spawns a new process using the specified command.

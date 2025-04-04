@@ -1,7 +1,7 @@
 import {getInput, info, setFailed} from "@actions/core";
 import process from "node:process";
-import {Release} from "./release.js";
-import {Setup} from "./setup.js";
+import {Release} from "./Release.js";
+import {Setup} from "./Setup.js";
 
 /**
  * Application entry point.
