@@ -13,9 +13,6 @@
 		"name": "Cédric Belin",
 		"url": "https://belin.io"
 	},
-	"bin": {
-		"setup_hashlink": "bin/setup_hashlink.cjs"
-	},
 	"dependencies": {
 		"@actions/core": "^1.11.1",
 		"@actions/tool-cache": "^2.0.2",
@@ -23,7 +20,7 @@
 	},
 	"devDependencies": {
 		"@types/gulp": "^4.0.17",
-		"@types/node": "^22.13.17",
+		"@types/node": "^22.14.0",
 		"@types/semver": "^7.7.0",
 		"esbuild": "^0.25.2",
 		"gulp": "^5.0.0",

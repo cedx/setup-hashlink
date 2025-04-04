@@ -29,10 +29,10 @@ export async function dist() {
 		"--legal-comments=none",
 		"--log-level=warning",
 		"--minify",
-		"--outfile=bin/setup_hashlink.cjs",
+		"--outfile=bin/SetupHashLink.cjs",
 		"--platform=node",
 		"lib/Program.js");
-	await run("git", "update-index", "--chmod=+x", "bin/setup_hashlink.cjs");
+	await run("git", "update-index", "--chmod=+x", "bin/SetupHashLink.cjs");
 }
 
 /** Performs the static analysis of source code. */
