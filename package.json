@@ -20,7 +20,7 @@
 	},
 	"devDependencies": {
 		"@types/gulp": "^4.0.17",
-		"@types/node": "^22.14.1",
+		"@types/node": "^22.15.0",
 		"@types/semver": "^7.7.0",
 		"esbuild": "^0.25.3",
 		"gulp": "^5.0.0",
