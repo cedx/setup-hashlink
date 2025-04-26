@@ -105,7 +105,7 @@ export class Release {
 /**
  * Represents an asset of a GitHub release.
  */
-export type ReleaseAsset = {
+export interface ReleaseAsset {
 
 	/**
 	 * The target file.
