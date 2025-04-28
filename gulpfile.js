@@ -55,7 +55,7 @@ export async function test() {
 
 /** Updates the version number in the sources. */
 export async function version() {
-	await replaceInFile("README.md", /action\/v\d+(\.\d+){2}/, `action/v${pkg.version}`);
+	await replaceInFile("ReadMe.md", /action\/v\d+(\.\d+){2}/, `action/v${pkg.version}`);
 }
 
 /** The default task. */
