@@ -20,10 +20,10 @@
 	},
 	"devDependencies": {
 		"@types/gulp": "^4.0.17",
-		"@types/node": "^22.15.23",
+		"@types/node": "^22.15.29",
 		"@types/semver": "^7.7.0",
 		"esbuild": "^0.25.5",
-		"gulp": "^5.0.0",
+		"gulp": "^5.0.1",
 		"typedoc": "^0.28.5",
 		"typescript": "^5.8.3",
 		"typescript-eslint": "^8.33.0"
