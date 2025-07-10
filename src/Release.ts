@@ -3,6 +3,22 @@ import semver, {SemVer} from "semver";
 import data from "./Release.Data.json" with {type: "json"};
 
 /**
+ * Represents an asset of a GitHub release.
+ */
+export interface IReleaseAsset {
+
+	/**
+	 * The target file.
+	 */
+	file: string;
+
+	/**
+	 * The target platform.
+	 */
+	platform: NodeJS.Platform;
+}
+
+/**
  * Represents a GitHub release.
  */
 export class Release {
@@ -22,12 +38,12 @@ export class Release {
 	/**
 	 * The list of all releases.
 	 */
-	static readonly #data: Release[] = data.map(release => new this(release.version, release.assets as ReleaseAsset[]));
+	static readonly #data: Release[] = data.map(release => new this(release.version, release.assets as IReleaseAsset[]));
 
 	/**
 	 * The associated assets.
 	 */
-	assets: ReleaseAsset[];
+	assets: IReleaseAsset[];
 
 	/**
 	 * The version number.
@@ -39,7 +55,7 @@ export class Release {
 	 * @param version The version number.
 	 * @param assets The associated assets.
 	 */
-	constructor(version: string, assets: ReleaseAsset[] = []) {
+	constructor(version: string, assets: IReleaseAsset[] = []) {
 		this.assets = assets;
 		this.version = version;
 	}
@@ -97,23 +113,7 @@ export class Release {
 	 * @param platform The target platform.
 	 * @returns The asset corresponding to the specified platform, or `null` if not found.
 	 */
-	getAsset(platform: NodeJS.Platform): ReleaseAsset|null {
+	getAsset(platform: NodeJS.Platform): IReleaseAsset|null {
 		return this.assets.find(asset => asset.platform == platform) ?? null;
 	}
-}
-
-/**
- * Represents an asset of a GitHub release.
- */
-export interface ReleaseAsset {
-
-	/**
-	 * The target file.
-	 */
-	file: string;
-
-	/**
-	 * The target platform.
-	 */
-	platform: NodeJS.Platform;
 }
