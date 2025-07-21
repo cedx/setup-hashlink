@@ -22,7 +22,7 @@
 		"@types/gulp": "^4.0.17",
 		"@types/node": "^24.0.15",
 		"@types/semver": "^7.7.0",
-		"esbuild": "^0.25.7",
+		"esbuild": "^0.25.8",
 		"gulp": "^5.0.1",
 		"typedoc": "^0.28.7",
 		"typescript": "^5.8.3",
