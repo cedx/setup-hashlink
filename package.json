@@ -43,8 +43,5 @@
 		"test",
 		"vm",
 		"workflow"
-	],
-	"scripts": {
-		"test": "gulp test"
-	}
+	]
 }
