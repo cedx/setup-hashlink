@@ -21,8 +21,8 @@
 		"esbuild": "^0.25.8",
 		"gulp": "^5.0.1",
 		"typedoc": "^0.28.9",
-		"typescript": "^5.8.3",
-		"typescript-eslint": "^8.38.0"
+		"typescript": "^5.9.2",
+		"typescript-eslint": "^8.39.0"
 	},
 	"engines": {
 		"node": ">=20.0.0"
