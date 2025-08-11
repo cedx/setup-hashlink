@@ -58,7 +58,7 @@ export class Setup {
 	 * @returns The path to the output directory.
 	 */
 	async #compile(directory: string): Promise<string> {
-		if (!["darwin", "linux"].includes(platform)) throw Error(`Compilation is not supported on "${platform}" platform.`);
+		if (!["darwin", "linux"].includes(platform)) throw new Error(`Compilation is not supported on "${platform}" platform.`);
 
 		const workingDirectory = cwd();
 		chdir(directory);
@@ -126,9 +126,9 @@ export class Setup {
 	async #findSubfolder(directory: string): Promise<string> {
 		const folders = (await readdir(directory, {withFileTypes: true})).filter(entity => entity.isDirectory());
 		switch (folders.length) {
-			case 0: throw Error(`No subfolder found in: ${directory}.`);
+			case 0: throw new Error(`No subfolder found in: ${directory}.`);
 			case 1: return folders[0].name;
-			default: throw Error(`Multiple subfolders found in: ${directory}.`);
+			default: throw new Error(`Multiple subfolders found in: ${directory}.`);
 		}
 	}
 }

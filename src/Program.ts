@@ -13,7 +13,7 @@ async function main(): Promise<void> {
 
 	const version = getInput("version");
 	const release = Release.find(!version || version == "latest" ? "*" : version);
-	if (!release) throw Error("No release matching the version constraint.");
+	if (!release) throw new Error("No release matching the version constraint.");
 
 	const path = await new Setup(release).install();
 	info(`HashLink ${release.version} successfully installed in "${path}".`);
