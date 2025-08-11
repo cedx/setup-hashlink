@@ -20,7 +20,7 @@
 		"@types/semver": "^7.7.0",
 		"esbuild": "^0.25.8",
 		"gulp": "^5.0.1",
-		"typedoc": "^0.28.9",
+		"typedoc": "^0.28.10",
 		"typescript": "^5.9.2",
 		"typescript-eslint": "^8.39.0"
 	},
