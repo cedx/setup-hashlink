@@ -18,7 +18,7 @@
 		"@types/gulp": "^4.0.17",
 		"@types/node": "^24.2.1",
 		"@types/semver": "^7.7.0",
-		"esbuild": "^0.25.8",
+		"esbuild": "^0.25.9",
 		"gulp": "^5.0.1",
 		"typedoc": "^0.28.10",
 		"typescript": "^5.9.2",
