@@ -17,7 +17,7 @@
 	"devDependencies": {
 		"@types/gulp": "^4.0.17",
 		"@types/node": "^24.3.0",
-		"@types/semver": "^7.7.0",
+		"@types/semver": "^7.7.1",
 		"esbuild": "^0.25.9",
 		"gulp": "^5.0.1",
 		"typedoc": "^0.28.12",
