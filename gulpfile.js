@@ -40,7 +40,7 @@ export async function dist() {
 /** Performs the static analysis of source code. */
 export async function lint() {
 	await run("npx tsc --build tsconfig.json --noEmit");
-	await run("npx eslint --config=etc/ESLint.js gulpfile.js src test");
+	await run("npx eslint --cache --cache-location=var --config=etc/ESLint.js gulpfile.js src test");
 }
 
 /** Publishes the package. */
