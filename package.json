@@ -20,7 +20,7 @@
 		"esbuild": "^0.25.10",
 		"typedoc": "^0.28.13",
 		"typescript": "^5.9.3",
-		"typescript-eslint": "^8.45.0"
+		"typescript-eslint": "^8.46.0"
 	},
 	"engines": {
 		"node": ">=20.0.0"
