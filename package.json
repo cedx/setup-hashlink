@@ -15,10 +15,10 @@
 		"semver": "^7.7.3"
 	},
 	"devDependencies": {
-		"@types/node": "^24.7.0",
+		"@types/node": "^24.7.2",
 		"@types/semver": "^7.7.1",
 		"esbuild": "^0.25.10",
-		"typedoc": "^0.28.13",
+		"typedoc": "^0.28.14",
 		"typescript": "^5.9.3",
 		"typescript-eslint": "^8.46.0"
 	},
