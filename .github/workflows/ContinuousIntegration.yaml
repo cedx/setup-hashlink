@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run tests
-        run: ./run.ps1 Test
+        run: ./invoke.ps1 Test
   run:
     needs: test
     runs-on: ${{matrix.platform}}
