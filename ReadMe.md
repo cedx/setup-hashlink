@@ -1,5 +1,5 @@
 # Setup HashLink VM
-![PowerShell](https://badgen.net/badge/pwsh/%3E%3D7.5/green) ![Action](https://badgen.net/badge/action/v6.2.0/blue) ![License](https://badgen.net/badge/license/MIT/blue)
+![PowerShell](https://badgen.net/static/pwsh/%3E%3D7.5/green) ![Action](https://badgen.net/static/action/v6.2.0/blue) ![License](https://badgen.net/static/license/MIT/blue)
 
 Set up your [GitHub Actions](https://docs.github.com/en/actions) workflow with a specific version of the [HashLink VM](https://hashlink.haxe.org).
 
