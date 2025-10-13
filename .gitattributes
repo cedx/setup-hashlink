@@ -1,24 +1,26 @@
 * text=auto
 .* text
 
-*.cjs text
+*.config text
+*.cs text diff=csharp
+*.csproj text
 *.css text diff=css
-*.esproj text
 *.html text diff=html
 *.http text
-*.js text
+*.ini text
+*.iss text
 *.json text
 *.md text diff=markdown
-*.mjs text
 *.ps1 text
 *.slnx text
 *.sql text
 *.svg text
-*.ts text
 *.txt text
+*.xml text
 *.yaml text
 *.yml text
 
+*.gif binary
 *.ico binary
 *.jpg binary
 *.pdf binary
