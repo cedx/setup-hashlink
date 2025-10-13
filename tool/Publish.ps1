@@ -1,6 +1,4 @@
-. $PSScriptRoot/Default.ps1
-
 Write-Output "Publishing the package..."
-$version = (Get-Content "package.json" | ConvertFrom-Json).version
+$version = (Import-PowerShellDataFile "SetupHashLink.psd1").ModuleVersion
 git tag "v$version"
 git push origin "v$version"
