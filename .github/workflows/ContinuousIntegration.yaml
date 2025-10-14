@@ -22,5 +22,6 @@ jobs:
       matrix:
         platform: [ubuntu-latest, windows-latest]
     steps:
-      - uses: cedx/setup-hashlink@main
+      - name: Set up HashLink
+        uses: cedx/setup-hashlink@main
       - run: hl --version
