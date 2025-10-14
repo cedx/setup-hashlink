@@ -9,8 +9,5 @@ $PSNativeCommandUseErrorActionPreference = $true
 $release = [Release]::Find($Env:SETUP_HASHLINK_VERSION)
 if (-not $release) { throw "No release matching the version constraint." }
 
-$optionalTasks = $Env:SETUP_HASHLINK_OPTIONAL_TASKS -eq "true"
-$path = [Setup]::new($release).Install($optionalTasks)
-
-$installed = $optionalTasks ? "installed with optional tasks" : "installed"
-"HashLink VM $($release.Version) successfully $installed in ""$path""."
+$path = [Setup]::new($release).Install()
+"HashLink VM $($release.Version) successfully installed in ""$path""."

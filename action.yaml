@@ -1,6 +1,6 @@
+author: Cédric Belin
 name: Setup HashLink VM
 description: Set up your GitHub Actions workflow with a specific version of the HashLink VM.
-author: Cédric Belin
 
 branding:
   color: purple
@@ -13,5 +13,11 @@ inputs:
     required: false
 
 runs:
-  using: node20
-  main: bin/SetupHashLink.cjs
+  using: composite
+  steps:
+    - run: Add-Content $Env:GITHUB_PATH ${{github.action_path}}
+      shell: pwsh
+    - run: start.ps1
+      shell: pwsh
+      env:
+        SETUP_HASHLINK_VERSION: ${{inputs.version}}
