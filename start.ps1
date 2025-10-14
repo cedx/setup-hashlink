@@ -10,4 +10,4 @@ $release = [Release]::Find($Env:SETUP_HASHLINK_VERSION)
 if (-not $release) { throw "No release matching the version constraint." }
 
 $path = [Setup]::new($release).Install()
-"HashLink VM $($release.Version) successfully installed in ""$path""."
+"HashLink $($release.Version) successfully installed in ""$path""."
