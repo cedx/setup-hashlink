@@ -1,4 +1,5 @@
 using namespace System.Diagnostics.CodeAnalysis
+using module ../src/Platform.psm1
 using module ../src/Release.psm1
 
 <#
@@ -9,9 +10,9 @@ Describe "Release" {
 	BeforeAll {
 		[SuppressMessage("PSUseDeclaredVarsMoreThanAssignments", "")]
 		$existingRelease = [Release]::new("1.15.0", @(
-			[ReleaseAsset]::new("Linux", "hashlink-1.15.0.zip")
-			[ReleaseAsset]::new("MacOS", "hashlink-1.15.0.zip")
-			[ReleaseAsset]::new("Windows", "hashlink-1.15.0.zip")
+			[ReleaseAsset]::new([Platform]::Linux, "hashlink-1.15.0.zip")
+			[ReleaseAsset]::new([Platform]::MacOS, "hashlink-1.15.0.zip")
+			[ReleaseAsset]::new([Platform]::Windows, "hashlink-1.15.0.zip")
 		))
 
 		[SuppressMessage("PSUseDeclaredVarsMoreThanAssignments", "")]
@@ -27,11 +28,11 @@ Describe "Release" {
 
 	Describe "GetAsset()" {
 		It "should return `$null if no asset matches the platform" {
-			$nonExistingRelease.GetAsset([ReleasePlatform]::Windows) | Should -Be $null
+			$nonExistingRelease.GetAsset([Platform]::Windows) | Should -Be $null
 		}
 
 		It "should return the asset corresponding to the platform number if it exists" {
-			$existingRelease.GetAsset([ReleasePlatform]::Windows)?.File | Should -BeExactly "hashlink-1.15.0.zip"
+			$existingRelease.GetAsset([Platform]::Windows)?.File | Should -BeExactly "hashlink-1.15.0.zip"
 		}
 	}
 

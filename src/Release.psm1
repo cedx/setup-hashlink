@@ -1,4 +1,5 @@
 using namespace System.Diagnostics.CodeAnalysis
+using module ./Platform.psm1
 
 <#
 .SYNOPSIS
@@ -54,7 +55,7 @@ class Release {
 	#>
 	static Release() {
 		[Release]::Data = (Import-PowerShellDataFile "$PSScriptRoot/Data.psd1").Releases.ForEach{
-			[Release]::new($_.Version, $_.Assets.ForEach{ [ReleaseAsset]::new($_.File, $_.Platform) })
+			[Release]::new($_.Version, $_.Assets.ForEach{ [ReleaseAsset]::new($_.Platform, $_.File) })
 		}
 	}
 
@@ -76,7 +77,7 @@ class Release {
 	.OUTPUTS
 		The asset corresponding to the specified platform, or `$null` if not found.
 	#>
-	[ReleaseAsset] GetAsset([ReleasePlatform] $platform) {
+	[ReleaseAsset] GetAsset([Platform] $platform) {
 		return $this.Assets.Where({ $_.Platform -eq $platform }, "First")[0]
 	}
 
@@ -87,7 +88,7 @@ class Release {
 		`$true` if this release is provided as source code, otherwise `$false`.
 	#>
 	[bool] IsSource() {
-		return -not $this.GetAsset([Release]::Platform())
+		return -not $this.GetAsset((Get-Platform))
 	}
 
 	<#
@@ -108,8 +109,8 @@ class Release {
 		The download URL.
 	#>
 	[uri] Url() {
-		$asset = $this.GetAsset([Release]::Platform())
-		$baseUrl = "https://github.com/HaxeFoundation/hashlink/"
+		$asset = $this.GetAsset((Get-Platform))
+		$baseUrl = [uri] "https://github.com/HaxeFoundation/hashlink/"
 		return [uri]::new($baseUrl, $asset ? "releases/download/$($this.Tag())/$($asset.File)" : "archive/refs/tags/$($this.Tag()).zip")
 	}
 
@@ -162,21 +163,6 @@ class Release {
 	static [Release] Latest() {
 		return [Release]::Data[0]
 	}
-
-	<#
-	.SYNOPSIS
-		Gets the current platform.
-	.OUTPUTS
-		The current platform.
-	#>
-	[SuppressMessage("PSUseDeclaredVarsMoreThanAssignments", "")]
-	hidden static [ReleasePlatform] Platform() {
-		return $discard = switch ($true) {
-			{ $IsLinux } { [ReleasePlatform]::Linux }
-			{ $IsMacOS } { [ReleasePlatform]::MacOS }
-			default { [ReleasePlatform]::Windows }
-		}
-	}
 }
 
 <#
@@ -195,28 +181,18 @@ class ReleaseAsset {
 	.SYNOPSIS
 		The target platform.
 	#>
-	[ValidateNotNull()] [ReleasePlatform] $Platform
+	[ValidateNotNull()] [Platform] $Platform
 
 	<#
 	.SYNOPSIS
 		Creates a new release asset.
-	.PARAMETER $file
-		The target file.
 	.PARAMETER $platform
 		The target platform.
+	.PARAMETER $file
+		The target file.
 	#>
-	ReleaseAsset([string] $file, [ReleasePlatform] $platform) {
+	ReleaseAsset([Platform] $platform, [string] $file) {
 		$this.File = $file
 		$this.Platform = $platform
 	}
-}
-
-<#
-.SYNOPSIS
-	Defines the target platform of a release asset.
-#>
-enum ReleasePlatform {
-	Linux
-	MacOS
-	Windows
 }

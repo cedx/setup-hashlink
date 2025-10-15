@@ -23,5 +23,6 @@ jobs:
         platform: [ubuntu-latest, windows-latest]
     steps:
       - name: Set up HashLink
-        uses: cedx/setup-hashlink@main
+        # TODO uses: cedx/setup-hashlink@main
+        uses: cedx/setup-hashlink@powershell
       - run: hl --version
