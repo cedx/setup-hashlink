@@ -42,7 +42,7 @@ Describe "Setup" {
 
 			$Env:PATH | Should -BeLikeExactly "*$path*"
 			if (($platform -eq [Platform]::Linux) -and ($setup.Release.IsSource())) {
-				$Env:LD_LIBRARY_PATH | Should -BeLikeExactly "*$path*"
+				$Env:LD_LIBRARY_PATH | Should -BeLikeExactly "*/usr/local/bin*"
 			}
 		}
 	}

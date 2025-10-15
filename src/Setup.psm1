@@ -102,9 +102,6 @@ class Setup {
 
 		$prefix = "/usr/local"
 		$binFolder = Join-Path $prefix "bin"
-		$Env:PATH += "$([Path]::PathSeparator)$binFolder"
-		Add-Content $Env:GITHUB_PATH $binFolder
-
 		$Env:LD_LIBRARY_PATH += "$([Path]::PathSeparator)$binFolder"
 		Add-Content $Env:GITHUB_ENV "LD_LIBRARY_PATH=$Env:LD_LIBRARY_PATH"
 		return $prefix
