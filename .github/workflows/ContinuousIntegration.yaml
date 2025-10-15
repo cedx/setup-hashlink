@@ -15,7 +15,7 @@ jobs:
         run: Install-PSResource Pester -TrustRepository
       - name: Run tests
         run: ./invoke.ps1 Test
-  run:
+  invoke:
     needs: test
     runs-on: ${{matrix.platform}}
     strategy:
