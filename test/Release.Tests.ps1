@@ -16,7 +16,8 @@ Describe "Release" {
 		))
 
 		[SuppressMessage("PSUseDeclaredVarsMoreThanAssignments", "")]
-		$latestRelease = [Release]::Latest();
+		$latestRelease = [Release]::Latest()
+
 		[SuppressMessage("PSUseDeclaredVarsMoreThanAssignments", "")]
 		$nonExistingRelease = [Release] "666.6.6"
 	}

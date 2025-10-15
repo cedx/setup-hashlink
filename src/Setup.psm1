@@ -1,8 +1,7 @@
-<#
-.SYNOPSIS
-	Spawns a new process using the specified command.
-#>
-$run = promisify(exec)
+using namespace System.Diagnostics.CodeAnalysis
+using namespace System.IO
+using module ./Platform.psm1
+using module ./Release.psm1
 
 <#
 .SYNOPSIS
@@ -14,7 +13,7 @@ class Setup {
 	.SYNOPSIS
 		The release to download and install.
 	#>
-	release: Release
+	hidden [ValidateNotNull()] [Release] $Release
 
 	<#
 	.SYNOPSIS
@@ -22,8 +21,8 @@ class Setup {
 	.PARAMETER $release
 		The release to download and install.
 	#>
-	constructor(release: Release) {
-		this.release = release
+	Setup([Release] $release) {
+		$this.Release = $release
 	}
 
 	<#
@@ -32,9 +31,12 @@ class Setup {
 	.OUTPUTS
 		The path to the extracted directory.
 	#>
-	async download(): Promise<string> {
-		$directory = await extractZip(await downloadTool(this.release.url.href))
-		return join(directory, await this.#findSubfolder(directory))
+	[string] Download() {
+		$file = New-TemporaryFile
+		Invoke-WebRequest $this.Release.Url() -OutFile $file
+		$directory = Join-Path ([Path]::GetTempPath()) (New-Guid)
+		Expand-Archive $file $directory -Force
+		return Join-Path $directory $this.FindSubfolder($directory)
 	}
 
 	<#
@@ -43,13 +45,15 @@ class Setup {
 	.OUTPUTS
 		The path to the installation directory.
 	#>
-	async install(): Promise<string> {
-		let directory = find("hashlink", this.release.version)
-		if (-not directory) directory = await cacheDir(await this.download(), "hashlink", this.release.version)
+	[string] Install() {
+		$directory = $this.Download()
+		$isSource = $this.Release.IsSource()
+		if ($isSource -and ($Env:CI -eq "true")) { $this.Compile($directory) }
 
-		if (this.release.isSource && env.CI == "true") await this.#compile(directory)
-		addPath(this.release.isSource ? join(directory, "bin") : directory)
-		return directory
+		$binFolder = $isSource ? (Join-Path $directory "bin") : $directory
+		$Env:PATH += "$([Path]::PathSeparator)$binFolder"
+		Add-Content $Env:GITHUB_PATH $binFolder
+		return $directory
 	}
 
 	<#
@@ -60,14 +64,15 @@ class Setup {
 	.OUTPUTS
 		The path to the output directory.
 	#>
-	async #compile(directory: string): Promise<string> {
-		if (-not ["darwin", "linux"].includes(platform)) throw new Error(`Compilation is not supported on "${platform}" platform.`)
+	hidden [string] Compile([string] $directory) {
+		$platform = Get-Platform
+		if ($platform -eq [Platform]::Windows) { throw [NotSupportedException] "Compilation is not supported on Windows platform." }
 
-		$workingDirectory = cwd()
-		chdir(directory)
-		$path = await (platform == "darwin" ? this.#compileMacOS() : this.#compileLinux())
-		chdir(workingDirectory)
-		return path
+		$workingDirectory = Get-Location
+		Set-Location $directory
+		$path = $platform -eq [Platform]::MacOS ? $this.CompileMacOS() : $this.CompileLinux()
+		Set-Location $workingDirectory
+		return $path
 	}
 
 	<#
@@ -76,32 +81,33 @@ class Setup {
 	.OUTPUTS
 		The path to the output directory.
 	#>
-	async #compileLinux(): Promise<string> {
-		$dependencies = [
-			"libglu1-mesa-dev",
-			"libmbedtls-dev",
-			"libopenal-dev",
-			"libpng-dev",
-			"libsdl2-dev",
-			"libsqlite3-dev",
-			"libturbojpeg-dev",
-			"libuv1-dev",
+	hidden [string] CompileLinux([string] $directory) {
+		$dependencies = @(
+			"libglu1-mesa-dev"
+			"libmbedtls-dev"
+			"libopenal-dev"
+			"libpng-dev"
+			"libsdl2-dev"
+			"libsqlite3-dev"
+			"libturbojpeg-dev"
+			"libuv1-dev"
 			"libvorbis-dev"
-		]
+		)
 
-		$commands = [
-			"sudo apt-get update",
-			`sudo apt-get install --assume-yes --no-install-recommends ${dependencies.join(" ")}`,
-			"make",
-			"sudo make install",
-			"sudo ldconfig"
-		]
+		sudo apt-get update
+		sudo apt-get install --assume-yes --no-install-recommends @dependencies
+		make
+		sudo make install
+		sudo ldconfig
 
-		for ($command of commands) await run(command, {maxBuffer: 10 * 1024 * 1024})
-		$libPath = (env.LD_LIBRARY_PATH ?? "").trim()
 		$prefix = "/usr/local"
-		exportVariable("LD_LIBRARY_PATH", libPath ? `${prefix}/bin:${libPath}` : `${prefix}/bin`)
-		return prefix
+		$binFolder = Join-Path $prefix "bin"
+		$Env:PATH += "$([Path]::PathSeparator)$binFolder"
+		Add-Content $Env:GITHUB_PATH $binFolder
+
+		$Env:LD_LIBRARY_PATH += "$([Path]::PathSeparator)$binFolder"
+		Add-Content $Env:GITHUB_ENV "LD_LIBRARY_PATH=$Env:LD_LIBRARY_PATH"
+		return $prefix
 	}
 
 	<#
@@ -110,18 +116,16 @@ class Setup {
 	.OUTPUTS
 		The path to the output directory.
 	#>
-	async #compileMacOS(): Promise<string> {
+	hidden [string] CompileMacOS([string] $directory) {
 		$prefix = "/usr/local"
-		$commands = [
-			"brew bundle",
-			"make",
-			"sudo make codesign_osx",
-			"sudo make install",
-			`sudo install_name_tool -change libhl.dylib ${prefix}/lib/libhl.dylib ${prefix}/bin/hl`
-		]
 
-		for ($command of commands) await run(command, {maxBuffer: 10 * 1024 * 1024})
-		return prefix
+		brew bundle
+		make
+		sudo make codesign_osx
+		sudo make install
+		sudo install_name_tool -change libhl.dylib $prefix/lib/libhl.dylib $prefix/bin/hl
+
+		return $prefix
 	}
 
 	<#
@@ -132,12 +136,13 @@ class Setup {
 	.OUTPUTS
 		The name of the single subfolder in the specified directory.
 	#>
-	async #findSubfolder(directory: string): Promise<string> {
-		$folders = (await readdir(directory, {withFileTypes: true})).filter(entity => entity.isDirectory())
-		switch (folders.length) {
-			case 0: throw new Error(`No subfolder found in: ${directory}.`)
-			case 1: return folders[0].name
-			default: throw new Error(`Multiple subfolders found in: ${directory}.`)
+	[SuppressMessage("PSUseDeclaredVarsMoreThanAssignments", "")]
+	hidden [string] FindSubfolder([string] $directory) {
+		$folders = Get-ChildItem $directory -Directory
+		return $discard = switch ($folders.Length) {
+			0 { throw "No subfolder found in: $directory." }
+			1 { $folders[0].BaseName }
+			default { throw "Multiple subfolders found in: $directory." }
 		}
 	}
 }

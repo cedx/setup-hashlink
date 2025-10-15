@@ -1,27 +1,47 @@
+using namespace System.Diagnostics.CodeAnalysis
+using module ../src/Platform.psm1
+using module ../src/Release.psm1
+using module ../src/Setup.psm1
+
 <#
 .SYNOPSIS
-	Tests the features of the {@link Setup} class.
+	Tests the features of the `Setup` class.
 #>
 Describe "Setup" {
-	$latestRelease = /** @type {Release}#> (Release.latest);
-	env.RUNNER_TEMP ??= resolve("var/tmp");
-	env.RUNNER_TOOL_CACHE ??= resolve("var/cache");
+	BeforeAll {
+		[SuppressMessage("PSUseDeclaredVarsMoreThanAssignments", "")]
+		$latestRelease = [Release]::Latest()
 
-	Describe "download()" {
-		It "should properly download and extract the HashLink VM", async () => {
-			$setup = new Setup(latestRelease);
-			$executable = `hl${setup.release.isSource ? ".vcxproj" : platform == "win32" ? ".exe" : [string]::Empty}`;
-			$dynamicLib = `libhl${setup.release.isSource ? ".vcxproj" : platform == "darwin" ? ".dylib" : platform == "win32" ? ".dll" : ".so"}`;
+		[SuppressMessage("PSUseDeclaredVarsMoreThanAssignments", "")]
+		$platform = Get-Platform
 
-			$path = await setup.download();
-			return doesNotReject(Promise.all([executable, dynamicLib].map(file => access(join(path, file)))));
-		});
-	});
+		$Env:GITHUB_ENV = "var/GitHub-Env.txt"
+		$Env:GITHUB_PATH = "var/GitHub-Path.txt"
+	}
 
-	Describe "install()" {
-		It "should add the HashLink VM binaries to the PATH environment variable", async () => {
-			$path = await new Setup(latestRelease).install();
-			ok(env.PATH?.includes(path));
-		});
-	});
-});
+	Describe "Download()" {
+		It "should properly download and extract the HashLink VM" {
+			$setup = [Setup]::new($latestRelease)
+			$isSource = $setup.Release.IsSource()
+			$path = $setup.Download()
+
+			$executable = "hl$($isSource ? ".vcxproj" : $platform -eq [Platform]::Windows ? ".exe" : [string]::Empty)"
+			Join-Path $path $executable | Should -Exist
+
+			$dynamicLib = "libhl$($isSource ? ".vcxproj" : $platform -eq [Platform]::MacOS ? ".dylib" : $platform -eq [Platform]::Linux ? ".so" : ".dll")"
+			Join-Path $path $dynamicLib | Should -Exist
+		}
+	}
+
+	Describe "Install()" {
+		It "should add the HashLink VM binaries to the PATH environment variable" {
+			$setup = [Setup]::new($latestRelease)
+			$path = $setup.Install()
+
+			$Env:PATH | Should -BeLikeExactly "*$path*"
+			if (($platform -eq [Platform]::Linux) -and ($setup.Release.IsSource())) {
+				$Env:LD_LIBRARY_PATH | Should -BeLikeExactly "*$path*"
+			}
+		}
+	}
+}
