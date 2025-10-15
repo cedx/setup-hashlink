@@ -81,7 +81,7 @@ class Setup {
 	.OUTPUTS
 		The path to the output directory.
 	#>
-	hidden [string] CompileLinux([string] $directory) {
+	hidden [string] CompileLinux() {
 		$dependencies = @(
 			"libglu1-mesa-dev"
 			"libmbedtls-dev"
@@ -116,7 +116,7 @@ class Setup {
 	.OUTPUTS
 		The path to the output directory.
 	#>
-	hidden [string] CompileMacOS([string] $directory) {
+	hidden [string] CompileMacOS() {
 		$prefix = "/usr/local"
 
 		brew bundle
