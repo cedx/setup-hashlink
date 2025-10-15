@@ -2,7 +2,7 @@ using namespace System.Diagnostics.CodeAnalysis
 
 <#
 .SYNOPSIS
-	Defines the target platform of a release asset.
+	Identifies an operating system or platform.
 #>
 enum Platform {
 	Linux
