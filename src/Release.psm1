@@ -76,7 +76,7 @@ class Release {
 	.OUTPUTS
 		The asset corresponding to the specified platform, or `$null` if not found.
 	#>
-	[ReleaseAsset] GetAsset([string] $platform) {
+	[ReleaseAsset] GetAsset([ReleasePlatform] $platform) {
 		return $this.Assets.Where({ $_.Platform -eq $platform }, "First")[0]
 	}
 
@@ -87,7 +87,7 @@ class Release {
 		`$true` if this release is provided as source code, otherwise `$false`.
 	#>
 	[bool] IsSource() {
-		return $null -eq $this.GetAsset([Release]::Platform())
+		return -not $this.GetAsset([Release]::Platform())
 	}
 
 	<#
@@ -109,7 +109,7 @@ class Release {
 	#>
 	[uri] Url() {
 		$asset = $this.GetAsset([Release]::Platform())
-		$baseUrl = [uri] "https://github.com/HaxeFoundation/hashlink/"
+		$baseUrl = "https://github.com/HaxeFoundation/hashlink/"
 		return [uri]::new($baseUrl, $asset ? "releases/download/$($this.Tag())/$($asset.File)" : "archive/refs/tags/$($this.Tag()).zip")
 	}
 
@@ -170,11 +170,11 @@ class Release {
 		The current platform.
 	#>
 	[SuppressMessage("PSUseDeclaredVarsMoreThanAssignments", "")]
-	hidden static [string] Platform() {
+	hidden static [ReleasePlatform] Platform() {
 		return $discard = switch ($true) {
-			{ $IsMacOS } { "MacOS" }
-			{ $IsLinux } { "Linux" }
-			default { "Windows" }
+			{ $IsLinux } { [ReleasePlatform]::Linux }
+			{ $IsMacOS } { [ReleasePlatform]::MacOS }
+			default { [ReleasePlatform]::Windows }
 		}
 	}
 }
@@ -195,7 +195,7 @@ class ReleaseAsset {
 	.SYNOPSIS
 		The target platform.
 	#>
-	[ValidateNotNullOrEmpty()] [string] $Platform
+	[ValidateNotNull()] [ReleasePlatform] $Platform
 
 	<#
 	.SYNOPSIS
@@ -205,8 +205,18 @@ class ReleaseAsset {
 	.PARAMETER $platform
 		The target platform.
 	#>
-	ReleaseAsset([string] $file, [string] $platform) {
+	ReleaseAsset([string] $file, [ReleasePlatform] $platform) {
 		$this.File = $file
 		$this.Platform = $platform
 	}
+}
+
+<#
+.SYNOPSIS
+	Defines the target platform of a release asset.
+#>
+enum ReleasePlatform {
+	Linux
+	MacOS
+	Windows
 }

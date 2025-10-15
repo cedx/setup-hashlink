@@ -1,64 +1,88 @@
+using namespace System.Diagnostics.CodeAnalysis
+using module ../src/Release.psm1
+
 <#
 .SYNOPSIS
-	Tests the features of the {@link Release} class.
+	Tests the features of the `Release` class.
 #>
 Describe "Release" {
-	$nonExistingRelease = new Release("666.6.6");
-	$existingRelease = new Release("1.15.0", [
-		{platform: "darwin", file: "hashlink-1.15.0.zip"},
-		{platform: "linux", file: "hashlink-1.15.0.zip"},
-		{platform: "win32", file: "hashlink-1.15.0.zip"}
-	]);
+	BeforeAll {
+		[SuppressMessage("PSUseDeclaredVarsMoreThanAssignments", "")]
+		$existingRelease = [Release]::new("1.15.0", @(
+			[ReleaseAsset]::new("Linux", "hashlink-1.15.0.zip")
+			[ReleaseAsset]::new("MacOS", "hashlink-1.15.0.zip")
+			[ReleaseAsset]::new("Windows", "hashlink-1.15.0.zip")
+		))
 
-	Describe "exists" {
-		It "should return `false` if the release does not exist", () => ok(!nonExistingRelease.exists));
-		It "should return `true` if the release exists", () => ok(existingRelease.exists));
-	});
+		[SuppressMessage("PSUseDeclaredVarsMoreThanAssignments", "")]
+		$latestRelease = [Release]::Latest();
+		[SuppressMessage("PSUseDeclaredVarsMoreThanAssignments", "")]
+		$nonExistingRelease = [Release] "666.6.6"
+	}
 
-	Describe "isSource" {
-		It "should return `false` if the release is provided as binary", () => ok(!existingRelease.isSource));
-		It "should return `true` if the release is provided as source code", () => ok(nonExistingRelease.isSource));
-	});
+	Describe "Exists()" {
+		It "should return `$true if the release exists" { $existingRelease.Exists() | Should -BeTrue }
+		It "should return `$false if the release does not exist" { $nonExistingRelease.Exists() | Should -BeFalse }
+	}
 
-	Describe "latest" {
-		It "should exist", () => ok(Release.latest?.exists));
-	});
+	Describe "GetAsset()" {
+		It "should return `$null if no asset matches the platform" {
+			$nonExistingRelease.GetAsset([ReleasePlatform]::Windows) | Should -Be $null
+		}
 
-	Describe "tag" {
-		It "should not include the patch component if it's zero", () => equal(existingRelease.tag, "1.15"));
-		It "should include the patch component if it's greater than zero", () => equal(nonExistingRelease.tag, "666.6.6"));
-	});
+		It "should return the asset corresponding to the platform number if it exists" {
+			$existingRelease.GetAsset([ReleasePlatform]::Windows)?.File | Should -BeExactly "hashlink-1.15.0.zip"
+		}
+	}
 
-	Describe "url" {
-		It "should point to a GitHub tag if the release is provided as source code", () =>
-			equal(nonExistingRelease.url.href, "https://github.com/HaxeFoundation/hashlink/archive/refs/tags/666.6.6.zip"));
+	Describe "IsSource()" {
+		It "should return `$true if the release is provided as source code" { $nonExistingRelease.IsSource() | Should -BeTrue }
+		It "should return `$false if the release is provided as binary" { $existingRelease.IsSource() | Should -BeFalse }
+	}
 
-		It "should point to a GitHub release if the release is provided as binary", () =>
-			equal(existingRelease.url.href, "https://github.com/HaxeFoundation/hashlink/releases/download/1.15/hashlink-1.15.0.zip"));
-	});
+	Describe "Tag()" {
+		It "should not include the patch component if it's zero" { $existingRelease.Tag() | Should -Be "1.15" }
+		It "should include the patch component if it's greater than zero" { $nonExistingRelease.Tag() | Should -Be "666.6.6" }
+	}
 
-	Describe "find()" {
-		It "should return `$null` if no release matches the version constraint", () =>
-			ok(!Release.find("666.6.6")));
+	Describe "Url()" {
+		It "should point to a GitHub tag if the release is provided as source code" {
+			$nonExistingRelease.Url() | Should -BeExactly "https://github.com/HaxeFoundation/hashlink/archive/refs/tags/666.6.6.zip"
+		}
+
+		It "should point to a GitHub release if the release is provided as binary" {
+			$existingRelease.Url() | Should -BeExactly "https://github.com/HaxeFoundation/hashlink/releases/download/1.15/hashlink-1.15.0.zip"
+		}
+	}
+
+	Describe "Find()" {
+		It "should return `$null if no release matches the version constraint" {
+			[Release]::Find("666.6.6") | Should -Be $null
+		}
 
 		It "should return the release corresponding to the version constraint if it exists" {
-			equal(Release.find("*"), Release.latest);
-			equal(Release.find("1.x"), Release.latest);
-			equal(Release.find("=1.0.0")?.version, "1.0.0");
-			equal(Release.find(">=1.0.0 <1.11.0")?.version, "1.10.0");
-		});
-	});
+			[Release]::Find("latest") | Should -Be $latestRelease
+			[Release]::Find("*") | Should -Be $latestRelease
+			[Release]::Find("1") | Should -Be $latestRelease
+			[Release]::Find("2") | Should -Be $null
+			[Release]::Find(">1.15")?.Version | Should -Be $null
+			[Release]::Find("=1.8.0")?.Version | Should -Be "1.8.0"
+			[Release]::Find("<1.10")?.Version | Should -Be "1.9.0"
+			[Release]::Find("<=1.10")?.Version | Should -Be "1.10.0"
+		}
 
-	Describe "get()" {
-		It "should return `$null` if no release matches to the version number", () => ok(!Release.get("666.6.6")));
-		It "should return the release corresponding to the version number if it exists", () => equal(Release.get("1.15.0")?.version, "1.15.0"));
-	});
+		It "should throw if the version constraint is invalid" {
+			{ [Release]::Find("abc") } | Should -Throw
+			{ [Release]::Find("?1.10") } | Should -Throw
+		}
+	}
 
-	Describe "getAsset()" {
-		It "should return `$null` if no asset matches the platform", () =>
-			ok(!nonExistingRelease.getAsset("win32")));
+	Describe "Get()" {
+		It "should return `$null if no release matches to the version number" { [Release]::Get("666.6.6") | Should -Be $null }
+		It "should return the release corresponding to the version number if it exists" { [Release]::Get("1.8.0")?.Version | Should -Be "1.8.0" }
+	}
 
-		It "should return the asset corresponding to the platform number if it exists", () =>
-			equal(existingRelease.getAsset("win32")?.file, "hashlink-1.15.0.zip"));
-	});
-});
+	Describe "Latest()" {
+		It "should exist" { $latestRelease | Should -Not -Be $null }
+	}
+}
