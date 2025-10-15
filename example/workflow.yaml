@@ -13,11 +13,11 @@ jobs:
         platform: [ubuntu-latest, windows-latest]
     steps:
       - name: Fetch sources
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Set up Lix
         uses: lix-pm/setup-lix@master
       - name: Set up HashLink
-        uses: cedx/setup-hashlink@v5
+        uses: cedx/setup-hashlink@v7
         with:
           version: latest
       - name: Cache dependencies

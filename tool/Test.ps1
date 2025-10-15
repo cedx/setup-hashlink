@@ -1,3 +1,5 @@
-Write-Output "Running the test suite..."
-npx tsc --build src/tsconfig.json --sourceMap
-node --enable-source-maps --test
+"Running the test suite..."
+pwsh -Command {
+	Import-Module Pester
+	Invoke-Pester test
+}

@@ -1,3 +1,2 @@
-Write-Output "Deleting all generated files..."
-if (Test-Path "lib") { Remove-Item "lib" -Force -Recurse }
+"Deleting all generated files..."
 Remove-Item "var/*" -Exclude ".gitkeep" -Force -Recurse

@@ -1,11 +1,10 @@
 # Setup HashLink VM
-![Node.js](https://badgen.net/badge/node/%3E%3D20.0.0/green) ![Action](https://badgen.net/badge/action/v6.2.0/blue) ![License](https://badgen.net/badge/license/MIT/blue)
+![PowerShell](https://badgen.net/static/pwsh/%3E%3D7.5/green) ![Action](https://badgen.net/static/action/v7.0.0/blue) ![License](https://badgen.net/static/license/MIT/blue)
 
 Set up your [GitHub Actions](https://docs.github.com/en/actions) workflow with a specific version of the [HashLink VM](https://hashlink.haxe.org).
 
 ## Documentation
 - [User guide](https://github.com/cedx/setup-hashlink/wiki)
-- [API reference](https://cedx.github.io/setup-hashlink)
 - [Examples](https://github.com/cedx/setup-hashlink/tree/main/example)
 
 ## Development

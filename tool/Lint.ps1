@@ -1,4 +1,5 @@
-Write-Output "Performing the static analysis of source code..."
-Invoke-ScriptAnalyzer $PSScriptRoot -ExcludeRule PSAvoidUsingPositionalParameters -Recurse
-npx tsc --build tsconfig.json --noEmit
-npx eslint --cache --cache-location=var --config=etc/ESLint.js src test
+"Performing the static analysis of source code..."
+Import-Module PSScriptAnalyzer
+Invoke-ScriptAnalyzer $PSScriptRoot -Recurse
+Invoke-ScriptAnalyzer src -Recurse
+Invoke-ScriptAnalyzer test -Recurse
