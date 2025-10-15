@@ -14,10 +14,13 @@ enum Platform {
 .SYNOPSIS
 	Gets the current platform.
 .OUTPUTS
-	[Platform] The current platform.
+	The current platform.
 #>
 function Get-Platform {
-	[SuppressMessage("PSUseDeclaredVarsMoreThanAssignments", "")] param ()
+	[OutputType([Platform])]
+	[SuppressMessage("PSUseDeclaredVarsMoreThanAssignments", "")]
+	param ()
+
 	return $discard = switch ($true) {
 		{ $IsLinux } { [Platform]::Linux }
 		{ $IsMacOS } { [Platform]::MacOS }
