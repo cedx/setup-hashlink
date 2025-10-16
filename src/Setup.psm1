@@ -66,7 +66,7 @@ class Setup {
 	#>
 	hidden [string] Compile([string] $directory) {
 		$platform = Get-Platform
-		if ($platform -eq [Platform]::Windows) { throw [NotSupportedException] "Compilation is not supported on Windows platform." }
+		if ($platform -eq [Platform]::Windows) { throw [PlatformNotSupportedException] "Compilation is not supported on Windows platform." }
 
 		$workingDirectory = Get-Location
 		Set-Location $directory
