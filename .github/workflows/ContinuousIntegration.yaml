@@ -12,9 +12,7 @@ jobs:
       - name: Fetch sources
         uses: actions/checkout@v5
       - name: Install dependencies
-        run: |
-          Set-PSRepository PSGallery -InstallationPolicy Trusted
-          ./invoke.ps1 Install
+        run: ./invoke.ps1 Install
       - name: Run tests
         run: ./invoke.ps1 Test
   invoke:
