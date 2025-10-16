@@ -13,7 +13,7 @@ class Setup {
 	.SYNOPSIS
 		The release to download and install.
 	#>
-	hidden [ValidateNotNull()] [Release] $Release
+	hidden [Release] $Release
 
 	<#
 	.SYNOPSIS
