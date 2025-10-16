@@ -21,7 +21,7 @@ Describe "Setup" {
 		}
 	}
 
-	Describe "Download()" {
+	Describe "Download" {
 		It "should properly download and extract the HashLink VM" {
 			$setup = [Setup]::new($latestRelease)
 			$isSource = $setup.Release.IsSource()
@@ -35,7 +35,7 @@ Describe "Setup" {
 		}
 	}
 
-	Describe "Install()" {
+	Describe "Install" {
 		It "should add the HashLink VM binaries to the PATH environment variable" {
 			$setup = [Setup]::new($latestRelease)
 			$path = $setup.Install()
