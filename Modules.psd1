@@ -1,0 +1,4 @@
+@{
+	Pester = @{}
+	PSScriptAnalyzer = @{}
+}
