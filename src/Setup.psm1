@@ -136,7 +136,7 @@ class Setup {
 	[SuppressMessage("PSUseDeclaredVarsMoreThanAssignments", "")]
 	hidden [string] FindSubfolder([string] $directory) {
 		$folders = Get-ChildItem $directory -Directory
-		return $discard = switch ($folders.Length) {
+		return $discard = switch ($folders.Count) {
 			0 { throw "No subfolder found in: $directory." }
 			1 { $folders[0].BaseName; break }
 			default { throw "Multiple subfolders found in: $directory." }
