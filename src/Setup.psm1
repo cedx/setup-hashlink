@@ -138,7 +138,7 @@ class Setup {
 		$folders = Get-ChildItem $directory -Directory
 		return $discard = switch ($folders.Length) {
 			0 { throw "No subfolder found in: $directory." }
-			1 { $folders[0].BaseName }
+			1 { $folders[0].BaseName; break }
 			default { throw "Multiple subfolders found in: $directory." }
 		}
 	}

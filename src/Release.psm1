@@ -124,18 +124,18 @@ class Release {
 	#>
 	static [Release] Find([string] $constraint) {
 		$operator, $semver = switch -Regex ($constraint) {
-			"^(\*|latest)$" { "=", [Release]::Latest().Version }
-			"^([^\d]+)\d" { $Matches[1], [semver] ($constraint -replace "^([^\d]+)", "") }
-			"^\d" { ">=", [semver] $constraint }
+			"^(\*|latest)$" { "=", [Release]::Latest().Version; break }
+			"^([^\d]+)\d" { $Matches[1], [semver] ($constraint -replace "^([^\d]+)", ""); break }
+			"^\d" { ">=", [semver] $constraint; break }
 			default { throw [FormatException] "The version constraint is invalid." }
 		}
 
 		$predicate = switch ($operator) {
-			">=" {{ $_.Version -ge $semver }}
-			">" {{ $_.Version -gt $semver }}
-			"<=" {{ $_.Version -le $semver }}
-			"<" {{ $_.Version -lt $semver }}
-			"=" {{ $_.Version -eq $semver }}
+			">=" { { $_.Version -ge $semver }; break }
+			">" { { $_.Version -gt $semver }; break }
+			"<=" { { $_.Version -le $semver }; break }
+			"<" { { $_.Version -lt $semver }; break }
+			"=" { { $_.Version -eq $semver }; break }
 			default { throw [FormatException] "The version constraint is invalid." }
 		}
 
