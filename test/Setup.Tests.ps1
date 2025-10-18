@@ -15,7 +15,7 @@ Describe "Setup" {
 		[SuppressMessage("PSUseDeclaredVarsMoreThanAssignments", "")]
 		$platform = Get-Platform
 
-		if ($Env:CI -ne "true") {
+		if (-not $Env:CI) {
 			$Env:GITHUB_ENV = "var/GitHub-Env.txt"
 			$Env:GITHUB_PATH = "var/GitHub-Path.txt"
 		}

@@ -48,7 +48,7 @@ class Setup {
 	[string] Install() {
 		$directory = $this.Download()
 		$isSource = $this.Release.IsSource()
-		if ($isSource -and ($Env:CI -eq "true")) { $this.Compile($directory) }
+		if ($isSource -and $Env:CI) { $this.Compile($directory) }
 
 		$binFolder = $isSource ? (Join-Path $directory "bin") : $directory
 		$Env:PATH += "$([Path]::PathSeparator)$binFolder"
