@@ -1,5 +1,5 @@
 @{
-	ModuleVersion = "7.0.0"
+	ModuleVersion = "7.1.0"
 	RootModule = "src/Main.psm1"
 
 	Author = "Cédric Belin <cedx@outlook.com>"
