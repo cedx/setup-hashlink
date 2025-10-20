@@ -50,6 +50,39 @@ function Get-Release {
 
 <#
 .SYNOPSIS
+	Installs the HashLink VM, after downloading it.
+.PARAMETER Version
+	The version number of the release to be installed.
+.PARAMETER InputObject
+	The instance of the release to be installed.
+.INPUTS
+	[string] A string that contains a version number.
+.INPUTS
+	[Release] An instance of the `Release` class to be installed.
+.OUTPUTS
+	The path to the installation directory.
+#>
+function Install-Release {
+	[CmdletBinding(DefaultParameterSetName = "Version")]
+	[OutputType([string])]
+	param (
+		[Parameter(Mandatory, ParameterSetName = "Version", Position = 0, ValueFromPipeline)]
+		[ValidateNotNullOrWhiteSpace()]
+		[string] $Version,
+
+		[Parameter(Mandatory, ParameterSetName = "InputObject", Position = 0, ValueFromPipeline)]
+		[ValidateNotNull()]
+		[Release] $InputObject
+	)
+
+	process {
+		$release = $InputObject ? $InputObject : [Release]::new($Version)
+		[Setup]::new($release).Install()
+	}
+}
+
+<#
+.SYNOPSIS
 	Creates a new release.
 .PARAMETER Version
 	The version number.
@@ -106,13 +139,13 @@ function New-ReleaseAsset {
 .SYNOPSIS
 	Gets a value indicating whether a release with the specified version exists.
 .PARAMETER Version
-	The version number.
+	The version number of the release to be tested.
 .PARAMETER InputObject
-	The release instance.
+	The instance of the release to be tested.
 .INPUTS
 	[string] A string that contains a version number.
 .INPUTS
-	[Release] An instance of the `Release` class.
+	[Release] An instance of the `Release` class to be tested.
 .OUTPUTS
 	`$true` if a release with the specified version exists, otherwise `$false`.
 #>

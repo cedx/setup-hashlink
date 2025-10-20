@@ -10,9 +10,9 @@ Describe "Main" {
 
 		[SuppressMessage("PSUseDeclaredVarsMoreThanAssignments", "")]
 		$existingRelease = New-HashLinkRelease "1.15.0" @(
-			New-HashLinkReleaseAsset "Linux" "hashlink-1.15.0.zip"
-			New-HashLinkReleaseAsset "MacOS" "hashlink-1.15.0.zip"
-			New-HashLinkReleaseAsset "Windows" "hashlink-1.15.0.zip"
+			New-HashLinkReleaseAsset Linux "hashlink-1.15.0.zip"
+			New-HashLinkReleaseAsset MacOS "hashlink-1.15.0.zip"
+			New-HashLinkReleaseAsset Windows "hashlink-1.15.0.zip"
 		)
 
 		[SuppressMessage("PSUseDeclaredVarsMoreThanAssignments", "")]
