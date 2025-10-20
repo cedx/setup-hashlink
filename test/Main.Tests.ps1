@@ -24,7 +24,7 @@ Describe "Main" {
 
 	Context "Find-Release" {
 		It "should return `$null if no release matches the version constraint" {
-			Find-HashLinkRelease "666.6.6" | Should -Be $null
+			Find-HashLinkRelease $nonExistingRelease.Version | Should -Be $null
 		}
 
 		It "should return the release corresponding to the version constraint if it exists" {
@@ -45,7 +45,7 @@ Describe "Main" {
 
 	Context "Get-Release" {
 		It "should return `$null if no release matches to the version number" {
-			Get-HashLinkRelease "666.6.6" | Should -Be $null
+			Get-HashLinkRelease $nonExistingRelease.Version | Should -Be $null
 		}
 
 		It "should return the release corresponding to the version number if it exists" {
