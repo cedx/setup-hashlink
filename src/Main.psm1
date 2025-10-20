@@ -1,3 +1,4 @@
+using namespace System.Diagnostics.CodeAnalysis
 using module ./Platform.psm1
 using module ./Release.psm1
 using module ./Setup.psm1
@@ -95,6 +96,7 @@ function Install-Release {
 #>
 function New-Release {
 	[OutputType([Release])]
+	[SuppressMessage("PSUseShouldProcessForStateChangingFunctions", "")]
 	param (
 		[Parameter(Mandatory, Position = 0, ValueFromPipeline)]
 		[ValidateNotNullOrWhiteSpace()]
@@ -122,6 +124,7 @@ function New-Release {
 #>
 function New-ReleaseAsset {
 	[OutputType([ReleaseAsset])]
+	[SuppressMessage("PSUseShouldProcessForStateChangingFunctions", "")]
 	param (
 		[Parameter(Mandatory, Position = 0)]
 		[ValidateNotNull()]

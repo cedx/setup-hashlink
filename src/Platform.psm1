@@ -1,5 +1,3 @@
-using namespace System.Diagnostics.CodeAnalysis
-
 <#
 .SYNOPSIS
 	Identifies an operating system or platform.
@@ -18,10 +16,9 @@ enum Platform {
 #>
 function Get-Platform {
 	[OutputType([Platform])]
-	[SuppressMessage("PSUseDeclaredVarsMoreThanAssignments", "")]
 	param ()
 
-	return $discard = switch ($true) {
+	switch ($true) {
 		{ $IsLinux } { [Platform]::Linux; break }
 		{ $IsMacOS } { [Platform]::MacOS; break }
 		default { [Platform]::Windows }
