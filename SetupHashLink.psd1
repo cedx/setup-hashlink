@@ -16,6 +16,7 @@
 	FunctionsToExport = @(
 		"Find-Release"
 		"Get-Release"
+		"Install-Release"
 		"New-Release"
 		"New-ReleaseAsset"
 		"Test-Release"
