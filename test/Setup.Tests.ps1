@@ -5,7 +5,7 @@ using module ../src/Setup.psm1
 
 <#
 .SYNOPSIS
-	Tests the features of the `Setup` class.
+	Tests the features of the `Setup` module.
 #>
 Describe "Setup" {
 	BeforeAll {

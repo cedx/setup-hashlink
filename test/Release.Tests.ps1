@@ -4,7 +4,7 @@ using module ../src/Release.psm1
 
 <#
 .SYNOPSIS
-	Tests the features of the `Release` class.
+	Tests the features of the `Release` module.
 #>
 Describe "Release" {
 	BeforeAll {
@@ -23,8 +23,13 @@ Describe "Release" {
 	}
 
 	Context "Exists" {
-		It "should return `$true if the release exists" { $existingRelease.Exists() | Should -BeTrue }
-		It "should return `$false if the release does not exist" { $nonExistingRelease.Exists() | Should -BeFalse }
+		It "should return `$true if the release exists" {
+			$existingRelease.Exists() | Should -BeTrue
+		}
+
+		It "should return `$false if the release does not exist" {
+			$nonExistingRelease.Exists() | Should -BeFalse
+		}
 	}
 
 	Context "GetAsset" {
@@ -38,13 +43,23 @@ Describe "Release" {
 	}
 
 	Context "IsSource" {
-		It "should return `$true if the release is provided as source code" { $nonExistingRelease.IsSource() | Should -BeTrue }
-		It "should return `$false if the release is provided as binary" { $existingRelease.IsSource() | Should -BeFalse }
+		It "should return `$true if the release is provided as source code" {
+			$nonExistingRelease.IsSource() | Should -BeTrue
+		}
+
+		It "should return `$false if the release is provided as binary" {
+			$existingRelease.IsSource() | Should -BeFalse
+		}
 	}
 
 	Context "Tag" {
-		It "should not include the patch component if it's zero" { $existingRelease.Tag() | Should -Be "1.15" }
-		It "should include the patch component if it's greater than zero" { $nonExistingRelease.Tag() | Should -Be "666.6.6" }
+		It "should not include the patch component if it's zero" {
+			$existingRelease.Tag() | Should -Be "1.15"
+		}
+
+		It "should include the patch component if it's greater than zero" {
+			$nonExistingRelease.Tag() | Should -Be "666.6.6"
+		}
 	}
 
 	Context "Url" {
@@ -79,11 +94,18 @@ Describe "Release" {
 	}
 
 	Context "Get" {
-		It "should return `$null if no release matches to the version number" { [Release]::Get("666.6.6") | Should -Be $null }
-		It "should return the release corresponding to the version number if it exists" { [Release]::Get("1.8.0")?.Version | Should -Be "1.8.0" }
+		It "should return `$null if no release matches to the version number" {
+			[Release]::Get("666.6.6") | Should -Be $null
+		}
+
+		It "should return the release corresponding to the version number if it exists" {
+			[Release]::Get("1.8.0")?.Version | Should -Be "1.8.0"
+		}
 	}
 
 	Context "Latest" {
-		It "should exist" { $latestRelease | Should -Not -Be $null }
+		It "should exist" {
+			$latestRelease | Should -Not -Be $null
+		}
 	}
 }
