@@ -13,16 +13,16 @@ class Setup {
 	.SYNOPSIS
 		The release to download and install.
 	#>
-	hidden [Release] $Release
+	hidden [ValidateNotNull()] [Release] $Release
 
 	<#
 	.SYNOPSIS
 		Creates a new setup.
-	.PARAMETER $release
+	.PARAMETER Release
 		The release to download and install.
 	#>
-	Setup([Release] $release) {
-		$this.Release = $release
+	Setup([Release] $Release) {
+		$this.Release = $Release
 	}
 
 	<#
@@ -41,7 +41,7 @@ class Setup {
 
 	<#
 	.SYNOPSIS
-		Installs the HashLink VM, after downloading it if required.
+		Installs the HashLink VM, after downloading it.
 	.OUTPUTS
 		The path to the installation directory.
 	#>
@@ -59,17 +59,17 @@ class Setup {
 	<#
 	.SYNOPSIS
 		Compiles the sources of the HashLink VM located in the specified directory.
-	.PARAMETER $directory
+	.PARAMETER Directory
 		The path to the directory containing the HashLink sources.
 	.OUTPUTS
 		The path to the output directory.
 	#>
-	hidden [string] Compile([string] $directory) {
+	hidden [string] Compile([string] $Directory) {
 		$platform = Get-Platform
 		if ($platform -eq [Platform]::Windows) { throw [PlatformNotSupportedException] "Compilation is not supported on Windows platform." }
 
 		$workingDirectory = Get-Location
-		Set-Location $directory
+		Set-Location $Directory
 		$path = $platform -eq [Platform]::MacOS ? $this.CompileMacOS() : $this.CompileLinux()
 		Set-Location $workingDirectory
 		return $path
@@ -128,18 +128,18 @@ class Setup {
 	<#
 	.SYNOPSIS
 		Determines the name of the single subfolder in the specified directory.
-	.PARAMETER $directory
+	.PARAMETER Directory
 		The directory path.
 	.OUTPUTS
 		The name of the single subfolder in the specified directory.
 	#>
 	[SuppressMessage("PSUseDeclaredVarsMoreThanAssignments", "")]
-	hidden [string] FindSubfolder([string] $directory) {
-		$folders = Get-ChildItem $directory -Directory
+	hidden [string] FindSubfolder([string] $Directory) {
+		$folders = Get-ChildItem $Directory -Directory
 		return $discard = switch ($folders.Count) {
-			0 { throw "No subfolder found in: $directory." }
+			0 { throw "No subfolder found in: $Directory." }
 			1 { $folders[0].BaseName; break }
-			default { throw "Multiple subfolders found in: $directory." }
+			default { throw "Multiple subfolders found in: $Directory." }
 		}
 	}
 }

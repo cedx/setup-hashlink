@@ -17,36 +17,36 @@ class Release {
 	.SYNOPSIS
 		The associated assets.
 	#>
-	[ReleaseAsset[]] $Assets
+	[ValidateNotNull()] [ReleaseAsset[]] $Assets
 
 	<#
 	.SYNOPSIS
 		The version number.
 	#>
-	[semver] $Version
+	[ValidateNotNull()] [semver] $Version
 
 	<#
 	.SYNOPSIS
 		Creates a new release.
-	.PARAMETER $version
+	.PARAMETER Version
 		The version number.
 	#>
-	Release([string] $version) {
+	Release([string] $Version) {
 		$this.Assets = @()
-		$this.Version = $version
+		$this.Version = $Version
 	}
 
 	<#
 	.SYNOPSIS
 		Creates a new release.
-	.PARAMETER $version
+	.PARAMETER Version
 		The version number.
-	.PARAMETER $assets
+	.PARAMETER Assets
 		The associated assets.
 	#>
-	Release([string] $version, [ReleaseAsset[]] $assets) {
-		$this.Assets = $assets
-		$this.Version = $version
+	Release([string] $Version, [ReleaseAsset[]] $Assets) {
+		$this.Assets = $Assets
+		$this.Version = $Version
 	}
 
 	<#
@@ -72,13 +72,13 @@ class Release {
 	<#
 	.SYNOPSIS
 		Gets the asset corresponding to the specified platform.
-	.PARAMETER $platform
+	.PARAMETER Platform
 		The target platform.
 	.OUTPUTS
 		The asset corresponding to the specified platform, or `$null` if not found.
 	#>
-	[ReleaseAsset] GetAsset([Platform] $platform) {
-		return $this.Assets.Where({ $_.Platform -eq $platform }, "First")[0]
+	[ReleaseAsset] GetAsset([Platform] $Platform) {
+		return $this.Assets.Where({ $_.Platform -eq $Platform }, "First")[0]
 	}
 
 	<#
@@ -117,16 +117,16 @@ class Release {
 	<#
 	.SYNOPSIS
 		Finds a release that matches the specified version constraint.
-	.PARAMETER $constraint
+	.PARAMETER Constraint
 		The version constraint.
 	.OUTPUTS
 		The release corresponding to the specified constraint, or `$null` if not found.
 	#>
-	static [Release] Find([string] $constraint) {
-		$operator, $semver = switch -Regex ($constraint) {
+	static [Release] Find([string] $Constraint) {
+		$operator, $semver = switch -Regex ($Constraint) {
 			"^(\*|latest)$" { "=", [Release]::Latest().Version; break }
-			"^([^\d]+)\d" { $Matches[1], [semver] ($constraint -replace "^([^\d]+)", ""); break }
-			"^\d" { ">=", [semver] $constraint; break }
+			"^([^\d]+)\d" { $Matches[1], [semver] ($Constraint -replace "^([^\d]+)", ""); break }
+			"^\d" { ">=", [semver] $Constraint; break }
 			default { throw [FormatException] "The version constraint is invalid." }
 		}
 
@@ -145,13 +145,13 @@ class Release {
 	<#
 	.SYNOPSIS
 		Gets the release corresponding to the specified version.
-	.PARAMETER $version
+	.PARAMETER Version
 		The version number of a release.
 	.OUTPUTS
 		The release corresponding to the specified version, or `$null` if not found.
 	#>
-	static [Release] Get([string] $version) {
-		return [Release]::Data.Where({ $_.Version -eq $version }, "First")[0]
+	static [Release] Get([string] $Version) {
+		return [Release]::Data.Where({ $_.Version -eq $Version }, "First")[0]
 	}
 
 	<#
@@ -175,24 +175,24 @@ class ReleaseAsset {
 	.SYNOPSIS
 		The target file.
 	#>
-	[string] $File
+	[ValidateNotNullOrWhiteSpace()] [string] $File
 
 	<#
 	.SYNOPSIS
 		The target platform.
 	#>
-	[Platform] $Platform
+	[ValidateNotNull()] [Platform] $Platform
 
 	<#
 	.SYNOPSIS
 		Creates a new release asset.
-	.PARAMETER $platform
+	.PARAMETER Platform
 		The target platform.
-	.PARAMETER $file
+	.PARAMETER File
 		The target file.
 	#>
-	ReleaseAsset([Platform] $platform, [string] $file) {
-		$this.File = $file
-		$this.Platform = $platform
+	ReleaseAsset([Platform] $Platform, [string] $File) {
+		$this.File = $File
+		$this.Platform = $Platform
 	}
 }
