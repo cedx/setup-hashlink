@@ -14,6 +14,7 @@ using module ./Setup.psm1
 	The release corresponding to the specified constraint, or `$null` if not found.
 #>
 function Find-Release {
+	[CmdletBinding()]
 	[OutputType([Release])]
 	param (
 		[Parameter(Mandatory, Position = 0, ValueFromPipeline)]
@@ -37,6 +38,7 @@ function Find-Release {
 	The release corresponding to the specified version, or `$null` if not found.
 #>
 function Get-Release {
+	[CmdletBinding()]
 	[OutputType([Release])]
 	param (
 		[Parameter(Mandatory, Position = 0, ValueFromPipeline)]
@@ -95,6 +97,7 @@ function Install-Release {
 	The newly created release.
 #>
 function New-Release {
+	[CmdletBinding()]
 	[OutputType([Release])]
 	[SuppressMessage("PSUseShouldProcessForStateChangingFunctions", "")]
 	param (
@@ -119,10 +122,13 @@ function New-Release {
 	The target platform.
 .PARAMETER File
 	The target file.
+.INPUTS
+	None.
 .OUTPUTS
 	The newly created release asset.
 #>
 function New-ReleaseAsset {
+	[CmdletBinding()]
 	[OutputType([ReleaseAsset])]
 	[SuppressMessage("PSUseShouldProcessForStateChangingFunctions", "")]
 	param (
@@ -135,7 +141,9 @@ function New-ReleaseAsset {
 		[string] $File
 	)
 
-	[ReleaseAsset]::new($Platform, $File)
+	end {
+		[ReleaseAsset]::new($Platform, $File)
+	}
 }
 
 <#
