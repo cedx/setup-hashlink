@@ -73,13 +73,13 @@ function Install-Release {
 		[ValidateNotNullOrWhiteSpace()]
 		[string] $Version,
 
-		[Parameter(Mandatory, ParameterSetName = "InputObject", Position = 0, ValueFromPipeline)]
+		[Parameter(Mandatory, ParameterSetName = "InputObject", ValueFromPipeline)]
 		[ValidateNotNull()]
 		[Release] $InputObject
 	)
 
 	process {
-		$release = $InputObject ? $InputObject : [Release]::new($Version)
+		$release = $PSCmdlet.ParameterSetName -eq "InputObject" ? $InputObject : [Release]::new($Version)
 		[Setup]::new($release).Install()
 	}
 }
@@ -168,13 +168,13 @@ function Test-Release {
 		[ValidateNotNullOrWhiteSpace()]
 		[string] $Version,
 
-		[Parameter(Mandatory, ParameterSetName = "InputObject", Position = 0, ValueFromPipeline)]
+		[Parameter(Mandatory, ParameterSetName = "InputObject", ValueFromPipeline)]
 		[ValidateNotNull()]
 		[Release] $InputObject
 	)
 
 	process {
-		$release = $InputObject ? $InputObject : [Release]::new($Version)
+		$release = $PSCmdlet.ParameterSetName -eq "InputObject" ? $InputObject : [Release]::new($Version)
 		$release.Exists()
 	}
 }
