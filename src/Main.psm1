@@ -122,8 +122,6 @@ function New-Release {
 	The target platform.
 .PARAMETER File
 	The target file.
-.INPUTS
-	None.
 .OUTPUTS
 	The newly created release asset.
 #>
