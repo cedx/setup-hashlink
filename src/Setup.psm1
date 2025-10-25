@@ -137,9 +137,9 @@ class Setup {
 	hidden [string] FindSubfolder([string] $Directory) {
 		$folders = Get-ChildItem $Directory -Directory
 		return $discard = switch ($folders.Count) {
-			0 { throw "No subfolder found in: $Directory." }
+			0 { throw [DirectoryNotFoundException] "No subfolder found in: $Directory." }
 			1 { $folders[0].BaseName; break }
-			default { throw "Multiple subfolders found in: $Directory." }
+			default { throw [DirectoryNotFoundException] "Multiple subfolders found in: $Directory." }
 		}
 	}
 }
