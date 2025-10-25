@@ -1,5 +1,2 @@
 "Installing the dependencies..."
-$modules = Import-PowerShellDataFile PSModules.psd1
-foreach ($module in $modules.Keys) {
-	Install-PSResource $module -TrustRepository -WarningAction SilentlyContinue
-}
+Install-PSResource -RequiredResourceFile PSModules.psd1 -TrustRepository -WarningAction SilentlyContinue
