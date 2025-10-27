@@ -139,9 +139,7 @@ function New-ReleaseAsset {
 		[string] $File
 	)
 
-	end {
-		[ReleaseAsset]::new($Platform, $File)
-	}
+	[ReleaseAsset]::new($Platform, $File)
 }
 
 <#
