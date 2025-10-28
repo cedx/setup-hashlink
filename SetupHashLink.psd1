@@ -1,4 +1,4 @@
-@{
+﻿@{
 	ModuleVersion = "7.1.0"
 	RootModule = "src/Main.psm1"
 
