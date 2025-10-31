@@ -52,23 +52,23 @@ Describe "Release" {
 		}
 	}
 
-	Context "Tag" {
+	Context "GetTag" {
 		It "should not include the patch component if it's zero" {
-			$existingRelease.Tag() | Should -Be "1.15"
+			$existingRelease.GetTag() | Should -Be "1.15"
 		}
 
 		It "should include the patch component if it's greater than zero" {
-			$nonExistingRelease.Tag() | Should -Be $nonExistingRelease.Version
+			$nonExistingRelease.GetTag() | Should -Be $nonExistingRelease.Version
 		}
 	}
 
-	Context "Url" {
+	Context "GetUrl" {
 		It "should point to a GitHub tag if the release is provided as source code" {
-			$nonExistingRelease.Url() | Should -BeExactly "https://github.com/HaxeFoundation/hashlink/archive/refs/tags/666.6.6.zip"
+			$nonExistingRelease.GetUrl() | Should -BeExactly "https://github.com/HaxeFoundation/hashlink/archive/refs/tags/666.6.6.zip"
 		}
 
 		It "should point to a GitHub release if the release is provided as binary" {
-			$existingRelease.Url() | Should -BeExactly "https://github.com/HaxeFoundation/hashlink/releases/download/1.15/hashlink-1.15.0.zip"
+			$existingRelease.GetUrl() | Should -BeExactly "https://github.com/HaxeFoundation/hashlink/releases/download/1.15/hashlink-1.15.0.zip"
 		}
 	}
 

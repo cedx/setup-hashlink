@@ -34,7 +34,7 @@ class Setup {
 	#>
 	[string] Download() {
 		$file = New-TemporaryFile
-		Invoke-WebRequest $this.Release.Url() -OutFile $file
+		Invoke-WebRequest $this.Release.GetUrl() -OutFile $file
 		$directory = Join-Path ([Path]::GetTempPath()) (New-Guid)
 		Expand-Archive $file $directory -Force
 		return Join-Path $directory $this.FindSubfolder($directory)

@@ -97,7 +97,7 @@ class Release {
 	.OUTPUTS
 		The associated Git tag.
 	#>
-	[string] Tag() {
+	[string] GetTag() {
 		$major, $minor, $patch = $this.Version.Major, $this.Version.Minor, $this.Version.Patch
 		return $patch -gt 0 ? "$major.$minor.$patch" : "$major.$minor"
 	}
@@ -108,10 +108,10 @@ class Release {
 	.OUTPUTS
 		The download URL.
 	#>
-	[uri] Url() {
+	[uri] GetUrl() {
 		$asset = $this.GetAsset((Get-Platform))
 		$baseUrl = [uri] "https://github.com/HaxeFoundation/hashlink/"
-		return [uri]::new($baseUrl, $asset ? "releases/download/$($this.Tag())/$($asset.File)" : "archive/refs/tags/$($this.Tag()).zip")
+		return [uri]::new($baseUrl, $asset ? "releases/download/$($this.GetTag())/$($asset.File)" : "archive/refs/tags/$($this.GetTag()).zip")
 	}
 
 	<#
