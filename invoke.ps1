@@ -11,4 +11,4 @@ param (
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
-. $PSScriptRoot/tool/$Command.ps1
+. "$PSScriptRoot/tool/$Command.ps1"
