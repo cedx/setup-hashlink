@@ -8,6 +8,7 @@
 	DefaultCommandPrefix = "HashLink"
 	Description = "Set up your GitHub Actions workflow with a specific version of the HashLink VM."
 	GUID = "6bb1e481-9f7c-4dd0-922c-fdf44f2c0e78"
+	PowerShellVersion = "7.4"
 
 	AliasesToExport = @()
 	CmdletsToExport = @()
