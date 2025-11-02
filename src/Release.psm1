@@ -17,13 +17,15 @@ class Release {
 	.SYNOPSIS
 		The associated assets.
 	#>
-	[ValidateNotNull()] [ReleaseAsset[]] $Assets
+	[ValidateNotNull()]
+	[ReleaseAsset[]] $Assets
 
 	<#
 	.SYNOPSIS
 		The version number.
 	#>
-	[ValidateNotNull()] [semver] $Version
+	[ValidateNotNull()]
+	[semver] $Version
 
 	<#
 	.SYNOPSIS
@@ -175,13 +177,15 @@ class ReleaseAsset {
 	.SYNOPSIS
 		The target file.
 	#>
-	[ValidateNotNullOrWhiteSpace()] [string] $File
+	[ValidateNotNullOrWhiteSpace()]
+	[string] $File
 
 	<#
 	.SYNOPSIS
 		The target platform.
 	#>
-	[ValidateNotNull()] [Platform] $Platform
+	[ValidateNotNull()]
+	[Platform] $Platform
 
 	<#
 	.SYNOPSIS
