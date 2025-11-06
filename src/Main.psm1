@@ -18,7 +18,6 @@ function Find-Release {
 	[OutputType([Release])]
 	param (
 		[Parameter(Mandatory, Position = 0, ValueFromPipeline)]
-		[ValidateNotNullOrWhiteSpace()]
 		[string] $Constraint
 	)
 
@@ -42,7 +41,6 @@ function Get-Release {
 	[OutputType([Release])]
 	param (
 		[Parameter(Mandatory, Position = 0, ValueFromPipeline)]
-		[ValidateNotNullOrWhiteSpace()]
 		[string] $Version
 	)
 
@@ -70,11 +68,9 @@ function Install-Release {
 	[OutputType([string])]
 	param (
 		[Parameter(Mandatory, ParameterSetName = "Version", Position = 0, ValueFromPipeline)]
-		[ValidateNotNullOrWhiteSpace()]
 		[string] $Version,
 
 		[Parameter(Mandatory, ParameterSetName = "InputObject", ValueFromPipeline)]
-		[ValidateNotNull()]
 		[Release] $InputObject
 	)
 
@@ -102,11 +98,9 @@ function New-Release {
 	[SuppressMessage("PSUseShouldProcessForStateChangingFunctions", "")]
 	param (
 		[Parameter(Mandatory, Position = 0, ValueFromPipeline)]
-		[ValidateNotNullOrWhiteSpace()]
 		[string] $Version,
 
 		[Parameter(Position = 1)]
-		[ValidateNotNull()]
 		[ReleaseAsset[]] $Assets = @()
 	)
 
@@ -131,11 +125,9 @@ function New-ReleaseAsset {
 	[SuppressMessage("PSUseShouldProcessForStateChangingFunctions", "")]
 	param (
 		[Parameter(Mandatory, Position = 0)]
-		[ValidateNotNull()]
 		[Platform] $Platform,
 
 		[Parameter(Mandatory, Position = 1)]
-		[ValidateNotNullOrWhiteSpace()]
 		[string] $File
 	)
 
@@ -161,11 +153,9 @@ function Test-Release {
 	[OutputType([bool])]
 	param (
 		[Parameter(Mandatory, ParameterSetName = "Version", Position = 0, ValueFromPipeline)]
-		[ValidateNotNullOrWhiteSpace()]
 		[string] $Version,
 
 		[Parameter(Mandatory, ParameterSetName = "InputObject", ValueFromPipeline)]
-		[ValidateNotNull()]
 		[Release] $InputObject
 	)
 
