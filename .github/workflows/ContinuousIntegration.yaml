@@ -12,9 +12,9 @@ jobs:
       - name: Fetch sources
         uses: actions/checkout@v5
       - name: Install dependencies
-        run: ./invoke.ps1 Install
+        run: ./Invoke.ps1 Install
       - name: Run tests
-        run: ./invoke.ps1 Test
+        run: ./Invoke.ps1 Test
   invoke:
     needs: test
     runs-on: ${{matrix.platform}}

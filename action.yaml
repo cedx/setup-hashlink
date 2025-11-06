@@ -17,7 +17,7 @@ runs:
   steps:
     - run: Add-Content $Env:GITHUB_PATH ${{github.action_path}}
       shell: pwsh
-    - run: start.ps1
+    - run: Start.ps1
       shell: pwsh
       env:
         SETUP_HASHLINK_VERSION: ${{inputs.version}}
