@@ -1,4 +1,5 @@
 /**/*.user
 /.idea/
 /.vs/
+/bin/
 /var/
