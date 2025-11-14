@@ -3,8 +3,23 @@
 	Identifies an operating system or platform.
 #>
 enum Platform {
+
+	<#
+	.SYNOPSIS
+		Specifies a Linux platform.
+	#>
 	Linux
+
+	<#
+	.SYNOPSIS
+		Specifies a macOS platform.
+	#>
 	MacOS
+
+	<#
+	.SYNOPSIS
+		Specifies a Windows platform.
+	#>
 	Windows
 }
 
