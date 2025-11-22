@@ -1,1 +1,1 @@
-. "$PSScriptRoot/Clean.ps1"
+& "$PSScriptRoot/Clean.ps1"

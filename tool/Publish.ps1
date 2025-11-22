@@ -1,4 +1,4 @@
-. "$PSScriptRoot/Default.ps1"
+& "$PSScriptRoot/Default.ps1"
 
 "Publishing the module..."
 $version = (Import-PowerShellDataFile "SetupHashLink.psd1").ModuleVersion
