@@ -18,6 +18,7 @@
 	<Folder Name="/Scripts/">
 		<File Path="Debug.ps1" />
 		<File Path="Invoke.ps1" />
+		<File Path="Start.ps1" />
 	</Folder>
 	<Folder Name="/Scripts/Tools/">
 		<File Path="tool/Clean.ps1" />
@@ -28,20 +29,16 @@
 		<File Path="tool/Test.ps1" />
 		<File Path="tool/Update.ps1" />
 	</Folder>
-	<Folder Name="/Sources/">
-		<File Path="src/Data.psd1" />
-		<File Path="src/Main.psm1" />
-		<File Path="src/Platform.psm1" />
-		<File Path="src/Release.psm1" />
-		<File Path="src/Setup.psm1" />
-	</Folder>
-	<Folder Name="/Tests/">
-		<File Path="test/Main.Tests.ps1" />
-		<File Path="test/Release.Tests.ps1" />
-		<File Path="test/Setup.Tests.ps1" />
-	</Folder>
 	<Folder Name="/Workflows/">
 		<File Path="action.yaml" />
 		<File Path=".github/workflows/ContinuousIntegration.yaml" />
 	</Folder>
+	<Project Path="src/SetupHashLink.esproj">
+		<Build />
+		<Deploy />
+	</Project>
+	<Project Path="test/SetupHashLink.Tests.esproj">
+		<Build />
+		<Deploy />
+	</Project>
 </Solution>
