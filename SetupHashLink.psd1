@@ -2,7 +2,7 @@
 	DefaultCommandPrefix = "HashLink"
 	ModuleVersion = "7.1.0"
 	PowerShellVersion = "7.4"
-	RootModule = "src/Main.psm1"
+	RootModule = "bin/Belin.SetupHashLink.dll"
 
 	Author = "Cédric Belin <cedx@outlook.com>"
 	CompanyName = "Cedric-Belin.fr"
@@ -11,22 +11,16 @@
 	GUID = "6bb1e481-9f7c-4dd0-922c-fdf44f2c0e78"
 
 	AliasesToExport = @()
-	CmdletsToExport = @()
+	FunctionsToExport = @()
 	VariablesToExport = @()
 
-	FunctionsToExport = @(
+	CmdletsToExport = @(
 		"Find-Release"
 		"Get-Release"
 		"Install-Release"
 		"New-Release"
 		"New-ReleaseAsset"
 		"Test-Release"
-	)
-
-	NestedModules = @(
-		"src/Platform.psm1"
-		"src/Release.psm1"
-		"src/Setup.psm1"
 	)
 
 	PrivateData = @{
