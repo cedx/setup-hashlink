@@ -33,12 +33,8 @@
 		<File Path="action.yaml" />
 		<File Path=".github/workflows/ContinuousIntegration.yaml" />
 	</Folder>
-	<Project Path="src/SetupHashLink.esproj">
-		<Build />
-		<Deploy />
-	</Project>
-	<Project Path="test/SetupHashLink.Tests.esproj">
-		<Build />
-		<Deploy />
+	<Project Path="src/SetupHashLink.csproj" />
+	<Project Path="test/SetupHashLink.Tests.csproj">
+		<Build Solution="Release|*" Project="false" />
 	</Project>
 </Solution>
