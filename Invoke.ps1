@@ -5,7 +5,10 @@ param (
 		param ($commandName, $parameterName, $wordToComplete)
 		(Get-Item "$PSScriptRoot/tool/$wordToComplete*.ps1").BaseName
 	})]
-	[string] $Command = "Default"
+	[string] $Command = "Default",
+
+	[Parameter()]
+	[switch] $Release
 )
 
 $ErrorActionPreference = "Stop"
