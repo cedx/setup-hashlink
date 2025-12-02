@@ -6,7 +6,7 @@ using namespace System.Diagnostics.CodeAnalysis
 #>
 Describe "Main" {
 	BeforeAll {
-		Import-Module ./SetupHashLink.psd1
+		Import-Module "$PSScriptRoot/../SetupHashLink.psd1"
 
 		[SuppressMessage("PSUseDeclaredVarsMoreThanAssignments", "")]
 		$existingRelease = New-HashLinkRelease "1.15.0" @(

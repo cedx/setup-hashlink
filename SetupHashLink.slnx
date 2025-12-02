@@ -21,13 +21,18 @@
 		<File Path="Start.ps1" />
 	</Folder>
 	<Folder Name="/Scripts/Tools/">
+		<File Path="tool/Build.ps1" />
 		<File Path="tool/Clean.ps1" />
 		<File Path="tool/Default.ps1" />
+		<File Path="tool/Format.ps1" />
 		<File Path="tool/Install.ps1" />
 		<File Path="tool/Lint.ps1" />
+		<File Path="tool/Outdated.ps1" />
 		<File Path="tool/Publish.ps1" />
 		<File Path="tool/Test.ps1" />
 		<File Path="tool/Update.ps1" />
+		<File Path="tool/Version.ps1" />
+		<File Path="tool/Watch.ps1" />
 	</Folder>
 	<Folder Name="/Workflows/">
 		<File Path="action.yaml" />
