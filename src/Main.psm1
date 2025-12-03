@@ -5,29 +5,6 @@ using module ./Setup.psm1
 
 <#
 .SYNOPSIS
-	Finds a release that matches the specified version constraint.
-.PARAMETER Constraint
-	The version constraint.
-.INPUTS
-	A string that contains a version constraint.
-.OUTPUTS
-	The release corresponding to the specified constraint, or `$null` if not found.
-#>
-function Find-Release {
-	[CmdletBinding()]
-	[OutputType([Release])]
-	param (
-		[Parameter(Mandatory, Position = 0, ValueFromPipeline)]
-		[string] $Constraint
-	)
-
-	process {
-		[Release]::Find($Constraint)
-	}
-}
-
-<#
-.SYNOPSIS
 	Gets the release corresponding to the specified version.
 .PARAMETER Version
 	The version number. Use `*` or `Latest` to get the latest release.
