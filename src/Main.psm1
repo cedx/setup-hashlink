@@ -5,29 +5,6 @@ using module ./Setup.psm1
 
 <#
 .SYNOPSIS
-	Gets the release corresponding to the specified version.
-.PARAMETER Version
-	The version number. Use `*` or `Latest` to get the latest release.
-.INPUTS
-	A string that contains a version number.
-.OUTPUTS
-	The release corresponding to the specified version, or `$null` if not found.
-#>
-function Get-Release {
-	[CmdletBinding()]
-	[OutputType([Release])]
-	param (
-		[Parameter(Mandatory, Position = 0, ValueFromPipeline)]
-		[string] $Version
-	)
-
-	process {
-		$Version -in "*", "Latest" ? [Release]::Latest() : [Release]::Get($Version)
-	}
-}
-
-<#
-.SYNOPSIS
 	Installs the HashLink VM, after downloading it.
 .PARAMETER Version
 	The version number of the release to be installed.
