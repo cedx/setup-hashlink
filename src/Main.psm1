@@ -62,34 +62,3 @@ function New-Release {
 		[Release]::new($Version, $Assets)
 	}
 }
-
-<#
-.SYNOPSIS
-	Gets a value indicating whether a release with the specified version exists.
-.PARAMETER Version
-	The version number of the release to be tested.
-.PARAMETER InputObject
-	The instance of the release to be tested.
-.INPUTS
-	[string] A string that contains a version number.
-.INPUTS
-	[Release] An instance of the `Release` class to be tested.
-.OUTPUTS
-	`$true` if a release with the specified version exists, otherwise `$false`.
-#>
-function Test-Release {
-	[CmdletBinding(DefaultParameterSetName = "Version")]
-	[OutputType([bool])]
-	param (
-		[Parameter(Mandatory, ParameterSetName = "Version", Position = 0, ValueFromPipeline)]
-		[string] $Version,
-
-		[Parameter(Mandatory, ParameterSetName = "InputObject", ValueFromPipeline)]
-		[Release] $InputObject
-	)
-
-	process {
-		$release = $PSCmdlet.ParameterSetName -eq "InputObject" ? $InputObject : [Release]::new($Version)
-		$release.Exists()
-	}
-}
