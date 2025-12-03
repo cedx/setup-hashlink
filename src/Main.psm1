@@ -33,32 +33,3 @@ function Install-Release {
 		[Setup]::new($release).Install()
 	}
 }
-
-<#
-.SYNOPSIS
-	Creates a new release.
-.PARAMETER Version
-	The version number.
-.PARAMETER Assets
-	The associated assets.
-.INPUTS
-	A string that contains a version number.
-.OUTPUTS
-	The newly created release.
-#>
-function New-Release {
-	[CmdletBinding()]
-	[OutputType([Release])]
-	[SuppressMessage("PSUseShouldProcessForStateChangingFunctions", "")]
-	param (
-		[Parameter(Mandatory, Position = 0, ValueFromPipeline)]
-		[string] $Version,
-
-		[Parameter(Position = 1)]
-		[ReleaseAsset[]] $Assets = @()
-	)
-
-	process {
-		[Release]::new($Version, $Assets)
-	}
-}
