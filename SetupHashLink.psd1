@@ -1,6 +1,6 @@
 ﻿@{
 	DefaultCommandPrefix = "HashLink"
-	ModuleVersion = "7.1.0"
+	ModuleVersion = "8.0.0"
 	PowerShellVersion = "7.4"
 	RootModule = "bin/Belin.SetupHashLink.dll"
 

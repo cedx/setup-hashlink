@@ -3,7 +3,7 @@
 		<Company>Cedric-Belin.fr</Company>
 		<Copyright>© Cédric Belin</Copyright>
 		<Product>Setup HashLink VM</Product>
-		<Version>7.1.0</Version>
+		<Version>8.0.0</Version>
 	</PropertyGroup>
 
 	<PropertyGroup>
