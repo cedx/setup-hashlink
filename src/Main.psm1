@@ -111,31 +111,6 @@ function New-Release {
 
 <#
 .SYNOPSIS
-	Creates a new release asset.
-.PARAMETER Platform
-	The target platform.
-.PARAMETER File
-	The target file.
-.OUTPUTS
-	The newly created release asset.
-#>
-function New-ReleaseAsset {
-	[CmdletBinding()]
-	[OutputType([ReleaseAsset])]
-	[SuppressMessage("PSUseShouldProcessForStateChangingFunctions", "")]
-	param (
-		[Parameter(Mandatory, Position = 0)]
-		[Platform] $Platform,
-
-		[Parameter(Mandatory, Position = 1)]
-		[string] $File
-	)
-
-	[ReleaseAsset]::new($Platform, $File)
-}
-
-<#
-.SYNOPSIS
 	Gets a value indicating whether a release with the specified version exists.
 .PARAMETER Version
 	The version number of the release to be tested.
