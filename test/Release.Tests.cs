@@ -26,7 +26,7 @@ public sealed class ReleaseTests {
 		IsTrue(existingRelease.Exists);
 		IsFalse(nonExistingRelease.Exists);
 	}
-	
+
 	[TestMethod]
 	public void IsSource() {
 		IsFalse(existingRelease.IsSource);

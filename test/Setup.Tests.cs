@@ -13,10 +13,10 @@ public sealed class SetupTests(TestContext testContext) {
 	private readonly Platform platform = PlatformExtensions.GetCurrent();
 
 	[ClassInitialize]
-  public static void ClassInitialize(TestContext testContext) {
+	public static void ClassInitialize(TestContext testContext) {
 		if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("GITHUB_ENV"))) Environment.SetEnvironmentVariable("GITHUB_ENV", "var/GitHub-Env.txt");
 		if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("GITHUB_PATH"))) Environment.SetEnvironmentVariable("GITHUB_PATH", "var/GitHub-Path.txt");
-  }
+	}
 
 	[TestMethod]
 	public async Task Download() {

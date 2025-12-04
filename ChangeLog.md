@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [8.0.0](https://github.com/cedx/setup-hashlink/compare/v7.1.0...v8.0.0)
+- Ported the source code to [C#](https://learn.microsoft.com/en-us/dotnet/csharp).
+
 ## Version [7.1.0](https://github.com/cedx/setup-hashlink/compare/v7.0.0...v7.1.0)
 - Added the `Find-Release`, `Get-Release`, `Install-Release`, `New-Release`, `New-ReleaseAsset` and `Test-Release` cmdlets.
 

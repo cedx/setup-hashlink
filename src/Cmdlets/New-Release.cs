@@ -6,7 +6,7 @@ namespace Belin.SetupHashLink.Cmdlets;
 [Cmdlet(VerbsCommon.New, "Release")]
 [OutputType(typeof(Release))]
 public class NewReleaseCommand: Cmdlet {
-	
+
 	/// <summary>
 	/// The associated assets.
 	/// </summary>
