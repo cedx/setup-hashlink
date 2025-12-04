@@ -14,8 +14,9 @@ public sealed class SetupTests(TestContext testContext) {
 
 	[ClassInitialize]
 	public static void ClassInitialize(TestContext testContext) {
-		if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("GITHUB_ENV"))) Environment.SetEnvironmentVariable("GITHUB_ENV", "var/GitHub-Env.txt");
-		if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("GITHUB_PATH"))) Environment.SetEnvironmentVariable("GITHUB_PATH", "var/GitHub-Path.txt");
+		var baseDir = Path.Join(AppDomain.CurrentDomain.BaseDirectory, "../var");
+		if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("GITHUB_ENV"))) Environment.SetEnvironmentVariable("GITHUB_ENV", Path.Join(baseDir, "GitHub-Env.txt"));
+		if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("GITHUB_PATH"))) Environment.SetEnvironmentVariable("GITHUB_PATH", Path.Join(baseDir, "GitHub-Path.txt"));
 	}
 
 	[TestMethod]
