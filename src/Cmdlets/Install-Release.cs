@@ -1,7 +1,7 @@
 namespace Belin.SetupHashLink.Cmdlets;
 
 /// <summary>
-/// Installs Apache Ant, after downloading it.
+/// Installs the HashLink VM, after downloading it.
 /// </summary>
 [Cmdlet(VerbsLifecycle.Install, "Release", DefaultParameterSetName = "Constraint")]
 [OutputType(typeof(string))]
@@ -18,12 +18,6 @@ public class InstallReleaseCommand: PSCmdlet {
 	/// </summary>
 	[Parameter(Mandatory = true, ParameterSetName = "InputObject", ValueFromPipeline = true)]
 	public required Release InputObject { get; set; }
-
-	/// <summary>
-	/// Value indicating whether to fetch the Ant optional tasks.
-	/// </summary>
-	[Parameter]
-	public SwitchParameter OptionalTasks { get; set; }
 
 	/// <summary>
 	/// Performs execution of this command.
