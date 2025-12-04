@@ -3,6 +3,7 @@
 	"configurations": [
 		{
 			"name": "Script",
+			"preLaunchTask": "Build",
 			"request": "launch",
 			"type": "PowerShell",
 			"script": "${workspaceFolder}/Debug.ps1"
