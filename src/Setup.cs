@@ -59,7 +59,7 @@ public class Setup(Release release) {
 	/// <returns>The path to the output directory.</returns>
 	/// <exception cref="PlatformNotSupportedException">The compilation is not supported on Windows platform.</exception>
 	private async Task<string> Compile(string directory, CancellationToken cancellationToken) {
-		var platform = PlatformExtensions.GetCurrent();
+		var platform = PlatformExtensions.Current;
 		if (platform == Platform.Windows) throw new PlatformNotSupportedException("Compilation is not supported on Windows platform.");
 
 		var workingDirectory = Environment.CurrentDirectory;

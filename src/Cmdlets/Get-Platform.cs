@@ -10,5 +10,5 @@ public class GetPlatformCommand: Cmdlet {
 	/// <summary>
 	/// Performs execution of this command.
 	/// </summary>
-	protected override void ProcessRecord() => WriteObject(PlatformExtensions.GetCurrent());
+	protected override void ProcessRecord() => WriteObject(PlatformExtensions.Current);
 }

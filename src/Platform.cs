@@ -31,7 +31,7 @@ public static class PlatformExtensions {
 	/// Gets the current platform.
 	/// </summary>
 	/// <returns>The current platform.</returns>
-	public static Platform GetCurrent() => true switch {
+	public static Platform Current => true switch {
 		true when OperatingSystem.IsLinux() => Platform.Linux,
 		true when OperatingSystem.IsMacOS() => Platform.MacOS,
 		_ => Platform.Windows
