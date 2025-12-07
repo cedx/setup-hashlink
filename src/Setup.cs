@@ -15,13 +15,19 @@ public class Setup(Release release) {
 	/// The release to download and install.
 	/// </summary>
 	public Release Release => release;
+	
+	/// <summary>
+	/// Downloads and extracts the ZIP archive of the HashLink VM.
+	/// </summary>
+	/// <returns>The path to the extracted directory.</returns>
+	public string Download() => DownloadAsync(CancellationToken.None).GetAwaiter().GetResult();
 
 	/// <summary>
 	/// Downloads and extracts the ZIP archive of the HashLink VM.
 	/// </summary>
 	/// <param name="cancellationToken">The token to cancel the operation.</param>
 	/// <returns>The path to the extracted directory.</returns>
-	public async Task<string> Download(CancellationToken cancellationToken = default) {
+	public async Task<string> DownloadAsync(CancellationToken cancellationToken = default) {
 		using var httpClient = new HttpClient();
 		var version = GetType().Assembly.GetName().Version!;
 		httpClient.DefaultRequestHeaders.Add("User-Agent", $".NET/{Environment.Version.ToString(3)} | SetupHashLink/{version.ToString(3)}");
@@ -35,14 +41,20 @@ public class Setup(Release release) {
 		ZipFile.ExtractToDirectory(file, directory);
 		return Path.Join(directory, Path.GetFileName(Directory.EnumerateDirectories(directory).Single()));
 	}
+	
+	/// <summary>
+	/// Installs the HashLink VM, after downloading it.
+	/// </summary>
+	/// <returns>The path to the installation directory.</returns>
+	public string Install() => InstallAsync(CancellationToken.None).GetAwaiter().GetResult();
 
 	/// <summary>
 	/// Installs the HashLink VM, after downloading it.
 	/// </summary>
 	/// <param name="cancellationToken">The token to cancel the operation.</param>
 	/// <returns>The path to the installation directory.</returns>
-	public async Task<string> Install(CancellationToken cancellationToken = default) {
-		var directory = await Download(cancellationToken);
+	public async Task<string> InstallAsync(CancellationToken cancellationToken = default) {
+		var directory = await DownloadAsync(cancellationToken);
 		if (Release.IsSource && Environment.GetEnvironmentVariable("CI") is not null) await Compile(directory, cancellationToken);
 
 		var binFolder = Release.IsSource ? Path.Join(directory, "bin") : directory;

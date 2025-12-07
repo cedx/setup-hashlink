@@ -22,7 +22,7 @@ public sealed class SetupTests(TestContext testContext) {
 	[TestMethod]
 	public async Task Download() {
 		var setup = new Setup(Release.Latest);
-		var path = await setup.Download(testContext.CancellationToken);
+		var path = await setup.DownloadAsync(testContext.CancellationToken);
 
 		var executable = $"hl{(setup.Release.IsSource ? ".vcxproj" : platform == Platform.Windows ? ".exe" : "")}";
 		IsTrue(File.Exists(Path.Join(path, executable)));
@@ -34,7 +34,7 @@ public sealed class SetupTests(TestContext testContext) {
 	[TestMethod]
 	public async Task Install() {
 		var setup = new Setup(Release.Latest);
-		var path = await setup.Install(testContext.CancellationToken);
+		var path = await setup.InstallAsync(testContext.CancellationToken);
 		Contains(path, Environment.GetEnvironmentVariable("PATH")!);
 		if (platform == Platform.Linux && setup.Release.IsSource) Contains("/usr/local/bin", Environment.GetEnvironmentVariable("LD_LIBRARY_PATH")!);
 	}

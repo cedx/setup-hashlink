@@ -11,5 +11,5 @@ if (-not (Test-Path Env:SETUP_HASHLINK_VERSION)) { $Env:SETUP_HASHLINK_VERSION =
 $release = [Release]::Find($Env:SETUP_HASHLINK_VERSION)
 if (-not $release) { throw "No release matches the specified version constraint." }
 
-$path = [Setup]::new($release).Install().GetAwaiter().GetResult()
+$path = [Setup]::new($release).Install()
 "HashLink $($release.Version) successfully installed in ""$path""."
