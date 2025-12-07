@@ -1,10 +1,11 @@
 #!/usr/bin/env pwsh
 using namespace Belin.SetupHashLink
-Add-Type -Path "$PSScriptRoot/bin/Belin.SetupHashLink.dll"
 
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 Set-StrictMode -Version Latest
+
+Add-Type -Path "$PSScriptRoot/bin/Belin.SetupHashLink.dll"
 if (-not (Test-Path Env:SETUP_HASHLINK_VERSION)) { $Env:SETUP_HASHLINK_VERSION = "Latest" }
 
 $release = [Release]::Find($Env:SETUP_HASHLINK_VERSION)
