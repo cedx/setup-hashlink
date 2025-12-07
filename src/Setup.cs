@@ -15,7 +15,7 @@ public class Setup(Release release) {
 	/// The release to download and install.
 	/// </summary>
 	public Release Release => release;
-	
+
 	/// <summary>
 	/// Downloads and extracts the ZIP archive of the HashLink VM.
 	/// </summary>
@@ -41,7 +41,7 @@ public class Setup(Release release) {
 		ZipFile.ExtractToDirectory(file, directory);
 		return Path.Join(directory, Path.GetFileName(Directory.EnumerateDirectories(directory).Single()));
 	}
-	
+
 	/// <summary>
 	/// Installs the HashLink VM, after downloading it.
 	/// </summary>
