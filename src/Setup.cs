@@ -58,7 +58,7 @@ public class Setup(Release release) {
 	/// <param name="cancellationToken">The token to cancel the operation.</param>
 	/// <returns>The path to the output directory.</returns>
 	/// <exception cref="PlatformNotSupportedException">The compilation is not supported on Windows platform.</exception>
-	private async Task<string> Compile(string directory, CancellationToken cancellationToken) {
+	private static async Task<string> Compile(string directory, CancellationToken cancellationToken) {
 		var platform = PlatformExtensions.Current;
 		if (platform == Platform.Windows) throw new PlatformNotSupportedException("Compilation is not supported on Windows platform.");
 
