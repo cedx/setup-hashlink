@@ -3,8 +3,7 @@ namespace Belin.SetupHashLink.Cmdlets;
 /// <summary>
 /// Finds a release that matches the specified version constraint.
 /// </summary>
-[Cmdlet(VerbsCommon.Find, "Release")]
-[OutputType(typeof(Release))]
+[Cmdlet(VerbsCommon.Find, "Release"), OutputType(typeof(Release))]
 public class FindReleaseCommand: Cmdlet {
 
 	/// <summary>

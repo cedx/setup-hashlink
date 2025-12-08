@@ -3,8 +3,7 @@ namespace Belin.SetupHashLink.Cmdlets;
 /// <summary>
 /// Gets the release corresponding to the specified version.
 /// </summary>
-[Cmdlet(VerbsCommon.Get, "Release")]
-[OutputType(typeof(Release))]
+[Cmdlet(VerbsCommon.Get, "Release"), OutputType(typeof(Release))]
 public class GetReleaseCommand: Cmdlet {
 
 	/// <summary>

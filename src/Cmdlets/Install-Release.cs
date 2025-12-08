@@ -3,8 +3,7 @@ namespace Belin.SetupHashLink.Cmdlets;
 /// <summary>
 /// Installs the HashLink VM, after downloading it.
 /// </summary>
-[Cmdlet(VerbsLifecycle.Install, "Release", DefaultParameterSetName = nameof(Constraint))]
-[OutputType(typeof(string))]
+[Cmdlet(VerbsLifecycle.Install, "Release", DefaultParameterSetName = nameof(Constraint)), OutputType(typeof(string))]
 public class InstallReleaseCommand: PSCmdlet {
 
 	/// <summary>

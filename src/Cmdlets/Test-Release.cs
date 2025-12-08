@@ -3,8 +3,7 @@ namespace Belin.SetupHashLink.Cmdlets;
 /// <summary>
 /// Gets a value indicating whether a release with the specified version exists.
 /// </summary>
-[Cmdlet(VerbsDiagnostic.Test, "Release", DefaultParameterSetName = nameof(Version))]
-[OutputType(typeof(bool))]
+[Cmdlet(VerbsDiagnostic.Test, "Release", DefaultParameterSetName = nameof(Version)), OutputType(typeof(bool))]
 public class TestReleaseCommand: PSCmdlet {
 
 	/// <summary>

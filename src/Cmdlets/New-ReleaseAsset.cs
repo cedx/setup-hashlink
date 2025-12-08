@@ -3,8 +3,7 @@ namespace Belin.SetupHashLink.Cmdlets;
 /// <summary>
 /// Creates a new release asset.
 /// </summary>
-[Cmdlet(VerbsCommon.New, "ReleaseAsset")]
-[OutputType(typeof(Release.Asset))]
+[Cmdlet(VerbsCommon.New, "ReleaseAsset"), OutputType(typeof(Release.Asset))]
 public class NewReleaseAssetCommand: Cmdlet {
 
 	/// <summary>
