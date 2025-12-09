@@ -10,6 +10,7 @@
 	<PropertyGroup>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<AssemblyName>Belin.SetupHashLink</AssemblyName>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<OutDir>../bin</OutDir>
@@ -18,7 +19,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="System.Management.Automation" Version="7.4.*" ExcludeAssets="runtime" />
+		<PackageReference Include="System.Management.Automation" Version="7.4.*" />
 	</ItemGroup>
 
 	<ItemGroup>
