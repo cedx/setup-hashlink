@@ -30,7 +30,7 @@ public class Setup(Release release) {
 	public async Task<string> DownloadAsync(CancellationToken cancellationToken = default) {
 		using var httpClient = new HttpClient();
 		var version = GetType().Assembly.GetName().Version!;
-		httpClient.DefaultRequestHeaders.Add("User-Agent", $".NET/{Environment.Version.ToString(3)} | SetupHashLink/{version.ToString(3)}");
+		httpClient.DefaultRequestHeaders.Add("User-Agent", $".NET/{Environment.Version.ToString(3)} | Belin.SetupHashLink/{version.ToString(3)}");
 
 		var bytes = await httpClient.GetByteArrayAsync(Release.Url, cancellationToken);
 		var file = Path.GetTempFileName();
