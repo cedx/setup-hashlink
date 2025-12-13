@@ -4,4 +4,5 @@ $PSNativeCommandUseErrorActionPreference = $true
 Set-StrictMode -Version Latest
 
 Import-Module "$PSScriptRoot/SetupHashLink.psd1"
-# Insert the command to be debugged here.
+try { <# Insert the command to be debugged here. #> }
+catch { Write-Error "$_`n$($_.ScriptStackTrace)" }
