@@ -26,7 +26,7 @@ public class InstallReleaseCommand: PSCmdlet {
 		if (release?.Exists ?? false) WriteObject(new Setup(release).Install());
 		else {
 			var exception = new InvalidOperationException("No release matches the specified version constraint.");
-			WriteError(new ErrorRecord(exception, "ReleaseNotFound", ErrorCategory.ObjectNotFound, null));
+			WriteError(new ErrorRecord(exception, "InstallRelease:InvalidOperation", ErrorCategory.ObjectNotFound, null));
 		}
 	}
 }
