@@ -1,44 +1,4 @@
 <Solution>
-	<Folder Name="/Configuration/">
-		<File Path=".editorconfig" />
-		<File Path=".gitattributes" />
-		<File Path=".gitignore" />
-		<File Path=".runsettings" />
-		<File Path="PSModules.psd1" />
-		<File Path="SetupHashLink.psd1" />
-	</Folder>
-	<Folder Name="/Documentation/">
-		<File Path="Authors.txt" />
-		<File Path="ChangeLog.md" />
-		<File Path="License.md" />
-		<File Path="ReadMe.md" />
-	</Folder>
-	<Folder Name="/Examples/">
-		<File Path="example/workflow.yaml" />
-	</Folder>
-	<Folder Name="/Scripts/">
-		<File Path="Debug.ps1" />
-		<File Path="Invoke.ps1" />
-		<File Path="Start.ps1" />
-	</Folder>
-	<Folder Name="/Scripts/Tools/">
-		<File Path="tool/Build.ps1" />
-		<File Path="tool/Clean.ps1" />
-		<File Path="tool/Default.ps1" />
-		<File Path="tool/Format.ps1" />
-		<File Path="tool/Install.ps1" />
-		<File Path="tool/Lint.ps1" />
-		<File Path="tool/Outdated.ps1" />
-		<File Path="tool/Publish.ps1" />
-		<File Path="tool/Test.ps1" />
-		<File Path="tool/Update.ps1" />
-		<File Path="tool/Version.ps1" />
-		<File Path="tool/Watch.ps1" />
-	</Folder>
-	<Folder Name="/Workflows/">
-		<File Path="action.yaml" />
-		<File Path=".github/workflows/ContinuousIntegration.yaml" />
-	</Folder>
 	<Project Path="src/SetupHashLink.csproj" />
 	<Project Path="test/SetupHashLink.Tests.csproj">
 		<Build Solution="Release|*" Project="false" />
