@@ -1,6 +1,7 @@
 /**/*.user
 /.idea/
 /.vs/
-/bin/
+/bin/*
+!/bin/Belin.SetupHashLink.dll
 /*/obj/
 /var/
