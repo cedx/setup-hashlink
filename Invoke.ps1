@@ -1,5 +1,6 @@
 #!/usr/bin/env pwsh
 param (
+	# The name of the task to be performed.
 	[Parameter(Position = 0)]
 	[ArgumentCompleter({
 		param ($commandName, $parameterName, $wordToComplete)
@@ -7,7 +8,7 @@ param (
 	})]
 	[string] $Command = "Default",
 
-	[Parameter()]
+	# Value indicating whether to enable the release configuration.
 	[switch] $Release
 )
 
