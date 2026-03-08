@@ -1,19 +1,17 @@
 # Basic Setup
-Set up a specific version of [Apache Ant](https://ant.apache.org):
+Set up a specific version of the [HashLink VM](https://hashlink.haxe.org):
 
 ```yaml
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-java@v5
+      - uses: lix-pm/setup-lix@master
+      - uses: cedx/setup-hashlink@v8
         with:
-          distribution: temurin
-          java-version: 25
-      - uses: cedx/setup-ant@v6
-        with:
-          optional-tasks: true
-          version: =1.10.15
-      - run: ant -version
+          version: =1.15.0
+      - run: hl --version
+      - run: lix download
+      - run: haxe test.hxml
 ```
