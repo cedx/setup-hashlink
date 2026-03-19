@@ -35,7 +35,7 @@ public partial class Release(Version version, IEnumerable<Release.Asset>? assets
 	/// <summary>
 	/// Value indicating whether this release is provided as source code.
 	/// </summary>
-	public bool IsSource => GetAsset(PlatformExtensions.Current) is null;
+	public bool IsSource => GetAsset(Platform.Current) is null;
 
 	/// <summary>
 	/// The associated Git tag.
@@ -47,7 +47,7 @@ public partial class Release(Version version, IEnumerable<Release.Asset>? assets
 	/// </summary>
 	public Uri Url {
 		get {
-			var asset = GetAsset(PlatformExtensions.Current);
+			var asset = GetAsset(Platform.Current);
 			var baseUrl = new Uri("https://github.com/HaxeFoundation/hashlink/");
 			return new(baseUrl, asset is null ? $"archive/refs/tags/{Tag}.zip" : $"releases/download/{Tag}/{asset.File}");
 		}

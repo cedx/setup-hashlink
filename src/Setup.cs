@@ -37,8 +37,7 @@ public class Setup(Release release) {
 		await File.WriteAllBytesAsync(file, bytes, cancellationToken);
 
 		var directory = Path.Join(Path.GetTempPath(), Guid.NewGuid().ToString());
-		// TODO (.NET 10) await ZipFile.ExtractToDirectoryAsync(file, directory, cancellationToken);
-		ZipFile.ExtractToDirectory(file, directory);
+		await ZipFile.ExtractToDirectoryAsync(file, directory, cancellationToken);
 		return Path.Join(directory, Path.GetFileName(Directory.EnumerateDirectories(directory).Single()));
 	}
 
@@ -71,7 +70,7 @@ public class Setup(Release release) {
 	/// <returns>The path to the output directory.</returns>
 	/// <exception cref="PlatformNotSupportedException">The compilation is not supported on Windows platform.</exception>
 	private static async Task<string> Compile(string directory, CancellationToken cancellationToken) {
-		var platform = PlatformExtensions.Current;
+		var platform = Platform.Current;
 		if (platform == Platform.Windows) throw new PlatformNotSupportedException("Compilation is not supported on Windows platform.");
 
 		var workingDirectory = Environment.CurrentDirectory;

@@ -25,15 +25,15 @@ public enum Platform {
 /// Provides extension members for platforms.
 /// </summary>
 public static class PlatformExtensions {
-	// TODO (.NET 10) extension(Platform)
+	extension(Platform _) {
 
-	/// <summary>
-	/// Gets the current platform.
-	/// </summary>
-	/// <returns>The current platform.</returns>
-	public static Platform Current => true switch {
-		true when OperatingSystem.IsLinux() => Platform.Linux,
-		true when OperatingSystem.IsMacOS() => Platform.MacOS,
-		_ => Platform.Windows
-	};
+		/// <summary>
+		/// The current platform.
+		/// </summary>
+		public static Platform Current => true switch {
+			true when OperatingSystem.IsLinux() => Platform.Linux,
+			true when OperatingSystem.IsMacOS() => Platform.MacOS,
+			_ => Platform.Windows
+		};
+	}
 }

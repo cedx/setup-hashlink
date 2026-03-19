@@ -10,7 +10,7 @@ public sealed class SetupTests(TestContext testContext) {
 	/// <summary>
 	/// The current platform.
 	/// </summary>
-	private readonly Platform platform = PlatformExtensions.Current;
+	private readonly Platform platform = Platform.Current;
 
 	[ClassInitialize]
 	public static void ClassInitialize(TestContext testContext) {
