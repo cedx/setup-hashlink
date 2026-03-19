@@ -20,7 +20,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="System.Management.Automation" Version="7.4.*" />
+		<PackageReference Include="System.Management.Automation" Version="7.6.*" />
 	</ItemGroup>
 
 	<ItemGroup>
