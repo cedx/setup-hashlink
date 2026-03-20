@@ -1,7 +1,7 @@
 ﻿@{
 	DefaultCommandPrefix = "HashLink"
 	ModuleVersion = "8.0.0"
-	PowerShellVersion = "7.4"
+	PowerShellVersion = "7.6"
 	RootModule = "bin/Belin.SetupHashLink.dll"
 
 	Author = "Cédric Belin <cedx@outlook.com>"
