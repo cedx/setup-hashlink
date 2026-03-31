@@ -1,6 +1,8 @@
 <#
 .SYNOPSIS
 	Checks whether an update is available for the specified PowerShell module.
+.INPUTS
+	The PowerShell module to be checked.
 .OUTPUTS
 	An object providing the current and the latest version of the specified module if an update is available, otherwise none.
 #>
