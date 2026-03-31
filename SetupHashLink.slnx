@@ -1,6 +1,0 @@
-<Solution>
-	<Project Path="src/SetupHashLink.csproj" />
-	<Project Path="test/SetupHashLink.Tests.csproj">
-		<Build Solution="Release|*" Project="false" />
-	</Project>
-</Solution>

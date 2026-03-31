@@ -1,8 +1,7 @@
 ﻿@{
 	DefaultCommandPrefix = "HashLink"
-	ModuleVersion = "8.0.0"
-	PowerShellVersion = "7.6"
-	RootModule = "bin/Belin.SetupHashLink.dll"
+	ModuleVersion = "8.1.0"
+	PowerShellVersion = "7.4"
 
 	Author = "Cédric Belin <cedx@outlook.com>"
 	CompanyName = "Cedric-Belin.fr"
@@ -11,10 +10,10 @@
 	GUID = "6bb1e481-9f7c-4dd0-922c-fdf44f2c0e78"
 
 	AliasesToExport = @()
-	FunctionsToExport = @()
+	CmdletsToExport = @()
 	VariablesToExport = @()
 
-	CmdletsToExport = @(
+	FunctionsToExport = @(
 		"Find-Release"
 		"Get-Release"
 		"Install-Release"
