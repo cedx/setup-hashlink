@@ -15,11 +15,22 @@
 
 	FunctionsToExport = @(
 		"Find-Release"
+		"Get-Platform"
 		"Get-Release"
 		"Install-Release"
 		"New-Release"
 		"New-ReleaseAsset"
 		"Test-Release"
+	)
+
+	NestedModules = @(
+		"src/Cmdlets/Find-Release.psm1"
+		"src/Cmdlets/Get-Platform.psm1"
+		"src/Cmdlets/Get-Release.psm1"
+		"src/Cmdlets/Install-Release.psm1"
+		"src/Cmdlets/New-Release.psm1"
+		"src/Cmdlets/New-ReleaseAsset.psm1"
+		"src/Cmdlets/Test-Release.psm1"
 	)
 
 	PrivateData = @{
