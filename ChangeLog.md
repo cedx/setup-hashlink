@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [8.1.0](https://github.com/cedx/setup-hashlink/compare/v8.0.0...v8.1.0)
+- Restored the [PowerShell](https://learn.microsoft.com/en-us/powershell) source code.
+
 ## Version [8.0.0](https://github.com/cedx/setup-hashlink/compare/v7.1.0...v8.0.0)
 - Ported the source code to [C#](https://learn.microsoft.com/en-us/dotnet/csharp).
 
