@@ -7,6 +7,7 @@
 	An object providing the current and the latest version of the specified module if an update is available, otherwise none.
 #>
 function Test-PSResourceUpdate {
+	[CmdletBinding()]
 	[OutputType([psobject])]
 	param (
 		# The PowerShell module to be checked.
