@@ -71,7 +71,7 @@ class Release {
 	.PARAMETER Assets
 		The associated assets.
 	#>
-	Release([string] $Version, [ReleaseAsset[]] $Assets) {
+	Release([version] $Version, [ReleaseAsset[]] $Assets) {
 		$this.Assets = $Assets
 		$this.Version = $Version
 	}
@@ -206,7 +206,7 @@ class Release {
 		The release corresponding to the specified version, or `$null` if not found.
 	#>
 	static [Release] Get([version] $Version) {
-		$releases = [Release]::Data.Where({ $_ -eq $this }, "First")
+		$releases = [Release]::Data.Where({ $_.Version -eq $Version }, "First")
 		return $releases.Count ? $releases[0] : $null
 	}
 

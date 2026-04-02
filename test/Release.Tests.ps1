@@ -1,6 +1,7 @@
 using namespace System.Diagnostics.CodeAnalysis
 using module ../src/Platform.psm1
 using module ../src/Release.psm1
+using module ../src/Release.Asset.psm1
 
 <#
 .SYNOPSIS
@@ -93,6 +94,7 @@ Describe "Release" {
 		}
 
 		It "should return the release corresponding to the version number if it exists" {
+			$toto = [Release]::Get("1.8.0")
 			[Release]::Get("1.8.0")?.Version | Should -Be ([version] "1.8.0")
 		}
 	}

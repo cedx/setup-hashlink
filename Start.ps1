@@ -1,15 +1,13 @@
 #!/usr/bin/env pwsh
-using namespace Belin.SetupHashLink
-
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
 Set-StrictMode -Version Latest
 
-Import-Module "$PSScriptRoot/bin/Belin.SetupHashLink.dll"
+Import-Module "$PSScriptRoot/SetupHashLink.psd1"
 if (-not (Test-Path Env:SETUP_HASHLINK_VERSION)) { $Env:SETUP_HASHLINK_VERSION = "Latest" }
 
-$release = [Release]::Find($Env:SETUP_HASHLINK_VERSION)
+$release = Find-AntRelease $Env:SETUP_ANT_VERSION
 if (-not $release) { throw "No release matches the specified version constraint." }
 
-$path = [Setup]::new($release).Install()
+$path = Install-HashLinkRelease -InputObject $release
 "HashLink $($release.Version) successfully installed in ""$path""."
