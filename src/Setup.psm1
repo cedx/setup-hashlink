@@ -1,5 +1,5 @@
-using namespace System.Diagnostics.CodeAnalysis
 using namespace System.IO
+using module ./Cmdlets/Get-Platform.psm1
 using module ./Platform.psm1
 using module ./Release.psm1
 
@@ -14,7 +14,7 @@ class Setup {
 		The release to download and install.
 	#>
 	[ValidateNotNull()]
-	hidden [Release] $Release
+	[Release] $Release
 
 	<#
 	.SYNOPSIS
@@ -34,10 +34,15 @@ class Setup {
 	#>
 	[string] Download() {
 		$file = New-TemporaryFile
-		Invoke-WebRequest $this.Release.Url() -OutFile $file
+		$version = (Import-PowerShellDataFile "$PSScriptRoot/../SetupHashLink.psd1").ModuleVersion
+		Invoke-WebRequest $this.Release.Url() -OutFile $file -UserAgent ".NET/$([Environment]::Version.ToString(3)) | Belin.SetupHashLink/$version"
+
 		$directory = Join-Path ([Path]::GetTempPath()) (New-Guid)
-		Expand-Archive $file $directory -Force
-		return Join-Path $directory $this.FindSubfolder($directory)
+		Expand-Archive $file -DestinationPath $directory -Force
+
+		$folders = Get-ChildItem $directory -Directory
+		if ($folders.Count -ne 1) { throw [InvalidOperationException] "No subfolders or multiple subfolders found in: $directory" }
+		return Join-Path $directory $folders[0].BaseName
 	}
 
 	<#
@@ -51,7 +56,7 @@ class Setup {
 		$isSource = $this.Release.IsSource()
 		if ($isSource -and $Env:CI) { $this.Compile($directory) }
 
-		$binFolder = $isSource ? (Join-Path $directory "bin") : $directory
+		$binFolder = $isSource ? (Join-Path $directory bin) : $directory
 		$Env:PATH += "$([Path]::PathSeparator)$binFolder"
 		Add-Content $Env:GITHUB_PATH $binFolder
 		return $directory
@@ -69,10 +74,9 @@ class Setup {
 		$platform = Get-Platform
 		if ($platform -eq [Platform]::Windows) { throw [PlatformNotSupportedException] "Compilation is not supported on Windows platform." }
 
-		$workingDirectory = Get-Location
-		Set-Location $Directory
+		Push-Location $Directory
 		$path = $platform -eq [Platform]::MacOS ? $this.CompileMacOS() : $this.CompileLinux()
-		Set-Location $workingDirectory
+		Pop-Location
 		return $path
 	}
 
@@ -84,14 +88,14 @@ class Setup {
 	#>
 	hidden [string] CompileLinux() {
 		$dependencies = @(
-			"libglu1-mesa-dev"
-			"libmbedtls-dev"
-			"libopenal-dev"
-			"libpng-dev"
-			"libsdl2-dev"
-			"libsqlite3-dev"
-			"libturbojpeg-dev"
-			"libuv1-dev"
+			"libglu1-mesa-dev",
+			"libmbedtls-dev",
+			"libopenal-dev",
+			"libpng-dev",
+			"libsdl2-dev",
+			"libsqlite3-dev",
+			"libturbojpeg-dev",
+			"libuv1-dev",
 			"libvorbis-dev"
 		)
 
@@ -102,8 +106,7 @@ class Setup {
 		sudo ldconfig
 
 		$prefix = "/usr/local"
-		$binFolder = Join-Path $prefix "bin"
-		$Env:LD_LIBRARY_PATH += "$([Path]::PathSeparator)$binFolder"
+		$Env:LD_LIBRARY_PATH += "$([Path]::PathSeparator)$prefix/bin"
 		Add-Content $Env:GITHUB_ENV "LD_LIBRARY_PATH=$Env:LD_LIBRARY_PATH"
 		return $prefix
 	}
@@ -124,23 +127,5 @@ class Setup {
 		sudo install_name_tool -change libhl.dylib $prefix/lib/libhl.dylib $prefix/bin/hl
 
 		return $prefix
-	}
-
-	<#
-	.SYNOPSIS
-		Determines the name of the single subfolder in the specified directory.
-	.PARAMETER Directory
-		The directory path.
-	.OUTPUTS
-		The name of the single subfolder in the specified directory.
-	#>
-	[SuppressMessage("PSUseDeclaredVarsMoreThanAssignments", "")]
-	hidden [string] FindSubfolder([string] $Directory) {
-		$folders = Get-ChildItem $Directory -Directory
-		return $discard = switch ($folders.Count) {
-			0 { throw "No subfolder found in: $Directory." }
-			1 { $folders[0].BaseName; break }
-			default { throw "Multiple subfolders found in: $Directory." }
-		}
 	}
 }
