@@ -1,42 +1,32 @@
-# /// <summary>
-# /// Installs the HashLink VM, after downloading it.
-# /// </summary>
-# [Cmdlet(VerbsLifecycle.Install, "Release", DefaultParameterSetName = nameof(Constraint)), OutputType(typeof(string))]
-# public class InstallReleaseCommand: PSCmdlet {
-
-# 	/// <summary>
-# 	/// The version constraint of the release to be installed.
-# 	/// </summary>
-# 	[Parameter(Mandatory = true, ParameterSetName = nameof(Constraint), Position = 0, ValueFromPipeline = true)]
-# 	public required string Constraint { get; set; }
-
-# 	/// <summary>
-# 	/// The release to be installed.
-# 	/// </summary>
-# 	[Parameter(Mandatory = true, ParameterSetName = nameof(InputObject), ValueFromPipeline = true)]
-# 	public required Release InputObject { get; set; }
-
-# 	/// <summary>
-# 	/// Performs execution of this command.
-# 	/// </summary>
-# 	protected override void ProcessRecord() {
-# 		var release = ParameterSetName == nameof(InputObject) ? InputObject : Release.Find(Constraint);
-# 		if (release?.Exists ?? false) WriteObject(new Setup(release).Install());
-# 		else {
-# 			var exception = new InvalidOperationException("No release matches the specified version constraint.");
-# 			WriteError(new ErrorRecord(exception, "Install-Release:InvalidOperationException", ErrorCategory.ObjectNotFound, null));
-# 		}
-# 	}
-# }
+using module ../Release.psm1
+using module ../Setup.psm1
 
 <#
 .SYNOPSIS
-	Installs Apache Ant, after downloading it.
+	Installs the HashLink VM, after downloading it.
+.INPUTS
+	[string] The version constraint of the release to be installed.
+.INPUTS
+	[Release] The release to be installed.
+.OUTPUTS
+	The path to the installation directory.
 #>
 function Install-Release {
-	[CmdletBinding()]
+	[CmdletBinding(DefaultParameterSetName = "Constraint")]
 	[OutputType([string])]
-	param ()
+	param (
+		# The version constraint of the release to be installed.
+		[Parameter(Mandatory, ParameterSetName = "Constraint", Position = 0, ValueFromPipeline)]
+		[string] $Constraint,
 
-	# TODO
+		# The instance of the release to be installed.
+		[Parameter(Mandatory, ParameterSetName = "InputObject", ValueFromPipeline)]
+		[Release] $InputObject
+	)
+
+	process {
+		$release = $PSCmdlet.ParameterSetName -eq "InputObject" ? $InputObject : [Release]::Find($Constraint)
+		if (${release}?.Exists()) { [Setup]::new($release).Install() }
+		else { throw [InvalidOperationException] "No release matches the specified version constraint." }
+	}
 }

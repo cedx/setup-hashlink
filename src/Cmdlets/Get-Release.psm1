@@ -1,30 +1,23 @@
-# /// <summary>
-# /// Gets the release corresponding to the specified version.
-# /// </summary>
-# [Cmdlet(VerbsCommon.Get, "Release"), OutputType(typeof(Release))]
-# public class GetReleaseCommand: Cmdlet {
-
-# 	/// <summary>
-# 	/// The version number. Use `*` or `Latest` to get the latest release.
-# 	/// </summary>
-# 	[Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true)]
-# 	public required string Version { get; set; }
-
-# 	/// <summary>
-# 	/// Performs execution of this command.
-# 	/// </summary>
-# 	protected override void ProcessRecord() =>
-# 		WriteObject(Release.LatestReleasePattern().IsMatch(Version) ? Release.Latest : Release.Get(Version));
-# }
+using module ../Release.psm1
 
 <#
 .SYNOPSIS
 	Gets the release corresponding to the specified version.
+.INPUTS
+	A string that contains a version number.
+.OUTPUTS
+	The release corresponding to the specified version, or `$null` if not found.
 #>
 function Get-Release {
 	[CmdletBinding()]
 	[OutputType([Release])]
-	param ()
+	param (
+		# The version number. Use `*` or `Latest` to get the latest release.
+		[Parameter(Mandatory, Position = 0, ValueFromPipeline)]
+		[string] $Version
+	)
 
-	# TODO
+	process {
+		$Version -in "*", "Latest" ? [Release]::Latest() : [Release]::Get($Version)
+	}
 }

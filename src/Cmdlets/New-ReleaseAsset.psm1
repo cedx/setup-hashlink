@@ -1,37 +1,26 @@
-# /// <summary>
-# /// Creates a new release asset.
-# /// </summary>
-# [Cmdlet(VerbsCommon.New, "ReleaseAsset"), OutputType(typeof(Release.Asset))]
-# public class NewReleaseAssetCommand: Cmdlet {
-
-# 	/// <summary>
-# 	/// The target file.
-# 	/// </summary>
-# 	[Parameter(Mandatory = true, Position = 1)]
-# 	public required string File { get; set; }
-
-# 	/// <summary>
-# 	/// The target platform.
-# 	/// </summary>
-# 	[Parameter(Mandatory = true, Position = 0)]
-# 	public required Platform Platform { get; set; }
-
-# 	/// <summary>
-# 	/// Performs execution of this command.
-# 	/// </summary>
-# 	protected override void ProcessRecord() => WriteObject(new Release.Asset(Platform, File));
-# }
+using namespace System.Diagnostics.CodeAnalysis
+using module ../Platform.psm1
+using module ../Release.Asset.psm1
 
 <#
 .SYNOPSIS
 	Creates a new release asset.
 .OUTPUTS
-	The newly created release aaset.
+	The newly created release asset.
 #>
 function New-ReleaseAsset {
 	[CmdletBinding()]
 	[OutputType([ReleaseAsset])]
-	param ()
+	[SuppressMessage("PSUseShouldProcessForStateChangingFunctions", "")]
+	param (
+		# The target platform.
+		[Parameter(Mandatory, Position = 0)]
+		[Platform] $Platform,
 
-	# TODO
+		# The target file.
+		[Parameter(Mandatory, Position = 1)]
+		[string] $File
+	)
+
+	[ReleaseAsset]::new($Platform, $File)
 }

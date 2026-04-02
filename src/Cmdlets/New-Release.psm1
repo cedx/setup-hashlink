@@ -1,37 +1,30 @@
-# /// <summary>
-# /// Creates a new release.
-# /// </summary>
-# [Cmdlet(VerbsCommon.New, "Release"), OutputType(typeof(Release))]
-# public class NewReleaseCommand: Cmdlet {
-
-# 	/// <summary>
-# 	/// The associated assets.
-# 	/// </summary>
-# 	[Parameter(Position = 1)]
-# 	public Release.Asset[] Assets { get; set; } = [];
-
-# 	/// <summary>
-# 	/// The version number.
-# 	/// </summary>
-# 	[Parameter(Mandatory = true, Position = 0, ValueFromPipeline = true)]
-# 	public required Version Version { get; set; }
-
-# 	/// <summary>
-# 	/// Performs execution of this command.
-# 	/// </summary>
-# 	protected override void ProcessRecord() => WriteObject(new Release(Version, Assets));
-# }
+using namespace System.Diagnostics.CodeAnalysis
+using module ../Release.psm1
 
 <#
 .SYNOPSIS
 	Creates a new release.
+.INPUTS
+	The version number.
 .OUTPUTS
 	The newly created release.
 #>
 function New-Release {
 	[CmdletBinding()]
 	[OutputType([Release])]
-	param ()
+	[SuppressMessage("PSUseShouldProcessForStateChangingFunctions", "")]
+	param (
+		# The version number.
+		[Parameter(Mandatory, Position = 0, ValueFromPipeline)]
+		[version] $Version,
 
-	# TODO
+		# The associated assets.
+		[Parameter(Position = 1)]
+		[ValidateNotNull()]
+		[ReleaseAsset[]] $Assets = @()
+	)
+
+	process {
+		[Release]::new($Version, $Assets)
+	}
 }
