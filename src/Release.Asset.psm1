@@ -17,7 +17,6 @@ class ReleaseAsset {
 	.SYNOPSIS
 		The target platform.
 	#>
-	[ValidateNotNull()]
 	[Platform] $Platform
 
 	<#

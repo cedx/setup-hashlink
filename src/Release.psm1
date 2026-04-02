@@ -1,4 +1,4 @@
-using namespace System.Diagnostics.CodeAnalysis
+using module ./Cmdlets/Get-Platform.psm1
 using module ./Platform.psm1
 using module ./Release.Asset.psm1
 
@@ -26,7 +26,7 @@ class Release {
 		The version number.
 	#>
 	[ValidateNotNull()]
-	[semver] $Version
+	[version] $Version
 
 	<#
 	.SYNOPSIS
@@ -35,6 +35,30 @@ class Release {
 		The version number.
 	#>
 	Release([string] $Version) {
+		$this.Assets = @()
+		$this.Version = [version] $Version
+	}
+
+	<#
+	.SYNOPSIS
+		Creates a new release.
+	.PARAMETER Version
+		The version number.
+	.PARAMETER Assets
+		The associated assets.
+	#>
+	Release([string] $Version, [ReleaseAsset[]] $Assets) {
+		$this.Assets = $Assets
+		$this.Version = [version] $Version
+	}
+
+	<#
+	.SYNOPSIS
+		Creates a new release.
+	.PARAMETER Version
+		The version number.
+	#>
+	Release([version] $Version) {
 		$this.Assets = @()
 		$this.Version = $Version
 	}
@@ -57,9 +81,37 @@ class Release {
 		Initializes the class.
 	#>
 	static Release() {
-		[Release]::Data = (Import-PowerShellDataFile "$PSScriptRoot/Release.Data.psd1").Releases | ForEach-Object {
-			[Release]::new($_.Version, $_.Assets | ForEach-Object { [ReleaseAsset]::new($_.Platform, $_.File) })
+		[Release]::Data = (Import-PowerShellDataFile "$PSScriptRoot/Release.Data.psd1").Releases.ForEach{
+			[Release]::new($_.Version, $_.Assets.ForEach{ [ReleaseAsset]::new($_.Platform, $_.File) })
 		}
+	}
+
+	<#
+	.SYNOPSIS
+		Determines whether the two specified objects are equal.
+	.PARAMETER Object1
+		The first object.
+	.PARAMETER Object2
+		The second object.
+	.OUTPUTS
+		`$true` if `$Object1` equals `$Object2`, otherwise `$false`.
+	#>
+	static [bool] op_Equality([Release] $Object1, [Release] $Object2) {
+		return $null -eq $Object1 ? ($null -eq $Object2) : ([object]::ReferenceEquals($Object1, $Object2) -or $Object1.Equals($Object2))
+	}
+
+	<#
+	.SYNOPSIS
+		Determines whether the two specified objects are not equal.
+	.PARAMETER Object1
+		The first object.
+	.PARAMETER Object2
+		The second object.
+	.OUTPUTS
+		`$true` if `$Object1` does not equal `$Object2`, otherwise `$false`.
+	#>
+	static [bool] op_Inequality([Release] $Object1, [Release] $Object2) {
+		return -not ($Object1 -eq $Object2)
 	}
 
 	<#
@@ -69,19 +121,7 @@ class Release {
 		`$true` if this release exists, otherwise `$false`.
 	#>
 	[bool] Exists() {
-		return $null -ne [Release]::Get($this.Version)
-	}
-
-	<#
-	.SYNOPSIS
-		Gets the asset corresponding to the specified platform.
-	.PARAMETER Platform
-		The target platform.
-	.OUTPUTS
-		The asset corresponding to the specified platform, or `$null` if not found.
-	#>
-	[ReleaseAsset] GetAsset([Platform] $Platform) {
-		return $this.Assets.Where({ $_.Platform -eq $Platform }, "First")[0]
+		return [Release]::Data.Where({ $_ -eq $this }, "First").Count -gt 0
 	}
 
 	<#
@@ -101,8 +141,7 @@ class Release {
 		The associated Git tag.
 	#>
 	[string] Tag() {
-		$major, $minor, $patch = $this.Version.Major, $this.Version.Minor, $this.Version.Patch
-		return $patch -gt 0 ? "$major.$minor.$patch" : "$major.$minor"
+		return $this.Version.ToString($this.Version.Build -gt 0 ? 3 : 2)
 	}
 
 	<#
@@ -126,23 +165,24 @@ class Release {
 		The release corresponding to the specified constraint, or `$null` if not found.
 	#>
 	static [Release] Find([string] $Constraint) {
-		$operator, $semver = switch -Regex ($Constraint) {
-			"^(\*|latest)$" { "=", [Release]::Latest().Version; break }
-			"^([^\d]+)\d" { $Matches[1], [semver] ($Constraint -replace "^([^\d]+)", ""); break }
-			"^\d" { ">=", [semver] $Constraint; break }
+		$operator, [semver] $semver = switch -Regex ($Constraint) {
+			"^(\*|latest)$" { "=", [Release]::Latest().Version.ToString(); break }
+			"^([^\d]+)\d" { $Matches[1], ($Constraint -replace "^([^\d]+)", ""); break }
+			"^\d" { ">=", $Constraint; break }
 			default { throw [FormatException] "The version constraint is invalid." }
 		}
 
 		$predicate = switch ($operator) {
-			">=" { { $_.Version -ge $semver }; break }
-			">" { { $_.Version -gt $semver }; break }
-			"<=" { { $_.Version -le $semver }; break }
-			"<" { { $_.Version -lt $semver }; break }
-			"=" { { $_.Version -eq $semver }; break }
+			">" { { [semver] $_.Version -gt $semver }; break }
+			">=" { { [semver] $_.Version -ge $semver }; break }
+			"=" { { [semver] $_.Version -eq $semver }; break }
+			"<=" { { [semver] $_.Version -le $semver }; break }
+			"<" { { [semver] $_.Version -lt $semver }; break }
 			default { throw [FormatException] "The version constraint is invalid." }
 		}
 
-		return [Release]::Data.Where($predicate)[0]
+		$releases = [Release]::Data.Where($predicate, "First")
+		return $releases.Count ? $releases[0] : $null
 	}
 
 	<#
@@ -154,7 +194,20 @@ class Release {
 		The release corresponding to the specified version, or `$null` if not found.
 	#>
 	static [Release] Get([string] $Version) {
-		return [Release]::Data.Where({ $_.Version -eq $Version }, "First")[0]
+		return [Release]::Get([version] $Version)
+	}
+
+	<#
+	.SYNOPSIS
+		Gets the release corresponding to the specified version.
+	.PARAMETER Version
+		The version number of a release.
+	.OUTPUTS
+		The release corresponding to the specified version, or `$null` if not found.
+	#>
+	static [Release] Get([version] $Version) {
+		$releases = [Release]::Data.Where({ $_.Version -eq $Version }, "First")
+		return $releases.Count ? $releases[0] : $null
 	}
 
 	<#
@@ -165,5 +218,40 @@ class Release {
 	#>
 	static [Release] Latest() {
 		return [Release]::Data[0]
+	}
+
+	<#
+	.SYNOPSIS
+		Determines whether the specified object is equal to this object.
+	.PARAMETER Other
+		An object to compare with this object.
+	.OUTPUTS
+		`$true` if the specified object is equal to this object, otherwise `$false`.
+	#>
+	[bool] Equals([object] $Other) {
+		return ($Other -is [Release]) -and ($this.Version -eq $Other.Version)
+	}
+
+	<#
+	.SYNOPSIS
+		Gets the asset corresponding to the specified platform.
+	.PARAMETER Platform
+		The target platform.
+	.OUTPUTS
+		The asset corresponding to the specified platform, or `$null` if not found.
+	#>
+	[ReleaseAsset] GetAsset([Platform] $Platform) {
+		$assetList = $this.Assets.Where({ $_.Platform -eq $Platform }, "First")
+		return $assetList.Count ? $assetList[0] : $null
+	}
+
+	<#
+	.SYNOPSIS
+		Gets the hash code for this object.
+	.OUTPUTS
+		The hash code for this object.
+	#>
+	[int] GetHashCode() {
+		return [HashCode]::Combine($this.Version)
 	}
 }
