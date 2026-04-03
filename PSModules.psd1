@@ -1,4 +1,4 @@
 @{
-	Pester = @{}
-	PSScriptAnalyzer = @{}
+	Pester = @{ repository = "PSGallery" }
+	PSScriptAnalyzer = @{ repository = "PSGallery" }
 }
