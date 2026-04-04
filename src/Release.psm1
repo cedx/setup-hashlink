@@ -1,6 +1,6 @@
 using module ./Cmdlets/Get-Platform.psm1
 using module ./Platform.psm1
-using module ./Release.Asset.psm1
+using module ./ReleaseAsset.psm1
 
 <#
 .SYNOPSIS
@@ -81,7 +81,7 @@ class Release {
 		Initializes the class.
 	#>
 	static Release() {
-		[Release]::Data = (Import-PowerShellDataFile "$PSScriptRoot/Release.Data.psd1").Releases.ForEach{
+		[Release]::Data = (Import-PowerShellDataFile "$PSScriptRoot/ReleaseData.psd1").Releases.ForEach{
 			[Release]::new($_.Version, $_.Assets.ForEach{ [ReleaseAsset]::new($_.Platform, $_.File) })
 		}
 	}

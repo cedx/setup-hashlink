@@ -1,6 +1,6 @@
 using namespace System.Diagnostics.CodeAnalysis
 using module ../Release.psm1
-using module ../Release.Asset.psm1
+using module ../ReleaseAsset.psm1
 
 <#
 .SYNOPSIS
