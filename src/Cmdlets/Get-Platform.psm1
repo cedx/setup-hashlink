@@ -1,4 +1,3 @@
-using namespace System.Diagnostics.CodeAnalysis
 using module ../Platform.psm1
 
 <#
@@ -10,12 +9,11 @@ using module ../Platform.psm1
 function Get-Platform {
 	[CmdletBinding()]
 	[OutputType([Platform])]
-	[SuppressMessage("PSUseDeclaredVarsMoreThanAssignments", "")]
 	param ()
 
-	return $discard = switch ($true) {
-		{ $IsLinux } { [Platform]::Linux; break }
-		{ $IsMacOS } { [Platform]::MacOS; break }
-		default { [Platform]::Windows }
+	switch ($true) {
+		{ $IsLinux } { return [Platform]::Linux }
+		{ $IsMacOS } { return [Platform]::MacOS }
+		default { return [Platform]::Windows }
 	}
 }
