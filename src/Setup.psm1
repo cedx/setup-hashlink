@@ -34,8 +34,7 @@ class Setup {
 	#>
 	[string] Download() {
 		$file = New-TemporaryFile
-		$version = (Import-PowerShellDataFile "$PSScriptRoot/../SetupHashLink.psd1").ModuleVersion
-		Invoke-WebRequest $this.Release.Url() -OutFile $file -UserAgent ".NET/$([Environment]::Version.ToString(3)) | Belin.SetupHashLink/$version"
+		Invoke-WebRequest $this.Release.Url() -OutFile $file
 
 		$directory = Join-Path ([Path]::GetTempPath()) (New-Guid)
 		Expand-Archive $file -DestinationPath $directory -Force
