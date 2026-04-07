@@ -121,7 +121,7 @@ class Release {
 		`$true` if this release exists, otherwise `$false`.
 	#>
 	[bool] Exists() {
-		return [Release]::Data.Where({ $_ -eq $this }, "First").Count -gt 0
+		return [Release]::Data.Where({ $_ -eq $this }, "First").Count
 	}
 
 	<#
