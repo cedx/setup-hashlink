@@ -12,8 +12,8 @@ function Get-Platform {
 	param ()
 
 	switch ($true) {
-		{ $IsLinux } { return [Platform]::Linux }
-		{ $IsMacOS } { return [Platform]::MacOS }
+		$IsLinux { return [Platform]::Linux }
+		$IsMacOS { return [Platform]::MacOS }
 		default { return [Platform]::Windows }
 	}
 }

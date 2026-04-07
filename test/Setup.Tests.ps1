@@ -1,5 +1,4 @@
 using namespace System.Diagnostics.CodeAnalysis
-using module ../src/Platform.psm1
 using module ../src/Release.psm1
 using module ../src/Setup.psm1
 
@@ -12,9 +11,6 @@ Describe "Setup" {
 		[SuppressMessage("PSUseDeclaredVarsMoreThanAssignments", "")]
 		$latestRelease = [Release]::Latest()
 
-		[SuppressMessage("PSUseDeclaredVarsMoreThanAssignments", "")]
-		$platform = Get-Platform
-
 		if (-not (Test-Path Env:GITHUB_ENV)) { $Env:GITHUB_ENV = Join-Path var GitHub-Env.txt }
 		if (-not (Test-Path Env:GITHUB_PATH)) { $Env:GITHUB_PATH = Join-Path var GitHub-Path.txt }
 	}
@@ -25,10 +21,10 @@ Describe "Setup" {
 			$isSource = $setup.Release.IsSource()
 			$path = $setup.Download()
 
-			$executable = "hl$($isSource ? ".vcxproj" : ($platform -eq [Platform]::Windows ? ".exe" : [string]::Empty))"
+			$executable = "hl$($isSource ? ".vcxproj" : ($IsWindows ? ".exe" : [string]::Empty))"
 			Join-Path $path $executable | Should -Exist
 
-			$dynamicLibrary = "libhl$($isSource ? ".vcxproj" : ($platform -eq [Platform]::MacOS ? ".dylib" : ($platform -eq [Platform]::Linux ? ".so" : ".dll")))"
+			$dynamicLibrary = "libhl$($isSource ? ".vcxproj" : ($IsMacOS ? ".dylib" : ($IsLinux ? ".so" : ".dll")))"
 			Join-Path $path $dynamicLibrary | Should -Exist
 		}
 	}
@@ -39,7 +35,7 @@ Describe "Setup" {
 			$path = $setup.Install()
 
 			$Env:PATH | Should -BeLikeExactly "*$path*"
-			if (($platform -eq [Platform]::Linux) -and ($setup.Release.IsSource())) {
+			if ($IsLinux -and $setup.Release.IsSource()) {
 				$Env:LD_LIBRARY_PATH | Should -BeLikeExactly "*/usr/local/bin*"
 			}
 		}
