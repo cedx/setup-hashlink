@@ -5,7 +5,7 @@ using module ../src/ReleaseAsset.psm1
 
 <#
 .SYNOPSIS
-	Tests the features of the `Release` module.
+	Tests the features of the `Release` class.
 #>
 Describe "Release" {
 	BeforeAll {
