@@ -40,7 +40,7 @@ class Setup {
 		Expand-Archive $file -DestinationPath $directory -Force
 
 		$folders = Get-ChildItem $directory -Directory
-		if ($folders.Count -ne 1) { throw [InvalidOperationException] "No subfolders or multiple subfolders found in: $directory" }
+		if ($folders.Count -ne 1) { throw [DirectoryNotFoundException] "No subfolders or multiple subfolders found in: $directory" }
 		return Join-Path $directory $folders[0].BaseName
 	}
 
