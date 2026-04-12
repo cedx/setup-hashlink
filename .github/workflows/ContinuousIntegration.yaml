@@ -11,6 +11,11 @@ jobs:
     steps:
       - name: Fetch sources
         uses: actions/checkout@v6
+      - name: Set up PowerShell
+        run: |
+          Invoke-WebRequest "https://aka.ms/install-powershell.ps1" -OutFile Install-PowerShell.ps1
+          ./Install-PowerShell.ps1
+          Add-Content $Env:GITHUB_PATH "$Env:LOCALAPPDATA\Microsoft\powershell"
       - name: Install dependencies
         run: ./Invoke.ps1 Install
       - name: Run tests
