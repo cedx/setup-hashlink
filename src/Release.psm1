@@ -97,7 +97,7 @@ class Release {
 		`$true` if `$Object1` equals `$Object2`, otherwise `$false`.
 	#>
 	static [bool] op_Equality([Release] $Object1, [Release] $Object2) {
-		return $null -eq $Object1 ? ($null -eq $Object2) : ([object]::ReferenceEquals($Object1, $Object2) -or $Object1.Equals($Object2))
+		return [object]::ReferenceEquals($Object1, $Object2) -or ${Object1}?.Equals($Object2)
 	}
 
 	<#
