@@ -1,7 +1,6 @@
 #!/usr/bin/env pwsh
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $true
-Set-StrictMode -Version Latest
 
 Import-Module "$PSScriptRoot/SetupHashLink.psd1"
 if (-not (Test-Path Env:SETUP_HASHLINK_VERSION)) { $Env:SETUP_HASHLINK_VERSION = "Latest" }

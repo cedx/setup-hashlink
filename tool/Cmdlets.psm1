@@ -1,5 +1,3 @@
-Set-StrictMode -Version Latest
-
 <#
 .SYNOPSIS
 	Checks whether an update is available for the specified PowerShell module.
