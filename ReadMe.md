@@ -1,4 +1,4 @@
-# Setup HashLink VM
+# Setup HashLink
 Set up your [GitHub Actions](https://docs.github.com/en/actions) workflow with a specific version of the [HashLink VM](https://hashlink.haxe.org).
 
 ## Documentation
@@ -10,4 +10,4 @@ Set up your [GitHub Actions](https://docs.github.com/en/actions) workflow with a
 - [Submit an issue](https://github.com/cedx/setup-hashlink/issues)
 
 ## License
-[Setup HashLink VM](https://github.com/cedx/setup-hashlink) is distributed under the MIT License.
+[Setup HashLink](https://github.com/cedx/setup-hashlink) is distributed under the MIT License.

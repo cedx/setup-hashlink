@@ -1,4 +1,4 @@
-# Setup HashLink VM
+# Setup HashLink
 Set up your [GitHub Actions](https://docs.github.com/en/actions) workflow 
 with a specific version of the [HashLink VM](https://hashlink.haxe.org).
 
