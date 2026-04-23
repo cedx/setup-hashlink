@@ -167,7 +167,7 @@ class Release {
 	static [Release] Find([string] $Constraint) {
 		$operator, [semver] $semver = switch -Regex ($Constraint) {
 			"^(\*|latest)$" { "=", [Release]::Latest().Version.ToString(); break }
-			"^([^\d]+)\d" { $Matches[1], ($Constraint -replace "^([^\d]+)", ""); break }
+			"^([^\d]+)\d" { $Matches[1], ($Constraint -replace "^([^\d]+)"); break }
 			"^\d" { ">=", $Constraint; break }
 			default { throw [FormatException] "The version constraint is invalid." }
 		}
