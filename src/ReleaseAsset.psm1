@@ -4,6 +4,7 @@ using module ./Platform.psm1
 .SYNOPSIS
 	Represents an asset of a HashLink release.
 #>
+[NoRunspaceAffinity()]
 class ReleaseAsset {
 
 	<#
