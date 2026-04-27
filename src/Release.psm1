@@ -6,7 +6,7 @@ using module ./ReleaseAsset.psm1
 .SYNOPSIS
 	The list of all releases.
 #>
-[Release[]] $Data = (Import-PowerShellDataFile "$PSScriptRoot/ReleaseData.psd1").Releases.ForEach{
+$Data = (Import-PowerShellDataFile "$PSScriptRoot/ReleaseData.psd1").Releases.ForEach{
 	[Release]::new($_.Version, $_.Assets.ForEach{ [ReleaseAsset]::new($_.Platform, $_.File) })
 }
 
