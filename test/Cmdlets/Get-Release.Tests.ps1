@@ -8,7 +8,7 @@ Describe "Get-Release" {
 	}
 
 	It "should return `$null if no release matches to the version number" {
-		Get-HashLinkRelease $nonExistingRelease.Version | Should -Be $null
+		Get-HashLinkRelease $nonExistingRelease.Version | Should -BeNullOrEmpty
 	}
 
 	It "should return the release corresponding to the version number if it exists" {

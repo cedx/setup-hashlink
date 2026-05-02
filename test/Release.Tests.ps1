@@ -65,9 +65,9 @@ Describe "Release" {
 
 	Context "Find" {
 		It "should return `$null if no release matches the version constraint" {
-			[Release]::Find($nonExistingRelease.Version.ToString()) | Should -Be $null
-			[Release]::Find("2") | Should -Be $null
-			[Release]::Find(">1.15")?.Version | Should -Be $null
+			[Release]::Find($nonExistingRelease.Version.ToString()) | Should -BeNullOrEmpty
+			[Release]::Find("2") | Should -BeNullOrEmpty
+			[Release]::Find(">1.15")?.Version | Should -BeNullOrEmpty
 		}
 
 		It "should return the release corresponding to the version constraint if it exists" {
@@ -90,7 +90,7 @@ Describe "Release" {
 
 	Context "Get" {
 		It "should return `$null if no release matches to the version number" {
-			[Release]::Get($nonExistingRelease.Version) | Should -Be $null
+			[Release]::Get($nonExistingRelease.Version) | Should -BeNullOrEmpty
 		}
 
 		It "should return the release corresponding to the version number if it exists" {
@@ -100,7 +100,7 @@ Describe "Release" {
 
 	Context "GetAsset" {
 		It "should return `$null if no asset matches the platform" {
-			$nonExistingRelease.GetAsset([Platform]::Windows) | Should -Be $null
+			$nonExistingRelease.GetAsset([Platform]::Windows) | Should -BeNullOrEmpty
 		}
 
 		It "should return the asset corresponding to the platform number if it exists" {
