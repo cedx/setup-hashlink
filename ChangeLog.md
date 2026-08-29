@@ -1,5 +1,12 @@
 # Changelog
 
+## Version [9.0.0](https://github.com/CedX/SetupHashLink/compare/v8.2.0...v9.0.0)
+- Breaking change: raised the required [PowerShell](https://learn.microsoft.com/en-us/powershell) version.
+- Breaking change: renamed the action repository to `CedX/SetupHashLink`.
+- Added [HashLink](https://hashlink.haxe.org) 1.16 to the supported releases.
+- Restored the module's `DefaultCommandPrefix`.
+- Optimized the packaging.
+
 ## Version [8.2.0](https://github.com/CedX/SetupHashLink/compare/v8.1.0...v8.2.0)
 - Removed the module's `DefaultCommandPrefix` in favor of a hard-coded command prefix.
 
