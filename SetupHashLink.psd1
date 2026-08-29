@@ -1,6 +1,6 @@
 ﻿@{
 	DefaultCommandPrefix = "HashLink"
-	ModuleVersion = "8.2.0"
+	ModuleVersion = "9.0.0"
 	PowerShellVersion = "7.6"
 	RootModule = "Sources/Main.psm1"
 
