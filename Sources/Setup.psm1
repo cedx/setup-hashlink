@@ -90,7 +90,7 @@ class Setup {
 			"libmbedtls-dev",
 			"libopenal-dev",
 			"libpng-dev",
-			"libsdl2-dev",
+			"libsdl3-dev",
 			"libsqlite3-dev",
 			"libturbojpeg-dev",
 			"libuv1-dev",
