@@ -1,6 +1,7 @@
 # Changelog
 
 ## Version [9.0.0](https://github.com/CedX/SetupHashLink/compare/v8.2.0...v9.0.0)
+- Breaking change: deprecated support for **Linux** and **macOS** platforms.
 - Breaking change: raised the required [PowerShell](https://learn.microsoft.com/en-us/powershell) version.
 - Breaking change: renamed the action repository to `CedX/SetupHashLink`.
 - Added [HashLink](https://hashlink.haxe.org) 1.16 to the supported releases.
