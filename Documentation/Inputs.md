@@ -7,9 +7,9 @@ The version constraint of the HashLink VM (optional, defaults to `latest`).
 Allowed values are:
 
 - `latest` or `*`: the latest stable release.
-- a loose version number: `1`, `1.15`, etc. This is equivalent to using the `>=` operator.
-- a strict version number: `=1.0.0`, `=1.15.0`, etc.
-- a version specification: `<=1`, `>1.15`, etc.
+- a loose version number: `1`, `1.16`, etc. This is equivalent to using the `>=` operator.
+- a strict version number: `=1.0.0`, `=1.16.0`, etc.
+- a version specification: `<=1`, `>1.16`, etc.
 
 > [!NOTE]
 > The version constraint uses a very basic [syntax and algorithm](https://github.com/CedX/SetupHashLink/blob/main/Sources/Release.psm1#L159), but it should suffice in most cases.  

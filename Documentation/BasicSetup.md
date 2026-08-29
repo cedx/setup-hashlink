@@ -10,7 +10,7 @@ jobs:
       - uses: lix-pm/setup-lix@master
       - uses: CedX/SetupHashLink@v9
         with:
-          version: =1.15.0
+          version: =1.16.0
       - run: hl --version
       - run: lix download
       - run: haxe test.hxml

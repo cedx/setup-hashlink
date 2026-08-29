@@ -9,10 +9,10 @@ using module ../Sources/Release.psm1
 Describe "Release" {
 	BeforeAll {
 		[SuppressMessage("PSUseDeclaredVarsMoreThanAssignments", "existingRelease")]
-		$existingRelease = [Release]::new("1.15.0", @(
-			[ReleaseAsset]::new([Platform]::Linux, "hashlink-1.15.0.zip")
-			[ReleaseAsset]::new([Platform]::MacOS, "hashlink-1.15.0.zip")
-			[ReleaseAsset]::new([Platform]::Windows, "hashlink-1.15.0.zip")
+		$existingRelease = [Release]::new("1.16.0", @(
+			[ReleaseAsset]::new([Platform]::Linux, "hashlink-1.16.0.zip")
+			[ReleaseAsset]::new([Platform]::MacOS, "hashlink-1.16.0.zip")
+			[ReleaseAsset]::new([Platform]::Windows, "hashlink-1.16.0.zip")
 		))
 
 		[SuppressMessage("PSUseDeclaredVarsMoreThanAssignments", "latestRelease")]
@@ -44,7 +44,7 @@ Describe "Release" {
 
 	Context "Tag" {
 		It "should not include the patch component if it's zero" {
-			Should-BeString "1.15" $existingRelease.Tag()
+			Should-BeString "1.16" $existingRelease.Tag()
 		}
 
 		It "should include the patch component if it's greater than zero" {
@@ -58,7 +58,7 @@ Describe "Release" {
 		}
 
 		It "should point to a GitHub release if the release is provided as binary" {
-			Should-BeString "https://github.com/HaxeFoundation/hashlink/releases/download/1.15/hashlink-1.15.0.zip" $existingRelease.Url().ToString() -CaseSensitive
+			Should-BeString "https://github.com/HaxeFoundation/hashlink/releases/download/1.16/hashlink-1.16.0.zip" $existingRelease.Url().ToString() -CaseSensitive
 		}
 	}
 
@@ -66,7 +66,7 @@ Describe "Release" {
 		It "should return `$null if no release matches the version constraint" {
 			Should-BeNull ([Release]::Find($nonExistingRelease.Version.ToString()))
 			Should-BeNull ([Release]::Find("2"))
-			Should-BeNull ([Release]::Find(">1.15")?.Version)
+			Should-BeNull ([Release]::Find(">1.16")?.Version)
 		}
 
 		It "should return the release corresponding to the version constraint if it exists" {
@@ -100,7 +100,7 @@ Describe "Release" {
 		}
 
 		It "should return the asset corresponding to the platform number if it exists" {
-			Should-BeString "hashlink-1.15.0.zip" $existingRelease.GetAsset([Platform]::Windows)?.File -CaseSensitive
+			Should-BeString "hashlink-1.16.0.zip" $existingRelease.GetAsset([Platform]::Windows)?.File -CaseSensitive
 		}
 	}
 }
@@ -121,7 +121,7 @@ Describe "Find-Release" {
 		Should-BeSame $latestRelease (Find-HashLinkRelease "*")
 		Should-BeSame $latestRelease (Find-HashLinkRelease "1")
 		Should-BeNull (Find-HashLinkRelease "2")
-		Should-BeNull (Find-HashLinkRelease ">1.15")?.Version
+		Should-BeNull (Find-HashLinkRelease ">1.16")?.Version
 		Should-Be "1.8.0" (Find-HashLinkRelease "=1.8")?.Version
 		Should-Be "1.9.0" (Find-HashLinkRelease "<1.10")?.Version
 		Should-Be "1.10.0" (Find-HashLinkRelease "<=1.10")?.Version
