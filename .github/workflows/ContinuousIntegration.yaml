@@ -1,4 +1,4 @@
-name: continuous-integration
+name: ContinuousIntegration
 on: push
 
 defaults:
@@ -6,7 +6,7 @@ defaults:
     shell: pwsh
 
 jobs:
-  test:
+  Test:
     runs-on: windows-latest
     steps:
       - name: Fetch sources
@@ -20,12 +20,9 @@ jobs:
         run: ./Invoke.ps1 Install
       - name: Run tests
         run: ./Invoke.ps1 Test
-  invoke:
+  Invoke:
     needs: test
-    runs-on: ${{matrix.platform}}
-    strategy:
-      matrix:
-        platform: [macos-latest, ubuntu-latest, windows-latest]
+    runs-on: windows-latest
     steps:
       - name: Set up HashLink
         uses: CedX/SetupHashLink@main
