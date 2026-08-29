@@ -3,7 +3,7 @@ Set up a specific version of the [HashLink VM](https://hashlink.haxe.org):
 
 ```yaml
 jobs:
-  test:
+  Test:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v5
@@ -13,5 +13,5 @@ jobs:
           version: =1.16.0
       - run: hl --version
       - run: lix download
-      - run: haxe test.hxml
+      - run: haxe Test.hxml
 ```

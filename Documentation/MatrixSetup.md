@@ -3,7 +3,7 @@ Setup multiple versions of the [HashLink VM](https://hashlink.haxe.org) on multi
 
 ```yaml
 jobs:
-  test:
+  Test:
     name: HashLink ${{matrix.version}} on ${{matrix.platform}}
     runs-on: ${{matrix.platform}}
     strategy:
@@ -18,5 +18,5 @@ jobs:
           version: ${{matrix.version}}
       - run: hl --version
       - run: lix download
-      - run: haxe test.hxml
+      - run: haxe Test.hxml
 ```

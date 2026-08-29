@@ -1,4 +1,4 @@
-name: continuous-integration
+name: ContinuousIntegration
 on: push
 
 defaults:
@@ -6,11 +6,8 @@ defaults:
     shell: pwsh
 
 jobs:
-  test:
-    runs-on: ${{matrix.platform}}
-    strategy:
-      matrix:
-        platform: [ubuntu-latest, windows-latest]
+  Test:
+    runs-on: windows-latest
     steps:
       - name: Fetch sources
         uses: actions/checkout@v7
@@ -23,4 +20,4 @@ jobs:
       - name: Install dependencies
         run: lix download
       - name: Run tests
-        run: haxe test.hxml
+        run: haxe Test.hxml
