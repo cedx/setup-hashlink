@@ -1,7 +1,7 @@
 ﻿@{
 	DefaultCommandPrefix = "HashLink"
 	ModuleVersion = "8.2.0"
-	PowerShellVersion = "7.4"
+	PowerShellVersion = "7.6"
 	RootModule = "Sources/Main.psm1"
 
 	Author = "Cédric Belin <cedx@outlook.com>"
