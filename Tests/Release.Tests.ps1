@@ -104,3 +104,69 @@ Describe "Release" {
 		}
 	}
 }
+
+<#
+.SYNOPSIS
+	Tests the features of the `Find-Release` cmdlet.
+#>
+Describe "Find-Release" {
+	BeforeAll { . "$PSScriptRoot/BeforeAll.ps1" }
+
+	It "should return `$null if no release matches the version constraint" {
+		Should-BeNull (Find-HashLinkRelease $nonExistingRelease.Version)
+	}
+
+	It "should return the release corresponding to the version constraint if it exists" {
+		Should-BeSame $latestRelease (Find-HashLinkRelease "latest")
+		Should-BeSame $latestRelease (Find-HashLinkRelease "*")
+		Should-BeSame $latestRelease (Find-HashLinkRelease "1")
+		Should-BeNull (Find-HashLinkRelease "2")
+		Should-BeNull (Find-HashLinkRelease ">1.15")?.Version
+		Should-Be "1.8.0" (Find-HashLinkRelease "=1.8")?.Version
+		Should-Be "1.9.0" (Find-HashLinkRelease "<1.10")?.Version
+		Should-Be "1.10.0" (Find-HashLinkRelease "<=1.10")?.Version
+	}
+
+	It "should throw if the version constraint is invalid" -ForEach "abc", "?1.10" {
+		Should-Throw -ScriptBlock { Find-HashLinkRelease $_ -ErrorAction Stop }
+	}
+}
+
+<#
+.SYNOPSIS
+	Tests the features of the `Get-Release` cmdlet.
+#>
+Describe "Get-Release" {
+	BeforeAll { . "$PSScriptRoot/BeforeAll.ps1" }
+
+	It "should return `$null if no release matches to the version number" {
+		Should-BeNull (Get-HashLinkRelease $nonExistingRelease.Version)
+	}
+
+	It "should return the release corresponding to the version number if it exists" {
+		Should-Be "1.8.0" (Get-HashLinkRelease "1.8.0")?.Version
+	}
+}
+
+<#
+.SYNOPSIS
+	Tests the features of the `Test-Release` cmdlet.
+#>
+Describe "Test-Release" {
+	BeforeAll { . "$PSScriptRoot/BeforeAll.ps1" }
+
+	It "should return `$true for the latest release" {
+		Should-BeTrue (Test-HashLinkRelease $latestRelease.Version)
+		Should-BeTrue ($latestRelease | Test-HashLinkRelease)
+	}
+
+	It "should return `$true if the release exists" {
+		Should-BeTrue (Test-HashLinkRelease $existingRelease.Version)
+		Should-BeTrue ($existingRelease | Test-HashLinkRelease)
+	}
+
+	It "should return `$false if the release does not exist" {
+		Should-BeFalse (Test-HashLinkRelease $nonExistingRelease.Version)
+		Should-BeFalse ($nonExistingRelease | Test-HashLinkRelease)
+	}
+}
