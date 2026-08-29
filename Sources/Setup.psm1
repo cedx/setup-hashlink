@@ -86,14 +86,14 @@ class Setup {
 	#>
 	hidden [string] CompileLinux() {
 		$dependencies = @(
-			"libglu1-mesa-dev",
-			"libmbedtls-dev",
-			"libopenal-dev",
-			"libpng-dev",
-			"libsdl3-dev",
-			"libsqlite3-dev",
-			"libturbojpeg-dev",
-			"libuv1-dev",
+			"libglu1-mesa-dev"
+			"libmbedtls-dev"
+			"libopenal-dev"
+			"libpng-dev"
+			"libsdl3-dev"
+			"libsqlite3-dev"
+			"libturbojpeg-dev"
+			"libuv1-dev"
 			"libvorbis-dev"
 		)
 
